@@ -1,0 +1,9 @@
+\section{MS-SSIM}
+\label{sec:msssim}
+A single-scale method as described in the previous section may be appropriate only for speciﬁc settings. Multi-scale method is a convenient way to incorporate image details at different resolutions. The authors of \cite{wang2003multiscale} proposed a multi-scale SSIM method that taking the reference and distorted image signals as the input, the system iteratively applies a low-pass ﬁlter and downsamples the ﬁltered image by a factor of 2. The original image has been indexes as Scale $1$1, while the highest scale as Scale $M$, which is obtained after $M - 1$ iterations. At the $j$-th scale, the contrast comparison \ref{eq:constrast} and the structure comparison \ref{eq:structure} are calculated and denoted as $c_j (x, y)$ and $s_j (x, y)$, respectively. The luminance comparison \ref{eq:luminance} is computed only at Scale $M$ and is denoted as $l_M (x, y)$. The overall SSIM evaluation is obtained by combining the measurement at different scales using
+
+\begin{align}
+SSIM(y, \hat{y}) = [l_M(y, \hat{y})]^{\alpha_M} \cdot \prod^{M}_{j = 1} [c_j(y, \hat{y})]^{\beta_j} [s_j(y, \hat{y})]^{\gamma_j}
+\end{align}
+
+To calibrate the system parameters, the authors of \cite{wang2003multiscale} involved in thier experiments 8 subjects, asking them to assess the quality of synthesized images. With this approach they estimated $\beta_1 = \gamma_1 = 0.0448, \beta_2 = \gamma_2 = 0.2856, \beta_3 = \gamma_3= 0.3001, \beta_4 = \gamma_4 = 0.2363, \text{ and } \alpha_5 = \beta_5 = \gamma_5 = 0.1333$, respectively.

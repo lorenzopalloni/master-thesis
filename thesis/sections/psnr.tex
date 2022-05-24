@@ -1,0 +1,9 @@
+\label{sec:psnr}
+Let $y$ be an image and $\hat{y}$ be a distorted version of $y$.
+A measure of similarity between the two given images is the Peak Signal-to-Noise Ratio:
+
+\begin{align}
+    PSNR(y, \hat{y}) \coloneqq 10 \cdot \log_{10} \left\{ \frac{MAX(y)^2}{MSE(y, \hat{y})} \right\},
+\end{align}
+
+where $MAX(y)$ is the maximum value of $y$, and $MSE(y, \hat{y}) \coloneqq || y - \hat{y} ||^2_2$.

@@ -2,15 +2,20 @@
 \label{chap:metrics}
 
 % TODOs
-% - DONE - explain PSNR
-% - explain SSIM
-% - explain MS-SSIM
-% - explain LPIPS
-% - explain DISTS
-% - explain ERQA
-% - explain SFSN
-% - explain MOS, 2AFC, JND
 
+% high priority
+
+% medium priority
+% - explain DISTS (start implementing metric framework before explaining this one)
+% - explain ERQAv2.0
+
+% DONEs
+% - DONE - explain PSNR
+% - DONE - explain SSIM
+% - DONE - explain MS-SSIM
+% - DONE - explain LPIPS-Comp / LPIPS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Random sentences:
 % An overview of the most used quality assessment metrics in image restoration tasks.
 
 % This work focuses on frame super-resolution and compression artifact removal in real-time videos.
@@ -19,11 +24,19 @@
 % - mean opinion score (MOS)
 % - two alternative force choices (2AFC)
 % - Just Noticeable Difference (JND)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This chapter investigates various Image Quality Assessment (IQA) metrics commonly used in the current literature to evaluate results and improve performance of super-resolution and compression artifact removal operations.
+For our purpose, a metric is as good as how much it agrees with the average human judgement.
+The agreement is often measured with Pearson, Kendall, and Spearman correlation coefficients, while the average human judgement is estimated using sets of images structured for Mean Opinion Score (MOS), Two Alternative Force Choices (2AFC), or Just Noticeable Difference (JND) approaches.
+
+% Not sure about this
 
 It is difficult to define an objective quantification of results from super-resolution and compression artifact removal operations that reflects human judgement.
 
 Plenty of quality metrics have been proposed in the literature.
-Traditional metrics, such as pixel-wise mean squared error (MSE), Peak Signal-to-Noise Ratio (PSNR) \ref{sec:psnr}, Structural SIMilarity (SSIM) \cite{wang2004image}, and Multi-Scale SSIM (MS-SSIM) \cite{wang2003multiscale} have begun to be considered inadequate for Image Quality Assessment (IQA) in recent years.
+
+Traditional metrics, such as Mean Squared Error (MSE), Peak Signal-to-Noise Ratio (PSNR) \ref{sec:psnr}, Structural Similarity (SSIM) \cite{wang2004image}, and Multi-Scale SSIM (MS-SSIM) \cite{wang2003multiscale} have begun to be considered inadequate for Image Quality Assessment (IQA) in recent years.
 
 A promising line of work is based on deep-learning features extracted from well-trained CNN models like AlexNet and VGG-16.
 FID \cite{heusel2017gans}, LPIPS \cite{zhang2018unreasonable}, LPIPS-Comp \cite{patel2021saliency}, E-LPIPS \cite{kettunen2019lpips}, and DISTS \cite{ding2020image} are all examples of deep-learning-based metrics.
@@ -35,25 +48,69 @@ So far, only Full-Reference IQA (FR-IQA) measures have been mentioned, but No-Re
 
 LIVE, TID2008, CSIQ, TID2013 are examples of FR-IQA datasets, while AVA, LIVE In the Wild are NR-IQA datasets, that is they assess the quality of an image by itself, without a reference image.
 
-\section{PSNR}
-\label{sec:psnr}
-Let $y$ be an image and $\hat{y}$ be a distorted version of $y$.
-A measure of similarity between the two given images is the Peak Signal-to-Noise Ratio:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{sections/psnr}
+\input{sections/ssim}
+\input{sections/ms-ssim}
+\input{sections/lpips-comp}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{align}
-    PSNR(y, \hat{y}) \coloneqq 10 \cdot \log_{10} \left\{ \frac{MAX(y)^2}{\sqrt{MSE(y, \hat{y})}} \right\},
-\end{align}
+\section{DISTS}
+\label{sec:dists}
+The authors of DISTS \cite{} carried out five major experiments. First, they showed that DISTS has not the best performance overall on LIVE \cite{}, CSIQ \cite{}, and TID2013 \cite{} that are datasets that have been around in the literature long enough to be likely overfitted by recent quality measures. Second, they saw comparable results on the BAPPS dataset against LPIPS (that is a metric trained on the BAPPS dataset). Third, DISTS achieves best performance...
 
-where $MAX(y)$ is the maximum value of $y$, and $MSE(y, \hat{y}) \coloneqq || y - \hat{y} ||^2_2$.
+\section{SFSN}
+\label{sec:sfsn}
+The authors of \cite{zhou2021image} found that a linear combination of a local structural fidelity assessment (SF) and a global statistical naturalness measure (SN) achieves high correlation with human judgement (measured with MOS on public Single Image Super Resolution IQA datasets, such as WIND \cite{yeganeh2015objective}, CVIU \cite{ma2017learning}, and QADS \cite{zhou2019visual}).
 
-\section{SSIM}
-\label{sec:ssim}
-Structural SIMilarity (SSIM) is a signal-based quality metric...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{algorithm}
+% \caption{SFSN}
+% \textbf{Input:} original image $y$; distorted image $\hat{y}$.\\
+% \textbf{Output:} SFSN quality score.\\
+% \label{alg-kcv}
+% \begin{algorithmic}
+% 
+% \State Convert both $y$ and $\hat{y}$ to grayscale
+% \State For efficiency it is possible to scale both images within $[0, 1]$
+% \State Get $m$ and $n$, that are respectively the height and the width of $\hat{y}$
+% \State $s$ = min(m, n)
+% \State Resize $y$ to $s \times s$ $\rightarrow$ $y^{(1)}$
+% \State Apply 2D discrete cosine transform to $y^{(1)}$ $\rightarrow$ $y^{(2)}$
+% \State Split $y_2$ in low and high frequency $\rightarrow$ $y^{3}_{high}$, $y^{3}_{low}$
+% \State Apply the inverse of the 2D discrete cosine transform $\rightarrow$ $y^{4}_{high}$, $y^{4}_{low}$
+% 
+% \State Resize $\hat{y}$ to $s \times s$ $\rightarrow$ $\hat{y}^{(1)}$
+% \State Apply 2D discrete cosine transform to $\hat{y}^{(1)}$ $\rightarrow$ $\hat{y}^{(2)}$
+% \State Split $\hat{y}_2$ in low and high frequency $\rightarrow$ $\hat{y}^{3}_{high}$, $\hat{y}^{3}_{low}$
+% \State Apply the inverse of the 2D discrete cosine transform $\rightarrow$ $\hat{y}^{4}_{high}$, $\hat{y}^{4}_{low}$
+% 
+% \State SF = MS-SSIM($y^{(4)_{low}}$, $\hat{y}^{4}_{low}$)
+% \State SN = Entropy($y^{(4)}_{high}$)
+% 
+% \State \Return $(0.9) * SF + 0.1 * SN$  \\ (1 + 0.9) * SF + (1 - 0.9) * SN
+% 
+% \end{algorithmic}
+% \end{algorithm}
 
-\section{LPIPS}
-\label{sec:lpips}
-Learned Perceptual Image Patch Similarity (LPIPS) is a deep-learning based metric...
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% from DISTS paper
+% For more than 50 years, the mean squared error (MSE)
+% was the standard full-reference method for assessing signal
+% fidelity and quality, and it continues to play a fundamental
+% role in the development of signal and image processing
+% algorithms, despite its poor correlation with human percep-
+% tion [1], [2].
+% [1] -> Z. Wang and A. C. Bovik, “Mean squared error: Love it or leave
+% it? A new look at signal fidelity measures,” IEEE Signal Processing
+% Magazine, vol. 26, no. 1, pp. 98–117, 2009.
+% 
+% [2] -> B. Girod, “What’s wrong with mean-squared error,” in Digital
+% Images and Human Vision, A. B. Watson, Ed. The MIT Press, 1993,
+% pp. 207–220
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %  Traditional similarity met-
 % rics such as PSNR and SSIM (Wang et al., 2004) are

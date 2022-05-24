@@ -1,0 +1,49 @@
+\section{SSIM}
+\label{sec:ssim}
+
+Let $y = \left\{ y_i | i = 1, 2, \dots, N \right\}$ and $\hat{y} = \left\{ \hat{y}_i | i = 1, 2, \dots, N \right\}$ be two discrete non-negative signals that have been aligned with each other, and let $\mu_y$, $\sigma_y$ and $\sigma_{y\hat{y}}$ be the mean of $y$, the variance of $y$, and the covariance of $y$ and $\hat{y}$, respectively. Approximately, $\mu_y$ and $\sigma_y$ can be viewed as estimates of the luminance and constrast of $x$, and $\sigma_{y\hat{y}}$ measures the tendency of $y$ and $\hat{y}$ to vary together, thus an indication of structural similarity. In \cite{wang2004image}, the luminance, constrast and structure comparison measures were given as follows:
+
+\begin{align}
+l(y, \hat{y}) = \frac{2 \mu_y \mu_{\hat{y}} + C_1}{\mu^2_y + \mu^2_{\hat{y}} + C_1}\label{eq:luminance} \\
+c(y, \hat{y}) = \frac{2\sigma_y\sigma_{\hat{y}} + C_2}{\sigma^2_y + \sigma^2_{\hat{y}} + C_2}\label{eq:constrast} \\
+s(y, \hat{y}) = \frac{\sigma_{y\hat{y}} + C_3}{\sigma_y \sigma_{\hat{y}} + C_3}\label{eq:structure}
+\end{align}
+
+where $C_1$, $C_2$, $C_3$ are small constants given by
+\begin{align}
+C_1 = \left( K_1 L \right)^2, C_2 = \left( K_2 L \right)^2 \text{ and } C_3 = C_2 / 2,
+\end{align}
+respectively. $L$ is the dynamic range of the pixel values (255 for 8-bit grayscale images), and $K_1 \ll 1, K_2 \ll 1$ are small scalar constants. In \cite{wang2004image} $K_1$ and $K_2$ are set to $0.01$ and $0.03$, respectively. The general form of the Structural SIMilarity index between signal $y$ and $\hat{y}$ is defined as:
+
+\begin{align}
+SSIM(y, \hat{y}) = [l(y, \hat{y})]^{\alpha} [c(y, \hat{y}]^{\beta} [s(y, \hat{y}]^{\gamma},
+\end{align}
+where $\alpha$, $\beta$ and $\gamma$ are parameters to define the relative importance of the three components. Specifically, we set $\alpha = \beta = \gamma = 1$, and the resulting SSIM index is given by
+
+\begin{align}
+SSIM(y, \hat{y}) = \frac{
+    \left( 2 \mu_{y} \mu_{\hat{y}} + C_1 \right) \left( 2 \sigma_{y \hat{y}} + C_2 \right)
+}{
+    \left( \mu_{y}^2 + \mu_{\hat{y}}^2 + C_1 \right) \left( \sigma_{y}^2 \sigma_{\hat{y}}^2 + C_2 \right)
+}
+\end{align}
+
+which satisfies the following conditions:
+\begin{enumerate}
+\item symmetry: $SSIM(y, \hat{y}) = SSIM(\hat{y}, y)$;
+\item boundedness: $SSIM(y, \hat{y}) \leq 1$;
+\item unique maximum: $SSIM(y, \hat{y}) = 1 \iff y = \hat{y}$.
+\end{enumerate}
+
+In practise the SSIM index is applied locally, using an $11\times11$ circular-symmetric Gaussian weighting function $w = \{w_i | i = 1, 2, \dots, N\}$, with standard deviation of $1.5$ samples, normalized to unit sum $\left( \sum^{N}_{i=1} w_i = 1 \right)$.
+\begin{align}
+    MSSIM(y, \hat{y}) =  \frac{1}{M} \sum^{M}_{j=1} SSIM(y_j, \hat{y}_j)
+\end{align}
+where $y_j$ and $\hat{y}_j$ are the image contents at the $j$-th local windows, and $M$ is the number of local windows of the image.
+
+The local statistics should be modified according to $w$:
+\begin{itemize}
+\item $ \mu_{y} = \sum^{N}_{i = 1} w_i y_i $
+\item $ \sigma_{y} = \left( \sum^{N}_{i = 1} w_i (y_i - \mu_y)^2 \right) ^ {\frac{1}{2}} $
+\item $ \sigma_{y \hat{y}} = \sum^{N}_{i = 1} w_i (y_i - \mu_y) (\hat{y}_i - \mu_{\hat{y}}) $.
+\end{itemize}
