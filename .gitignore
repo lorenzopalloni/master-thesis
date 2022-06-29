@@ -1,4 +1,6 @@
 literature/
+code/
+*.vscode/
 
 ### Tex.gitignore
 ## Core latex/pdflatex auxiliary files:
