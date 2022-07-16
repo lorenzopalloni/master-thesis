@@ -1,6 +1,7 @@
 TODO List
 ==========
 
+> pay attention: you should be in another branch called dev
 > implement a custom PyTorch Dataset in ./code/copying.py
 > remember to activate thesis (define which venv tool to use)
 
