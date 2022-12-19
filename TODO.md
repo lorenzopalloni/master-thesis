@@ -11,6 +11,8 @@
 ---
 
 ## medium priority
+- explain DISTS (start implementing metric framework before explaining this one)
+- explain ERQAv2.0
 
 ---
 
@@ -30,4 +32,8 @@
 - DONE - poetry vs conda: understand which one would be the best to manage the venv for the project
 - DONE - study fast-sr-unet repo identifying from which file(s) to start copying/adapting
 - DONE - start packaging the ./code/ folder in another repo
+- DONE - explain PSNR
+- DONE - explain SSIM
+- DONE - explain MS-SSIM
+- DONE - explain LPIPS-Comp / LPIPS
 
