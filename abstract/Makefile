@@ -1,11 +1,11 @@
 properly: abstract.tex
 	pdflatex abstract.tex \
 	&& pdflatex abstract.tex \
-	&& evince abstract.pdf &!
+	&& evince abstract.pdf &
 
 easy: abstract.tex
 	pdflatex abstract.tex \
-	&& evince abstract.pdf &!
+	&& evince abstract.pdf &
 
 clean:
 	rm ./abstract.aux ./abstract.log ./abstract.out
