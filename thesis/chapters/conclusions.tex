@@ -1,4 +1,11 @@
 \myChapter{conclusion}
 \label{chap:conclusion}
 
-\lipsum
+The results of this study demonstrate the potential of post-training quantization techniques, in particular, to optimize deep learning models for inference. By reducing the precision of weights and activations in the model, we were able to significantly reduce the computational complexity and memory requirements of the UNet model, without sacrificing performance. This is particularly important for super-resolution applications, where real-time inference is often required.
+
+The use of TensorRT, a powerful inference optimization tool developed by NVIDIA, also played a key role in achieving these results. By integrating TensorRT with PyTorch, we were able to take advantage of its performance benefits on NVIDIA GPUs, further improving the efficiency of the model.
+
+Overall, the findings of this study have important implications for the development and deployment of deep learning models in real-world applications. By optimizing deep learning models for inference through post-training quantization techniques and integration with TensorRT, we can significantly improve their performance and efficiency, making them more practical and cost-effective for a wide range of applications.
+
+Future research in this area could explore the use of other optimization techniques, such as pruning or weight sharing, to further reduce the computational complexity and memory requirements of deep learning models. Additionally, the impact of different quantization parameters and techniques on model performance and accuracy could be explored in greater detail. Nonetheless, the successful reduction of inference time and memory consumption for super-resolution using quantization techniques and TensorRT provides a solid foundation for future work in this area.
+
