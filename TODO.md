@@ -1,17 +1,15 @@
 # TODO List
 
-> resume from quantization papers
-
 ## high priority
 
-- add in README.md how to compile and run latex sources to generate a .pdf
-- study literature in quantization theory
+- give more structure to the thesis
+
 - write about current literature in quantization theory
 
 ---
 
 ## medium priority
-- explain DISTS (start implementing metric framework before explaining this one)
+- explain DISTS
 - explain ERQAv2.0
 
 ---
@@ -36,4 +34,6 @@
 - DONE - explain SSIM
 - DONE - explain MS-SSIM
 - DONE - explain LPIPS-Comp / LPIPS
+- DONE - add in README.md how to compile and run latex sources to generate a .pdf
+- DONE - study literature in quantization theory
 
