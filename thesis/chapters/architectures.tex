@@ -1,0 +1,28 @@
+\myChapter{Architectures}
+\label{chap:Architectures}
+
+SRUNet: A Deep Learning-based Super-Resolution Model
+
+In recent years, deep learning-based super-resolution models have achieved state-of-the-art performance in super-resolution tasks. One such model is SRUNet, which is an extension of the U-Net architecture. In this chapter, we will discuss the definition of SRUNet and how it differs from U-Net.
+
+3.1 Definition of SRUNet
+
+SRUNet is a deep learning-based super-resolution model that uses a U-Net architecture with skip connections. The model takes a low-resolution image as input and generates a high-resolution image as output. The U-Net architecture is composed of an encoder and a decoder, with skip connections between them. The encoder consists of several convolutional layers that reduce the spatial resolution of the input image and increase its feature depth. The decoder consists of several deconvolutional layers that increase the spatial resolution of the feature maps and decrease their feature depth. Skip connections connect the encoder and decoder at each level, allowing the model to recover high-frequency details.
+
+SRUNet extends the U-Net architecture by incorporating residual learning and dense connections. Residual learning allows the model to learn residual features between the low-resolution input and the high-resolution output. Dense connections allow the model to access the feature maps of all preceding layers, promoting information flow and feature reuse.
+
+3.2 Differences between SRUNet and U-Net
+
+SRUNet differs from U-Net in several ways. First, SRUNet incorporates residual learning, allowing the model to learn residual features between the low-resolution input and the high-resolution output. This improves the ability of the model to capture high-frequency details and generate sharper images.
+
+Second, SRUNet incorporates dense connections, allowing the model to access the feature maps of all preceding layers. This promotes information flow and feature reuse, improving the efficiency of the model and reducing the risk of vanishing gradients.
+
+Third, SRUNet uses a depth-wise separable convolution in the bottleneck layer, reducing the number of parameters and improving the efficiency of the model. Depth-wise separable convolutions factorize a standard convolution into a depth-wise convolution and a point-wise convolution, reducing the computational cost of the operation.
+
+Finally, SRUNet uses a residual scaling module in the output layer, which scales the residual features by a learnable parameter before adding them to the input image. This improves the stability of the model and reduces the risk of exploding gradients.
+
+Overall, SRUNet improves upon the U-Net architecture by incorporating residual learning, dense connections, depth-wise separable convolutions, and a residual scaling module. These improvements lead to a more efficient and effective super-resolution model with state-of-the-art performance.
+
+3.3 Conclusion
+
+In this chapter, we discussed SRUNet, a deep learning-based super-resolution model that uses a U-Net architecture with skip connections, residual learning, dense connections, depth-wise separable convolutions, and a residual scaling module. We also discussed the differences between SRUNet and U-Net, highlighting the improvements in efficiency and effectiveness provided by SRUNet. The discussion of SRUNet provides a foundation for the proposed work on optimizing deep learning models for visual quality improvement in super-resolution tasks.
