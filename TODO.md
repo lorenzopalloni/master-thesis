@@ -1,10 +1,37 @@
 # TODO List
 
 ## high priority
+- propose a change in the title:
+    - Tecniche di ottimizzazione di reti neurali per la super risoluzione
+    - Optimization techniques of deep learning models for super-resolution
+
+- add VMAF as quality metric for video
+- bureaucracy about thesis:
+    - website
+    - a CS professor: ask about supervisor and especially about Leonardo Galtieri
+        that should not be able to do as supervisor cause he's an adjunct professor
+    - mighelett'
+    - emilio
+
+---
+
+## medium priority
+- replace LPIPS with one of the new metrics available in the literature as loss
+- explain DISTS
+- explain ERQAv2.0
+
+---
+
+## low priority
+- find a quote
+
+---
+
+### Comments
 
 Thesis title:
-- Optimization techniques of deep learning models for visual quality improvement
 - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
+- Optimization techniques of deep learning models for visual quality improvement
 
 Structure:
 - Intro
@@ -18,26 +45,6 @@ Structure:
     - TensorRT
 - 4. Experiments and Results
 - Conclusion
-
-- IMPORTANT: add VMAF as quality metric for video
-
-- ask info to the CS department (and also to Mighelett') about bureaucracy around the master's thesis at UniFI
-- I think that you need at least two supervisors, one will be Marco,
-    but the other one we don't know if he can be Leonardo, since he's an
-    adjunct professor, and maybe he can only be a co-supervisor, 
-    so I should ask someone at the CS department to be sure,
-    and in case to look for the other supervisor.
-
----
-
-## medium priority
-- replace LPIPS with one of the new metrics available in the literature as loss
-- explain DISTS
-- explain ERQAv2.0
-
----
-
-## low priority
 
 ---
 

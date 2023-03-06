@@ -1,6 +1,36 @@
 \myChapter{Optimization}
 \label{chap:Optimization}
 
+START: Overview optimization techniques for deep-learning-based SR models
+
+Optimizing deep learning models is critical to improving their performance in video restoration tasks. Several optimization techniques have been proposed to improve the performance of deep learning-based video restoration models.
+
+2.5.1 Loss Function Optimization
+
+Loss function optimization is a common technique used to improve the performance of deep learning-based video restoration models. The loss function measures the difference between the generated output and the ground-truth output, and the optimization process aims to minimize this difference. Different loss functions can be used for different video restoration tasks, such as mean squared error (MSE), mean absolute error (MAE), and perceptual loss.
+
+Perceptual loss is a commonly used loss function in video restoration tasks. Perceptual loss measures the difference between the high-level features of the generated output and the ground-truth output, instead of pixel-wise differences. By using perceptual loss, deep learning models can capture high-level features, such as texture and structure, and generate more visually appealing results.
+
+2.5.2 Network Architecture Optimization
+
+Network architecture optimization is another technique used to improve the performance of deep learning-based video restoration models. The network architecture determines the complexity of the model and its ability to capture complex patterns in the input data. Different architectures, such as U-Net, ResNet, and DenseNet, have been proposed for different video restoration tasks.
+
+2.5.3 Regularization Techniques
+
+Regularization techniques are used to prevent overfitting and improve the generalization ability of deep learning-based video restoration models. Regularization techniques include dropout, weight decay, and data augmentation. Dropout is a technique that randomly drops out neurons during training to prevent overfitting. Weight decay is a technique that penalizes large weights to prevent overfitting. Data augmentation is a technique that artificially increases the size of the training dataset by applying transformations such as rotation, cropping, and flipping.
+
+2.5.4 Transfer Learning
+
+Transfer learning is a technique used to transfer knowledge learned from one task to another task. Transfer learning has been used to improve the performance of deep learning-based video restoration models by initializing the model with pre-trained weights from a related task. For example, a deep learning-based super-resolution model can be initialized with pre-trained weights from a deep learning-based image classification model.
+
+2.6 Conclusion
+
+In this chapter, we reviewed the literature on video restoration, with a focus on deep learning-based techniques and optimization techniques for improving visual quality. We discussed traditional video restoration techniques and their limitations, as well as the superiority of deep learning-based techniques. We also reviewed the state-of-the-art super-resolution techniques, including the RSGAN model, and optimization techniques such as loss function optimization, network architecture optimization, regularization techniques, and transfer learning. The review of the literature provides a foundation for the proposed work on optimizing deep learning models for visual quality improvement in video restoration tasks.
+
+END: Overview optimization techniques for deep-learning-based SR models
+
+START: Quantization techniques for deep-learning-based SR models
+
 Quantization techniques have been widely studied as a means of reducing the computational complexity and memory requirements of deep learning models, while maintaining their accuracy and performance. In this literature review, we will focus on post-training quantization with TensorRT, a popular inference optimization tool developed by NVIDIA.
 
 Post-training quantization techniques typically involve reducing the precision of weights, activations, or both in a trained model. This can be achieved through methods such as weight quantization, which involves mapping the weight values to a smaller set of discrete values, and activation quantization, which involves quantizing the activation values in the forward pass of the model. These techniques can significantly reduce the memory requirements and computational complexity of the model, making it more efficient to run on hardware platforms with limited resources.
@@ -12,6 +42,8 @@ In the context of super-resolution (SR) with deep learning models, post-training
 While post-training quantization with TensorRT has shown promising results in reducing the computational complexity and memory requirements of deep learning models, there are still challenges to be addressed. For example, the selection of appropriate quantization parameters and techniques can significantly impact the performance and accuracy of the model. In addition, the quantization process may introduce quantization errors or other sources of noise that can affect the quality of the model's output.
 
 Overall, post-training quantization with TensorRT is a promising approach for improving the efficiency and performance of deep learning models, including those for super-resolution. Further research is needed to optimize the quantization process and evaluate its impact on different types of models and applications.
+
+START: Quantization techniques for deep-learning-based SR models
 
 \section{TensorRT}
 \label{sec:tensorrt}
