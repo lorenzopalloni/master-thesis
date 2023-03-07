@@ -1,11 +1,34 @@
 # TODO List
 
-## high priority
-- propose a change in the title:
+- propose changes in the title:
     - Tecniche di ottimizzazione di reti neurali per la super risoluzione
     - Optimization techniques of deep learning models for super-resolution
 
+- propose changes in the structure:
+    1. Introduction
+    2. Background
+    3. Metrics
+    4. Architectures
+        - SRUNet
+    5. Optimizations
+        - Overview optimization techniques for Deep Learning-based SR models
+        - Custom dataloader to speed up training
+        - TensorRT to speed up inference
+    6. Experiments
+    7. Conclusions
+
+## high priority
 - add VMAF as quality metric for video
+- train with PNG for ground-truth images
+- train again replacing LPIPS with another perceptual loss
+
+- metrics: clean up
+- architectures: draft SRUNet explanation
+- optimizations: draft overview optimization techniques
+- optimizations: draft custom dataloader section
+- optimizations: draft tensorrt section
+- experiments: clean up
+
 - bureaucracy about thesis:
     - website
     - a CS professor: ask about supervisor and especially about Leonardo Galtieri
@@ -23,6 +46,8 @@
 ---
 
 ## low priority
+- background: add citations
+- background: update content with a recent survey on video reconstruction
 - find a quote
 
 ---

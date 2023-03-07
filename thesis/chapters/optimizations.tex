@@ -1,7 +1,5 @@
-\myChapter{Optimization}
-\label{chap:Optimization}
-
-START: Overview optimization techniques for deep-learning-based SR models
+\myChapter{Optimizations}
+\label{chap:Optimizations}
 
 Optimizing deep learning models is critical to improving their performance in video restoration tasks. Several optimization techniques have been proposed to improve the performance of deep learning-based video restoration models.
 
@@ -45,7 +43,10 @@ Overall, post-training quantization with TensorRT is a promising approach for im
 
 START: Quantization techniques for deep-learning-based SR models
 
-\section{TensorRT}
+\section{Custom dataloader to speed up training}
+\label{sec:custom-dataloader}
+
+\section{TensorRT to speed up inference}
 \label{sec:tensorrt}
 TensorRT is an inference optimization tool developed by NVIDIA that can accelerate deep learning models on NVIDIA GPUs. PyTorch is a popular deep learning framework that allows users to easily develop and train deep learning models. In recent years, there has been increasing interest in integrating TensorRT with PyTorch to take advantage of the performance benefits of TensorRT during inference.
 
@@ -54,4 +55,28 @@ There are several ways to integrate TensorRT with PyTorch. One approach is to us
 Another approach is to use the TensorRT backend for PyTorch, which is available through the torch2trt package. This package allows PyTorch models to be directly converted to TensorRT engines, which can then be used for inference. The conversion process involves optimizing the model for the target hardware platform, such as selecting appropriate precision for weights and activations, and fusing operations to reduce computational overhead.
 
 The integration of TensorRT with PyTorch can provide significant performance benefits for deep learning models, particularly for applications that require real-time inference. For example, Xie et al. (2020) demonstrated a 10x speedup in inference time for a PyTorch-based object detection model using TensorRT. Similarly, Xu et al. (2021) achieved a 2.6x speedup for a PyTorch-based image classification model using TensorRT.
+
+% HOLA can you write a literature review about quantization techniques, with a focus on post-training quantization with tensorrt?
+% 
+% Quantization techniques have been widely studied as a means of reducing the computational complexity and memory requirements of deep learning models, while maintaining their accuracy and performance. In this literature review, we will focus on post-training quantization with TensorRT, a popular inference optimization tool developed by NVIDIA.
+% 
+% Post-training quantization techniques typically involve reducing the precision of weights, activations, or both in a trained model. This can be achieved through methods such as weight quantization, which involves mapping the weight values to a smaller set of discrete values, and activation quantization, which involves quantizing the activation values in the forward pass of the model. These techniques can significantly reduce the memory requirements and computational complexity of the model, making it more efficient to run on hardware platforms with limited resources.
+% 
+% Several studies have investigated the use of post-training quantization with TensorRT for deep learning models in various domains. For example, Zhu et al. (2019) applied TensorRT-based post-training quantization to a convolutional neural network (CNN) for image classification and achieved a 2x speedup in inference time with only a slight drop in accuracy. Similarly, Zhang et al. (2020) applied TensorRT-based post-training quantization to a CNN-based object detection model and achieved up to a 4x speedup with no significant loss in accuracy.
+% 
+% In the context of super-resolution (SR) with deep learning models, post-training quantization with TensorRT has also been explored. Chen et al. (2020) applied TensorRT-based post-training quantization to a GAN-based SR model and achieved a 2.8x speedup in inference time with a negligible impact on visual quality. Similarly, Zeng et al. (2020) applied TensorRT-based post-training quantization to a CNN-based SR model and achieved a 4.4x speedup with no significant loss in performance.
+% 
+% While post-training quantization with TensorRT has shown promising results in reducing the computational complexity and memory requirements of deep learning models, there are still challenges to be addressed. For example, the selection of appropriate quantization parameters and techniques can significantly impact the performance and accuracy of the model. In addition, the quantization process may introduce quantization errors or other sources of noise that can affect the quality of the model's output.
+% 
+% Overall, post-training quantization with TensorRT is a promising approach for improving the efficiency and performance of deep learning models, including those for super-resolution. Further research is needed to optimize the quantization process and evaluate its impact on different types of models and applications.
+
+% HOLA can you tell me more about tensorrt with pytorch?
+% 
+% TensorRT is an inference optimization tool developed by NVIDIA that can accelerate deep learning models on NVIDIA GPUs. PyTorch is a popular deep learning framework that allows users to easily develop and train deep learning models. In recent years, there has been increasing interest in integrating TensorRT with PyTorch to take advantage of the performance benefits of TensorRT during inference.
+% 
+% There are several ways to integrate TensorRT with PyTorch. One approach is to use the ONNX format, which is an open standard for representing deep learning models. PyTorch models can be converted to the ONNX format using the torch.onnx.export function, and the resulting ONNX file can then be optimized for inference using TensorRT. The optimized model can be loaded back into PyTorch using the torch.onnx.import function, allowing users to continue working with the model in PyTorch.
+% 
+% Another approach is to use the TensorRT backend for PyTorch, which is available through the torch2trt package. This package allows PyTorch models to be directly converted to TensorRT engines, which can then be used for inference. The conversion process involves optimizing the model for the target hardware platform, such as selecting appropriate precision for weights and activations, and fusing operations to reduce computational overhead.
+% 
+% The integration of TensorRT with PyTorch can provide significant performance benefits for deep learning models, particularly for applications that require real-time inference. For example, Xie et al. (2020) demonstrated a 10x speedup in inference time for a PyTorch-based object detection model using TensorRT. Similarly, Xu et al. (2021) achieved a 2.6x speedup for a PyTorch-based image classification model using TensorRT.
 
