@@ -1,33 +1,64 @@
 # TODO List
 
+> have a look below in the "high priority section"
+
 - propose changes in the title:
     - Tecniche di ottimizzazione di reti neurali per la super risoluzione
-    - Optimization techniques of deep learning models for super-resolution
+    - Optimization techniques for super-resolution deep learning models
 
 - propose changes in the structure:
-    1. Introduction
-    2. Background
-    3. Metrics
-    4. Architectures
-        - SRUNet
-    5. Optimizations
-        - Overview optimization techniques for Deep Learning-based SR models
-        - Custom dataloader to speed up training
-        - TensorRT to speed up inference
-    6. Experiments
-    7. Conclusions
+    Introduction
+[not sure]        1.1 Motivation
+[not sure]        1.2 Problem Statement
+[not sure]        1.3 Objectives and Contributions
+[not sure]        1.4 Thesis Outline
+
+    Background
+[not sure]        2.1 Literature Review
+[not sure]        2.2 State-of-the-Art
+
+    Metrics
+[drafted]        3.1 Traditional Metrics
+[drafted]        3.2 Perceptual Metrics
+
+    Architectures
+[drafted]        4.1 UNet Architecture
+[drafted]        4.2 SRUNet Architecture
+[drafted]        4.3 Training Setup
+
+    Optimizations
+[not sure]        5.1 Overview of Optimization Techniques for Deep Learning-based SR Models
+        5.2 Custom Dataloader to Speed up Training
+        5.3 TensorRT to Speed up Inference
+
+    Experiments
+        6.1 Experimental Setup
+        6.2 Results and Analysis
+        6.2.1 Quantitative Results
+        6.2.2 Qualitative Results
+        6.3 Discussion
+
+    Conclusions
+[drafted]        7.1 Summary of Contributions
+[drafted]        7.2 Limitations and Future Work
+[drafted]        7.3 Conclusion
+
 
 ## high priority
-- add VMAF as quality metric for video
-- train with PNG for ground-truth images
-- train again replacing LPIPS with another perceptual loss
 
-- metrics: clean up
+- architectures: draft UNet explanation
 - architectures: draft SRUNet explanation
+- architectures: draft training setup
+
 - optimizations: draft overview optimization techniques
 - optimizations: draft custom dataloader section
 - optimizations: draft tensorrt section
+
 - experiments: clean up
+
+- code: add VMAF as quality metric for video
+- code: train with PNG for ground-truth images
+- code: train again replacing LPIPS with another perceptual loss
 
 - bureaucracy about thesis:
     - website
@@ -39,9 +70,10 @@
 ---
 
 ## medium priority
-- replace LPIPS with one of the new metrics available in the literature as loss
-- explain DISTS
-- explain ERQAv2.0
+- metrics: put some details on some metrics, especially where you have already written something
+- metrics: add VMAF description, once you have used it
+
+- code: replace LPIPS with one of the new metrics available in the literature as loss
 
 ---
 
@@ -92,4 +124,5 @@ Structure:
 - DONE - add in README.md how to compile and run latex sources to generate a .pdf
 - DONE - study literature in quantization theory
 - DONE - give more structure to the thesis
+- DONE - metrics: clean up
 
