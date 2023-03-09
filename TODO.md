@@ -1,5 +1,6 @@
 # TODO List
 
+> resume from training setup section in architecture chapter
 > have a look below in the "high priority section"
 
 - propose changes in the title:
