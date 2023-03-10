@@ -67,7 +67,7 @@ Modelling the problem as producing a residual on the top of the upsampled image 
 
 \section{Training Setup}
 
-To train the UNet and SRUNet models for super-resolution, we used a GAN framework with a combination of LPIPS and SSIM as the generator loss.
+To train both the UNet and SRUNet models, we used a GAN framework with a combination of LPIPS and SSIM as the generator loss.
 
 The GAN framework consists of a generator and a discriminator. The generator takes a low-resolution image as input and generates a high-resolution image. The discriminator takes either a low-resolution or a high-resolution image and outputs a probability score indicating whether the input image is real or fake.
 

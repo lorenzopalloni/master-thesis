@@ -3,47 +3,62 @@
 > resume from training setup section in architecture chapter
 > have a look below in the "high priority section"
 
-- propose changes in the title:
-    - Tecniche di ottimizzazione di reti neurali per la super risoluzione
-    - Optimization techniques for super-resolution deep learning models
+--------------------------------------------------
+## Title proposals
 
-- propose changes in the structure:
-    Introduction
-[not sure]        1.1 Motivation
-[not sure]        1.2 Problem Statement
-[not sure]        1.3 Objectives and Contributions
-[not sure]        1.4 Thesis Outline
+Original:
+ - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
+ - Optimization techniques of deep learning models for visual quality improvement
+
+Version 1:
+ - Tecniche di ottimizzazione di reti neurali per la super risoluzione
+ - Optimization techniques for super-resolution deep learning models
+
+Version 2:
+ - Ottimizzazione di reti neurali per la super risoluzione
+ - Optimization of deep learning models for super-resolution
+
+--------------------------------------------------
+
+## Structure proposal
+
+Introduction
+ - [not sure] - 1.1 Motivation
+ - [not sure] - 1.2 Problem Statement
+ - [not sure] - 1.3 Objectives and Contributions
+ - [not sure] - 1.4 Thesis Outline
 
     Background
-[not sure]        2.1 Literature Review
-[not sure]        2.2 State-of-the-Art
+ - [not sure] - 2.1 Literature Review
+ - [not sure] - 2.2 State-of-the-Art
 
     Metrics
-[drafted]        3.1 Traditional Metrics
-[drafted]        3.2 Perceptual Metrics
+ - [drafted] - 3.1 Traditional Metrics
+ - [drafted] - 3.2 Perceptual Metrics
 
     Architectures
-[drafted]        4.1 UNet Architecture
-[drafted]        4.2 SRUNet Architecture
-[drafted]        4.3 Training Setup
+ - [drafted] - 4.1 UNet Architecture
+ - [drafted] - 4.2 SRUNet Architecture
+ - [drafted] - 4.3 Training Setup
 
     Optimizations
-[not sure]        5.1 Overview of Optimization Techniques for Deep Learning-based SR Models
-        5.2 Custom Dataloader to Speed up Training
-        5.3 TensorRT to Speed up Inference
+ - [not sure] - 5.1 Overview of Optimization Techniques for Deep Learning-based SR Models
+ - 5.2 Custom Dataloader to Speed up Training
+ - 5.3 TensorRT to Speed up Inference
 
     Experiments
-        6.1 Experimental Setup
-        6.2 Results and Analysis
-        6.2.1 Quantitative Results
-        6.2.2 Qualitative Results
-        6.3 Discussion
+- 6.1 Experimental Setup
+- 6.2 Results and Analysis
+- 6.2.1 Quantitative Results
+- 6.2.2 Qualitative Results
+- 6.3 Discussion
 
     Conclusions
-[drafted]        7.1 Summary of Contributions
-[drafted]        7.2 Limitations and Future Work
-[drafted]        7.3 Conclusion
+ - [drafted] - 7.1 Summary of Contributions
+ - [drafted] - 7.2 Limitations and Future Work
+ - [drafted] - 7.3 Conclusion
 
+--------------------------------------------------
 
 ## high priority
 
