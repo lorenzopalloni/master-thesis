@@ -4,22 +4,6 @@
 > have a look below in the "high priority section"
 
 --------------------------------------------------
-## Title proposals
-
-Original:
- - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
- - Optimization techniques of deep learning models for visual quality improvement
-
-Version 1:
- - Tecniche di ottimizzazione di reti neurali per la super risoluzione
- - Optimization techniques for super-resolution deep learning models
-
-Version 2:
- - Ottimizzazione di reti neurali per la super risoluzione
- - Optimization of deep learning models for super-resolution
-
---------------------------------------------------
-
 ## Structure proposal
 
 Introduction
@@ -47,11 +31,11 @@ Introduction
  - 5.3 TensorRT to Speed up Inference
 
     Experiments
-- 6.1 Experimental Setup
-- 6.2 Results and Analysis
-- 6.2.1 Quantitative Results
-- 6.2.2 Qualitative Results
-- 6.3 Discussion
+ - 6.1 Experimental Setup
+ - 6.2 Results and Analysis
+ - 6.2.1 Quantitative Results
+ - 6.2.2 Qualitative Results
+ - 6.3 Discussion
 
     Conclusions
  - [drafted] - 7.1 Summary of Contributions
@@ -62,8 +46,6 @@ Introduction
 
 ## high priority
 
-- architectures: draft UNet explanation
-- architectures: draft SRUNet explanation
 - architectures: draft training setup
 
 - optimizations: draft overview optimization techniques
@@ -77,8 +59,8 @@ Introduction
 - code: train again replacing LPIPS with another perceptual loss
 
 - bureaucracy about thesis:
-    - website
-    - a CS professor: ask about supervisor and especially about Leonardo Galtieri
+    - DONE - website
+    - DONE - a CS professor: ask about supervisor and especially about Leonardo Galtieri
         that should not be able to do as supervisor cause he's an adjunct professor
     - mighelett'
     - emilio
@@ -141,4 +123,6 @@ Structure:
 - DONE - study literature in quantization theory
 - DONE - give more structure to the thesis
 - DONE - metrics: clean up
+- DONE - architectures: draft UNet explanation
+- DONE - architectures: draft SRUNet explanation
 
