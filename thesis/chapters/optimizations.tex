@@ -1,50 +1,62 @@
 \myChapter{Optimizations}
 \label{chap:Optimizations}
 
-Optimizing deep learning models is critical to improving their performance in video restoration tasks. Several optimization techniques have been proposed to improve the performance of deep learning-based video restoration models.
+This chapter will explore various methods to enhance deep learning models for super-resolution and visual artifact removal. The quality of the resulting output can be significantly influenced by multiple factors, such as the model's architecture, the loss function chosen, the evaluation metric(s), the way the model weights are updated during training, and other relevant hyperparameters.
 
-2.5.1 Loss Function Optimization
+The loss function is a crucial component of these models, as it measures the difference between the generated output and the ground-truth output. Depending on the task at hand, different loss functions can be utilized, such as the widely used mean squared error (MSE) and mean absolute error (MAE), as well as perceptual loss - discussed in \cref{chap:Metrics} - which considers high-level features of the image such as FID, LPIPS, DISTS, among others available in the literature.
 
-Loss function optimization is a common technique used to improve the performance of deep learning-based video restoration models. The loss function measures the difference between the generated output and the ground-truth output, and the optimization process aims to minimize this difference. Different loss functions can be used for different video restoration tasks, such as mean squared error (MSE), mean absolute error (MAE), and perceptual loss.
+The network architecture is also an important factor that determines the complexity of the model and its capacity to capture intricate patterns in the input data. For example, the UNet and SRUNet architectures used in this work are both based on CNNs with an encoder-decoder structure, use a residual layer, skip connections, interpolation, and pixel shuffle modules. Further details on these model architectures used can be found in \cref{chap:Architectures}.
 
-Perceptual loss is a commonly used loss function in video restoration tasks. Perceptual loss measures the difference between the high-level features of the generated output and the ground-truth output, instead of pixel-wise differences. By using perceptual loss, deep learning models can capture high-level features, such as texture and structure, and generate more visually appealing results.
+To prevent overfitting and improve the generalization ability, regularization techniques can be employed. These techniques include dropout and data augmentation. Dropout randomly drops out neurons during training to prevent overfitting, while data augmentation artificially expands the training dataset by applying transformations such as rotation, cropping, and flipping. Some of these techniques, among others were used in this research, as described in \cref{sec:training-setup}
 
-2.5.2 Network Architecture Optimization
+Transfer learning is a technique that can enhance performance by transferring knowledge learned from one task to another. This can be accomplished by initializing the model with pre-trained weights from a related task, such as using weights from an image classification model to initialize a super-resolution model.
 
-Network architecture optimization is another technique used to improve the performance of deep learning-based video restoration models. The network architecture determines the complexity of the model and its ability to capture complex patterns in the input data. Different architectures, such as U-Net, ResNet, and DenseNet, have been proposed for different video restoration tasks.
+One of the primary focus of this thesis is to investigate quantization techniques, which are widely studied for their ability to decrease the computational complexity and memory usage of deep learning models, while maintaining their accuracy and performance. This is particularly significant for enabling the deployment of deep learning models on devices with limited resources, such as mobile phones and embedded systems. Quantization is a technique that reduces the memory footprint and computation requirements of deep learning models by representing their parameters and activations with fewer bits than the standard 32-bit floating-point format.
 
-2.5.3 Regularization Techniques
+NOT SURE ABOUT THIS
+There are different methods for quantizing neural networks, such as uniform quantization and non-uniform quantization. Uniform quantization involves dividing the dynamic range of the weights and activations into a fixed number of equally spaced levels. Non-uniform quantization, on the other hand, assigns more bits to important weights and activations and fewer bits to less important ones.
 
-Regularization techniques are used to prevent overfitting and improve the generalization ability of deep learning-based video restoration models. Regularization techniques include dropout, weight decay, and data augmentation. Dropout is a technique that randomly drops out neurons during training to prevent overfitting. Weight decay is a technique that penalizes large weights to prevent overfitting. Data augmentation is a technique that artificially increases the size of the training dataset by applying transformations such as rotation, cropping, and flipping.
+-----------------------------------------------------------------------------
+ALL GOOD SO FAR
+-----------------------------------------------------------------------------
 
-2.5.4 Transfer Learning
+There are several quantization techniques that can be used, including fixed-point quantization, dynamic range quantization, integer quantization, hybrid quantization, and post-training quantization.
 
-Transfer learning is a technique used to transfer knowledge learned from one task to another task. Transfer learning has been used to improve the performance of deep learning-based video restoration models by initializing the model with pre-trained weights from a related task. For example, a deep learning-based super-resolution model can be initialized with pre-trained weights from a deep learning-based image classification model.
+Fixed-point quantization represents numbers with a fixed number of bits, typically 8 or 16, which reduces the memory footprint of the model. However, this can result in a loss of precision and accuracy. Dynamic range quantization determines the minimum and maximum values for each layer's activations during the inference phase and then quantizes the activations within that range. This technique can help maintain the model's accuracy while reducing its memory footprint.
 
-2.6 Conclusion
+Integer quantization represents weights and activations as integers instead of floating-point values, which reduces the model's memory footprint even further. It can be combined with dynamic range quantization for better accuracy. Hybrid quantization combines fixed-point and floating-point representations for different layers of the model to achieve a balance between accuracy and memory requirements.
 
-In this chapter, we reviewed the literature on video restoration, with a focus on deep learning-based techniques and optimization techniques for improving visual quality. We discussed traditional video restoration techniques and their limitations, as well as the superiority of deep learning-based techniques. We also reviewed the state-of-the-art super-resolution techniques, including the RSGAN model, and optimization techniques such as loss function optimization, network architecture optimization, regularization techniques, and transfer learning. The review of the literature provides a foundation for the proposed work on optimizing deep learning models for visual quality improvement in video restoration tasks.
+Post-training quantization applies quantization to a pre-trained model after it has been trained. This technique can reduce the model's memory requirements without the need for retraining.
 
-END: Overview optimization techniques for deep-learning-based SR models
+Training Aware Quantization (TAQ) is another quantization technique that involves quantizing weights and activations during the training process rather than after the training is complete. This allows the model to adjust to the quantization levels during training, which can result in better accuracy and performance compared to post-training quantization. During the training process, the weights and activations are quantized to a lower precision, and then the gradients are computed and backpropagated through the quantized operations. This allows the model to learn how to adjust to the quantization levels and can result in a better trade-off between accuracy and computational requirements.
 
-START: Quantization techniques for deep-learning-based SR models
+% Post-training quantization techniques typically involve reducing the precision of weights, activations, or both in a trained model. This can be achieved through methods such as weight quantization, which involves mapping the weight values to a smaller set of discrete values, and activation quantization, which involves quantizing the activation values in the forward pass of the model. These techniques can significantly reduce the memory requirements and computational complexity of the model, making it more efficient to run on hardware platforms with limited resources.
+% 
+% Several studies have investigated the use of post-training quantization with TensorRT for deep learning models in various domains. For example, Zhu et al. (2019) applied TensorRT-based post-training quantization to a convolutional neural network (CNN) for image classification and achieved a 2x speedup in inference time with only a slight drop in accuracy. Similarly, Zhang et al. (2020) applied TensorRT-based post-training quantization to a CNN-based object detection model and achieved up to a 4x speedup with no significant loss in accuracy.
+% 
+% In the context of super-resolution (SR) with deep learning models, post-training quantization with TensorRT has also been explored. Chen et al. (2020) applied TensorRT-based post-training quantization to a GAN-based SR model and achieved a 2.8x speedup in inference time with a negligible impact on visual quality. Similarly, Zeng et al. (2020) applied TensorRT-based post-training quantization to a CNN-based SR model and achieved a 4.4x speedup with no significant loss in performance.
+% 
+% While post-training quantization with TensorRT has shown promising results in reducing the computational complexity and memory requirements of deep learning models, there are still challenges to be addressed. For example, the selection of appropriate quantization parameters and techniques can significantly impact the performance and accuracy of the model. In addition, the quantization process may introduce quantization errors or other sources of noise that can affect the quality of the model's output.
 
-Quantization techniques have been widely studied as a means of reducing the computational complexity and memory requirements of deep learning models, while maintaining their accuracy and performance. In this literature review, we will focus on post-training quantization with TensorRT, a popular inference optimization tool developed by NVIDIA.
+-----------------------------------------------------------------------------
 
-Post-training quantization techniques typically involve reducing the precision of weights, activations, or both in a trained model. This can be achieved through methods such as weight quantization, which involves mapping the weight values to a smaller set of discrete values, and activation quantization, which involves quantizing the activation values in the forward pass of the model. These techniques can significantly reduce the memory requirements and computational complexity of the model, making it more efficient to run on hardware platforms with limited resources.
-
-Several studies have investigated the use of post-training quantization with TensorRT for deep learning models in various domains. For example, Zhu et al. (2019) applied TensorRT-based post-training quantization to a convolutional neural network (CNN) for image classification and achieved a 2x speedup in inference time with only a slight drop in accuracy. Similarly, Zhang et al. (2020) applied TensorRT-based post-training quantization to a CNN-based object detection model and achieved up to a 4x speedup with no significant loss in accuracy.
-
-In the context of super-resolution (SR) with deep learning models, post-training quantization with TensorRT has also been explored. Chen et al. (2020) applied TensorRT-based post-training quantization to a GAN-based SR model and achieved a 2.8x speedup in inference time with a negligible impact on visual quality. Similarly, Zeng et al. (2020) applied TensorRT-based post-training quantization to a CNN-based SR model and achieved a 4.4x speedup with no significant loss in performance.
-
-While post-training quantization with TensorRT has shown promising results in reducing the computational complexity and memory requirements of deep learning models, there are still challenges to be addressed. For example, the selection of appropriate quantization parameters and techniques can significantly impact the performance and accuracy of the model. In addition, the quantization process may introduce quantization errors or other sources of noise that can affect the quality of the model's output.
-
-Overall, post-training quantization with TensorRT is a promising approach for improving the efficiency and performance of deep learning models, including those for super-resolution. Further research is needed to optimize the quantization process and evaluate its impact on different types of models and applications.
+% START: Quantization techniques for deep-learning-based SR models
+% 
+% Post-training quantization techniques typically involve reducing the precision of weights, activations, or both in a trained model. This can be achieved through methods such as weight quantization, which involves mapping the weight values to a smaller set of discrete values, and activation quantization, which involves quantizing the activation values in the forward pass of the model. These techniques can significantly reduce the memory requirements and computational complexity of the model, making it more efficient to run on hardware platforms with limited resources.
+% 
+% Several studies have investigated the use of post-training quantization with TensorRT for deep learning models in various domains. For example, Zhu et al. (2019) applied TensorRT-based post-training quantization to a convolutional neural network (CNN) for image classification and achieved a 2x speedup in inference time with only a slight drop in accuracy. Similarly, Zhang et al. (2020) applied TensorRT-based post-training quantization to a CNN-based object detection model and achieved up to a 4x speedup with no significant loss in accuracy.
+% 
+% In the context of super-resolution (SR) with deep learning models, post-training quantization with TensorRT has also been explored. Chen et al. (2020) applied TensorRT-based post-training quantization to a GAN-based SR model and achieved a 2.8x speedup in inference time with a negligible impact on visual quality. Similarly, Zeng et al. (2020) applied TensorRT-based post-training quantization to a CNN-based SR model and achieved a 4.4x speedup with no significant loss in performance.
+% 
+% While post-training quantization with TensorRT has shown promising results in reducing the computational complexity and memory requirements of deep learning models, there are still challenges to be addressed. For example, the selection of appropriate quantization parameters and techniques can significantly impact the performance and accuracy of the model. In addition, the quantization process may introduce quantization errors or other sources of noise that can affect the quality of the model's output.
+% 
+% Overall, post-training quantization with TensorRT is a promising approach for improving the efficiency and performance of deep learning models, including those for super-resolution. Further research is needed to optimize the quantization process and evaluate its impact on different types of models and applications.
 
 START: Quantization techniques for deep-learning-based SR models
 
 \section{Custom dataloader to speed up training}
 \label{sec:custom-dataloader}
+To speed up training a custom data-ingestion pipeline were implemented.
 
 \section{TensorRT to speed up inference}
 \label{sec:tensorrt}

@@ -1,22 +1,8 @@
 # TODO List
 
-> resume from training setup section in architecture chapter
+> resume from optimizations chapter and survey:
+    "A Survey of Quantization Methods for Efficient Neural Network Inference"
 > have a look below in the "high priority section"
-
---------------------------------------------------
-## Title proposals
-
-Original:
- - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
- - Optimization techniques of deep learning models for visual quality improvement
-
-Version 1:
- - Tecniche di ottimizzazione di reti neurali per la super risoluzione
- - Optimization techniques for super-resolution deep learning models
-
-Version 2:
- - Ottimizzazione di reti neurali per la super risoluzione
- - Optimization of deep learning models for super-resolution
 
 --------------------------------------------------
 
