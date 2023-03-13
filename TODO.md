@@ -2,20 +2,19 @@
 
 > resume from optimizations chapter and survey:
     "A Survey of Quantization Methods for Efficient Neural Network Inference"
-> have a look below in the "high priority section"
 
 --------------------------------------------------
 ## Structure proposal
 
-Introduction
- - [not sure] - 1.1 Motivation
- - [not sure] - 1.2 Problem Statement
- - [not sure] - 1.3 Objectives and Contributions
- - [not sure] - 1.4 Thesis Outline
+    Introduction
+ - [drafted] - possible outline:
+    - Motivation
+    - Problem Statement
+    - Objectives and Contributions
+    - Thesis Outline
 
     Background
- - [not sure] - 2.1 Literature Review
- - [not sure] - 2.2 State-of-the-Art
+ - [drafted] - literature review in video restoration
 
     Metrics
  - [drafted] - 3.1 Traditional Metrics
@@ -27,31 +26,25 @@ Introduction
  - [drafted] - 4.3 Training Setup
 
     Optimizations
- - [not sure] - 5.1 Overview of Optimization Techniques for Deep Learning-based SR Models
- - 5.2 Custom Dataloader to Speed up Training
- - 5.3 TensorRT to Speed up Inference
+ - [drafted] - 5.1 Quantization
+ - [drafted] - 5.2 TensorRT to Speed up Inference
+ - [maybe to be moved, but where?] 5.3 Custom Dataloader to Speed up Training
 
     Experiments
- - 6.1 Experimental Setup
- - 6.2 Results and Analysis
- - 6.2.1 Quantitative Results
- - 6.2.2 Qualitative Results
- - 6.3 Discussion
+ - 6.1 Quantitative Results
+ - 6.2 Qualitative Results
 
     Conclusions
- - [drafted] - 7.1 Summary of Contributions
- - [drafted] - 7.2 Limitations and Future Work
- - [drafted] - 7.3 Conclusion
+ - [drafted] - possible outline:
+    - Summary of Contributions
+    - Limitations and Future Work
+    - Conclusion
 
 --------------------------------------------------
 
 ## high priority
 
-- architectures: draft training setup
-
-- optimizations: draft overview optimization techniques
 - optimizations: draft custom dataloader section
-- optimizations: draft tensorrt section
 
 - experiments: clean up
 
@@ -126,4 +119,7 @@ Structure:
 - DONE - metrics: clean up
 - DONE - architectures: draft UNet explanation
 - DONE - architectures: draft SRUNet explanation
+- DONE - architectures: draft training setup
+- DONE - optimizations: draft overview optimization techniques
+- DONE - optimizations: draft tensorrt section
 
