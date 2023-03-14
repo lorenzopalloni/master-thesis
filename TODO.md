@@ -1,77 +1,62 @@
 # TODO List
 
-> resume from optimizations chapter and survey:
-    "A Survey of Quantization Methods for Efficient Neural Network Inference"
-
 --------------------------------------------------
-## Structure proposal
+## Structure
 
-    Introduction
+1. Introduction
  - [drafted] - possible outline:
     - Motivation
     - Problem Statement
     - Objectives and Contributions
     - Thesis Outline
 
-    Background
+2. Background
  - [drafted] - literature review in video restoration
 
-    Metrics
+3. Metrics
  - [drafted] - 3.1 Traditional Metrics
  - [drafted] - 3.2 Perceptual Metrics
 
-    Architectures
+4. Architectures
  - [drafted] - 4.1 UNet Architecture
  - [drafted] - 4.2 SRUNet Architecture
  - [drafted] - 4.3 Training Setup
 
-    Optimizations
+5. Optimizations
  - [drafted] - 5.1 Quantization
  - [drafted] - 5.2 TensorRT to Speed up Inference
  - [maybe to be moved, but where?] 5.3 Custom Dataloader to Speed up Training
 
-    Experiments
- - 6.1 Quantitative Results
+6. Experiments
+ - [drafted] - 6.1 Quantitative Results
  - 6.2 Qualitative Results
 
-    Conclusions
+7. Conclusions
  - [drafted] - possible outline:
     - Summary of Contributions
     - Limitations and Future Work
     - Conclusion
-
 --------------------------------------------------
 
 ## high priority
 
-- optimizations: draft custom dataloader section
-
-- experiments: clean up
-
-- code: add VMAF as quality metric for video
-- code: train with PNG for ground-truth images
-- code: train again replacing LPIPS with another perceptual loss
-
-- bureaucracy about thesis:
-    - DONE - website
-    - DONE - a CS professor: ask about supervisor and especially about Leonardo Galtieri
-        that should not be able to do as supervisor cause he's an adjunct professor
-    - mighelett'
-    - emilio
+- [bureaucracy] ask administration about taxes
+- [code] add VMAF as quality metric for video
+- [code] train with PNG for ground-truth images
+- [code] train again replacing LPIPS with another perceptual loss
+- [optimizations] draft custom dataloader section
 
 ---
 
 ## medium priority
-- metrics: put some details on some metrics, especially where you have already written something
-- metrics: add VMAF description, once you have used it
-
-- code: replace LPIPS with one of the new metrics available in the literature as loss
+- [metrics] put some details on some metrics, especially where you have already written something
+- [metrics] add VMAF description, once you have used it
 
 ---
 
 ## low priority
-- background: add citations
-- background: update content with a recent survey on video reconstruction
+- [background] add citations
+- [background] update content with a recent survey on video reconstruction
 - find a quote
 
 ---
@@ -81,19 +66,6 @@
 Thesis title:
 - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
 - Optimization techniques of deep learning models for visual quality improvement
-
-Structure:
-- Intro
-- 1. Literature review about video restoration
-    - RSGAN
-    - ERSGAN
-- 2. IQA/VQA metrics
-- 3. SRUNet
-    - description UNet / SRUNet
-    - code optimization with custom dataloader with buffer to deal with GPU bottleneck
-    - TensorRT
-- 4. Experiments and Results
-- Conclusion
 
 ---
 
@@ -116,10 +88,15 @@ Structure:
 - DONE - add in README.md how to compile and run latex sources to generate a .pdf
 - DONE - study literature in quantization theory
 - DONE - give more structure to the thesis
-- DONE - metrics: clean up
-- DONE - architectures: draft UNet explanation
-- DONE - architectures: draft SRUNet explanation
-- DONE - architectures: draft training setup
-- DONE - optimizations: draft overview optimization techniques
-- DONE - optimizations: draft tensorrt section
+- DONE - [metrics] clean up
+- DONE - [architectures] draft UNet explanation
+- DONE - [architectures] draft SRUNet explanation
+- DONE - [architectures] draft training setup
+- DONE - [optimizations] draft overview optimization techniques
+- DONE - [optimizations] draft tensorrt section
+- DONE - [experiments] clean up
+- DONE - [bureaucracy] website
+- DONE - [bureaucracy] ask mighelett'
+- DONE - [bureaucracy] ask emilio
+- DONE - [bureaucracy] ask about supervisors
 
