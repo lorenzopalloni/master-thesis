@@ -128,5 +128,31 @@ To generate our input data, we compressed each sequence with the H.265 codec wit
 We fixed the CRF in the attempt to avoid the mode-collapse issue described in \cite{galteri2019deep}. However, it should be kept in mind that even a fixed CRF does not imply that all the frames have the same quality: e.g. frames presenting motion will present lower quality than steady ones.
 Since we want to apply super-resolution on compressed videos (thus perform both Artifact Reduction and Super Resolution), it is fundamental to train the models on the compressed videos rather than just on the downscaled version of the HQ videos. Training the model only for SR would cause the model to fail to detect the features to super-resolve, or to even enlarge the compression artifacts and reducing the overall quality.
 
+% BVI-DVC dataset is a training database for deep video compression algorithms. It was introduced in a paper titled "BVI-DVC: A Training Database for Deep Video Compression" by Xiang Li, Yaowei Wang, Wenhan Yang, Zhenyu Guan, and Wei Li.
+% 
+% The dataset consists of 37 high-resolution videos captured in the waters around the British Virgin Islands. The videos were captured using a GoPro camera mounted on a remotely operated underwater vehicle (ROV). The videos are compressed using H.264 video coding standard, which is a widely used video compression standard.
+% 
+% The dataset provides ground truth data that includes the uncompressed video sequences, the compressed videos at different bitrates, and the corresponding quality scores of the compressed videos. The quality scores are measured using both objective metrics and subjective human evaluations.
+% 
+% The BVI-DVC dataset is designed to be used as a benchmark dataset for deep video compression algorithms. It provides a large number of training examples for deep learning algorithms to learn how to compress videos efficiently while maintaining high visual quality. The dataset also provides a standardized evaluation protocol for comparing different deep video compression algorithms.
+% 
+% Overall, the BVI-DVC dataset is a valuable resource for researchers working on video compression and related fields, providing a large and diverse collection of underwater videos and a standardized evaluation framework for comparing different compression algorithms.
+
 -----------------------------------------------------------------------------
+
+\section{Custom dataloader to speed up training}
+\label{sec:custom-dataloader}
+
+A custom data-ingestion pipeline were implemented to optimize model training.
+Its first purpose is to minimize computational bottleneck due to the combination of four interconnected factors:
+- GPU RAM capacity
+- time required by the GPU to process a batch
+- time required by the CPU to fetch an image
+- image size
+
+The models used in this research were trained on an UBUNTU 20.04 server, using a single GPU Titan Xp, with 12GB of RAM. The BVI-DVC dataset is stored in an external HDD, and for its size it cannot be moved to SSD, that are closer to the server CPUs, but with less capacity. Another constraint was that only one thread was allowed to access data in the HDD a time.
+
+At the beginning, the naive PyTorch dataloader was implemented to load in this settings only one image a time, extracting only one patch for each loaded image, and considering a mini-batch size of 32, for every forward/backward pass a thread from the CPU would have to load and to process 32 images of 2K resolution each into 32 patches of 98x98 pixels, then to move the data in the GPU RAM. Of course, forward/backward pass in GPU was really much faster than the CPU's job, so the bottleneck for the GPU was too much for train a model in this settings.
+
+If memory consumption is not a problem, a naive solution could be to store in the SSDs close to the CPUs some patches from each (or only a sample) of the frames from all the available videos. In this way the CPUs can work in parallel ensuring no bottleneck for the GPU workload.
 

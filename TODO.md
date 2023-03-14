@@ -1,5 +1,8 @@
 # TODO List
 
+> resume from code
+> resume from [architectures], continue explaining custom dataloder implemented
+
 --------------------------------------------------
 ## Structure
 
