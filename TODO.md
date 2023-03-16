@@ -3,7 +3,6 @@
 > resume from code
 > resume from [architectures], continue explaining custom dataloder implemented
 
---------------------------------------------------
 ## Structure
 
 1. Introduction
@@ -39,7 +38,6 @@
     - Summary of Contributions
     - Limitations and Future Work
     - Conclusion
---------------------------------------------------
 
 ## high priority
 
@@ -49,28 +47,20 @@
 - [code] train again replacing LPIPS with another perceptual loss
 - [optimizations] draft custom dataloader section
 
----
-
 ## medium priority
 - [metrics] put some details on some metrics, especially where you have already written something
 - [metrics] add VMAF description, once you have used it
-
----
 
 ## low priority
 - [background] add citations
 - [background] update content with a recent survey on video reconstruction
 - find a quote
 
----
-
 ### Comments
 
 Thesis title:
 - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
 - Optimization techniques of deep learning models for visual quality improvement
-
----
 
 ## DONEs
 - DONE - .gitignore literature/ folder, plus Python and LaTex stuff
