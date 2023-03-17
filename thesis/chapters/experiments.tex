@@ -76,8 +76,8 @@ SRUNet\_INT8 &    0.006 ± 0.0 \\
 \end{table*}
 
 \begin{figure*}[h]
-  \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_timings_all.png}
-  \caption{Average times elapsed in seconds for generating one image using different versions of UNET and SRUNET implementations. The top graph shows all the versions, the middle one zooms in comparing only the TRT versions of UNET, as well as the bottom graph for SRUNET.}
+\includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_timings_all.png}
+\caption{Average times elapsed in seconds for generating one image using different versions of UNET and SRUNET implementations. The top graph shows all the versions, the middle one zooms in comparing only the TRT versions of UNET, as well as the bottom graph for SRUNET.}
 \label{fig:timings-all}
 \end{figure*}
 
@@ -92,6 +92,19 @@ SRUNet\_INT8 &    0.006 ± 0.0 \\
 \caption{Boxplots for several metrics on validation images using SRUNET compiled in TensorRT (FP32/FP16/INT8).}
 \label{fig:timings-srunet}
 \end{figure*}
+
+\begin{figure*}[h]
+\includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_mean.png}
+\caption{Mean VMAF score on a test video using different versions of UNET and SRUNET implementations.}
+\label{fig:vmaf-mean}
+\end{figure*}
+
+\begin{figure*}[h]
+\includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_harmonic_mean.png}
+\caption{Harmonic mean VMAF score on a test video using different versions of UNET and SRUNET implementations.}
+\label{fig:vmaf-harmonic-mean}
+\end{figure*}
+
 \clearpage
 
 \section{Qualitative Results}
