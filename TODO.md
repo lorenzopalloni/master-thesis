@@ -1,52 +1,65 @@
-TODO List
-==========
+# TODO List
+> resume from solaris, there are trainings on png's that are running
+> resume from code
+> resume from [architectures], continue explaining custom dataloder implemented
 
-> implement a custom PyTorch Dataset in ./code/copying.py
-> remember to activate thesis (define which venv tool to use)
+## Structure
+1. Introduction
+ - [drafted] - possible outline:
+    - Motivation
+    - Problem Statement
+    - Objectives and Contributions
+    - Thesis Outline
+
+2. Background
+ - [drafted] - literature review in video restoration
+
+3. Metrics
+ - [drafted] - 3.1 Traditional Metrics
+ - [drafted] - 3.2 Perceptual Metrics
+
+4. Architectures
+ - [drafted] - 4.1 UNet Architecture
+ - [drafted] - 4.2 SRUNet Architecture
+ - [drafted] - 4.3 Training Setup
+
+5. Optimizations
+ - [drafted] - 5.1 Quantization
+ - [drafted] - 5.2 TensorRT to Speed up Inference
+ - [maybe to be moved, but where?] 5.3 Custom Dataloader to Speed up Training
+
+6. Experiments
+ - [drafted] - 6.1 Quantitative Results
+ - 6.2 Qualitative Results
+
+7. Conclusions
+ - [drafted] - possible outline:
+    - Summary of Contributions
+    - Limitations and Future Work
+    - Conclusion
 
 ## high priority
-
-- files in fast-sr-unet project:
-    - data\_loader.py
-    - evaluate\_model.py
-    - models.py
-    - pytorch\_unet.py
-    - render.py
-    - train.py
-    - utils.py
-- study them and identify a good start for studying and copying/adapting
-
-- in fast-sr-unet/evaluate\_mode.py there is a ~260-lines-of-code function really messed up that can be useful as a reference to evaluate different metrics on low vs high quality videos
-- start packaging the ./code/ folder in another repo
-    - add tests/ and \<package-name\>/ folders to the new repo
-    - manage it with poetry
-    - poetry vs conda: understand which one would be the best to manage the venv for the project
-
-- pytorch dataset
-
-- look for LPIPS-Comp
-- look for LPIPS
-- look for SSIM / MS-SSIM
-
-- binarize SR-UNet
-
----
+- [optimizations] draft custom dataloader section
+- [metrics] add VMAF description, once you have used it
+- [metrics] put some details on some metrics, especially where you have already written something
 
 ## medium priority
-- remember to use Hydra
-- Comet.ml was suggested by the professor
-- sync GitHub and Overleaf
-
----
+- [code] rename the codebase (suggestions: quant)
+- [code] handle the gifnoc package (rename, refactor, then publish on PyPI)
 
 ## low priority
+- [background] add citations
+- [background] update content with a recent survey on video reconstruction
+- find a quote
+- [code] train again replacing LPIPS with another perceptual loss
 
----
-#### Streak
-May 8-27  # 19 days
-May 30
+### Comments
 
-#### DONEs
+Thesis title:
+- Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
+- Optimization techniques of deep learning models for visual quality improvement
+
+## DONEs
 - DONE - .gitignore literature/ folder, plus Python and LaTex stuff
 - DONE - set up abstract
 - DONE - simple makefile
@@ -55,3 +68,28 @@ May 30
 - DONE - overleaf setup
 - DONE - init git repo for the thesis
 - DONE - convert sh script for video preparation to Python
+- DONE - poetry vs conda: understand which one would be the best to manage the venv for the project
+- DONE - study fast-sr-unet repo identifying from which file(s) to start copying/adapting
+- DONE - start packaging the ./code/ folder in another repo
+- DONE - explain PSNR
+- DONE - explain SSIM
+- DONE - explain MS-SSIM
+- DONE - explain LPIPS-Comp / LPIPS
+- DONE - add in README.md how to compile and run latex sources to generate a .pdf
+- DONE - study literature in quantization theory
+- DONE - give more structure to the thesis
+- DONE - [metrics] clean up
+- DONE - [architectures] draft UNet explanation
+- DONE - [architectures] draft SRUNet explanation
+- DONE - [architectures] draft training setup
+- DONE - [optimizations] draft overview optimization techniques
+- DONE - [optimizations] draft tensorrt section
+- DONE - [experiments] clean up
+- DONE - [bureaucracy] website
+- DONE - [bureaucracy] ask mighelett'
+- DONE - [bureaucracy] ask emilio
+- DONE - [bureaucracy] ask about supervisors
+- DONE - [code] add VMAF as quality metric for video
+- DONE - [code] train with PNG for ground-truth images
+- DONE - [bureaucracy] ask administration about taxes
+

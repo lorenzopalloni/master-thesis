@@ -1,14 +1,14 @@
 easy: thesis.tex
 	pdflatex thesis.tex \
-    && bibtex thesis \
-	&& evince thesis.pdf &!
+	&& bibtex thesis \
+	&& evince thesis.pdf &
 
 properly: thesis.tex
 	pdflatex thesis.tex \
-    && bibtex thesis \
+	&& bibtex thesis \
 	&& pdflatex thesis.tex \
 	&& pdflatex thesis.tex \
-	&& evince thesis.pdf &!
+	&& evince thesis.pdf &
 
 clean:
 	rm ./thesis.aux ./thesis.bbl ./thesis.blg ./thesis.brf ./thesis.lof ./thesis.log \

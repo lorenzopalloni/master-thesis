@@ -1,0 +1,97 @@
+\myChapter{Optimizations}
+\label{chap:Optimizations}
+
+This chapter will explore various methods to enhance deep learning models for super-resolution and visual artifact removal. The quality of the resulting output can be significantly influenced by multiple factors, such as the model's architecture, the loss function chosen, the evaluation metric(s), the way the model weights are updated during training, and other relevant hyperparameters.
+
+The loss function is a crucial component of these models, as it measures the difference between the generated output and the ground-truth output. Depending on the task at hand, different loss functions can be utilized, such as the widely used mean squared error (MSE) and mean absolute error (MAE), as well as perceptual loss - discussed in \cref{chap:Metrics} - which considers high-level features of the image such as FID, LPIPS, DISTS, among others available in the literature.
+
+The network architecture is also an important factor that determines the complexity of the model and its capacity to capture intricate patterns in the input data. For example, the UNet and SRUNet architectures used in this work are both based on CNNs with an encoder-decoder structure, use residual layers, skip connections, interpolation and pixel shuffle modules. Further details on these model architectures can be found in \cref{chap:Architectures}.
+
+To prevent overfitting and improve the generalization ability, regularization techniques can be employed. These techniques include dropout and data augmentation. Dropout randomly drops out neurons during training to prevent overfitting, while data augmentation artificially expands the training dataset by applying transformations such as rotation, cropping, and flipping. Some of these techniques, among others were used in this research, as described in \cref{sec:training-setup}
+
+\section{Quantization}
+\label{sec:quantization}
+
+Another approach, and one of the primary focus of this thesis, is quantization. Quantization techniques are widely studied for their ability to decrease the computational complexity and memory usage of deep learning models, while maintaining their accuracy and performance. This is particularly significant for enabling the deployment of deep learning models on devices with limited resources, such as mobile phones and embedded systems. Quantization is a technique that reduces the memory footprint and computation requirements of deep learning models by representing their parameters and activations with fewer bits than the standard 32-bit floating-point format.
+
+There are different methods for quantizing neural networks, such as uniform quantization and non-uniform quantization. Uniform quantization involves dividing the dynamic range of the weights and activations into a fixed number of equally spaced levels. Non-uniform quantization, on the other hand, assigns more bits to important weights and activations and fewer bits to less important ones allowing for more precise capture of signal information. However, implementing non-uniform quantization schemes on common computational hardware, such as GPUs and CPUs, can be challenging. Therefore, the current standard method for quantization is uniform quantization due to its simplicity and efficient mapping to hardware \cite{gholami2021survey}.
+
+Another way in which quantization methods can be divided is in fixed-point, integer, and hybrid quantization. Fixed-point quantization represents numbers with a fixed number of bits, typically 8 or 16, which reduces the memory footprint of the model. Integer quantization represents weights and activations as integers instead of floating-point values, which reduces the model's memory footprint even further. Hybrid quantization combines fixed-point and floating-point representations for different layers of the model to achieve a balance between accuracy and memory requirements.
+
+It is often necessary to fine-tune the parameters in a neural network after quantization. There are two ways to accomplish this: one approach involves re-training the model, which is known as Quantization-Aware Training (QAT), while the other approach is to modify the parameters without re-training, a method commonly referred to as Post-Training Quantization (PTQ).
+
+QAT involves re-training a neural network model with quantized parameters to address the perturbation introduced by quantization, which may shift the model away from its convergence point in floating point precision. During QAT, forward and backward passes are performed in floating point on the quantized model, with the model parameters being quantized after each gradient update using projected gradient descent. It is crucial to perform this projection after the weight update in floating point precision to maintain accuracy. Backpropagation in floating point is also essential to avoid zero-gradient or gradients with high errors, which can occur when accumulating gradients in quantized precision, particularly in low-precision scenarios. The non-differentiable quantization operator is approximated using the Straight Through Estimator (STE) to address this issue. Despite being a coarse approximation, STE typically works well in practice except for ultra low-precision quantization such as binary quantization.
+
+Although QAT has been demonstrated to be effective, the main drawback is the computational cost of re-training the neural network model. This re-training may take several hundred epochs to recover accuracy, particularly in low-bit precision quantization. If a quantized model is expected to be deployed for a long time and efficiency and accuracy are critical, then the investment in re-training is likely worthwhile. However, this may not be the case for all models, particularly those with a short lifetime. In the following section, we discuss an alternative approach that does not have this overhead.
+
+During PTQ, the quantization parameters for both weights and activations are established without performing any re-training on the neural network model. Consequently, PTQ is a rapid technique for quantizing neural network models. However, this approach often results in lower accuracy compared to QAT.
+
+\section{TensorRT to speed up inference}
+\label{sec:tensorrt}
+
+TensorRT is an inference optimization tool developed by NVIDIA that can accelerate deep learning models on NVIDIA GPUs. In recent years, there has been increasing interest in integrating TensorRT with PyTorch, one of the most popular deep learning frameworks that allows users to easily develop and train deep learning models, to take advantage of the performance benefits of TensorRT during inference.
+ 
+There are several ways to integrate TensorRT with PyTorch. One approach is to use the ONNX format, which is an open standard for representing deep learning models. PyTorch models can be converted to the ONNX format using the \texttt{torch.onnx.export} function, and the resulting ONNX file can then be optimized for inference using TensorRT. The optimized model can be loaded back into PyTorch using the \texttt{torch.onnx.import} function, allowing users to continue working with the model in PyTorch.
+
+Another approach is to use Torch-TensorRT. Torch-TensorRT is a compiler that is designed for PyTorch, TorchScript, and FX, with the aim of optimizing them for NVIDIA GPUs through the use of NVIDIA's TensorRT.
+
+TorchScript is a scripting language and runtime environment for PyTorch that allows you to serialize and save PyTorch models and run them in production without needing the full PyTorch framework. It enables efficient execution of PyTorch models on a wide range of devices.
+
+FX is a new, experimental toolkit for building high-performance machine learning models in PyTorch. It allows developers to compose models using pure Python syntax and provides tools for optimizing and deploying those models on various hardware platforms. FX is designed to enable fast experimentation and easy production deployment of PyTorch models.
+
+Unlike PyTorch's Just-In-Time (JIT) compiler, Torch-TensorRT is an Ahead-of-Time (AOT) compiler. This means that before deploying your TorchScript code, you must go through an explicit compile step to convert a standard TorchScript or FX program into a module targeting a TensorRT engine. Torch-TensorRT works as a PyTorch extension, and compiled modules can integrate seamlessly into the JIT runtime. Once compiled, the optimized graph should feel no different from running a TorchScript module. Additionally, you have access to TensorRT's suite of configurations at compile time, allowing you to specify operating precision (FP32/FP16/INT8) and other settings for your module.
+
+The Torch-TensorRT Python API offers a simple and user-friendly approach to utilizing PyTorch dataloaders in conjunction with TensorRT calibrators. By specifying the desired configuration, the DataLoaderCalibrator class can be employed to establish a TensorRT calibrator. The provided code exemplifies how to make use of this functionality.
+
+TODO: NOT SURE ABOUT INCLUDING THIS CODE SNIPPET
+\begin{lstlisting}[language=Python]
+import torch
+import torchvision
+import torchvision.transforms as transforms
+import torch_tensorrt
+
+testing_dataset = torchvision.datasets.CIFAR10(
+  root="./data",
+  train=False,
+  download=True,
+  transform=transforms.Compose(
+    [
+      transforms.ToTensor(),
+      transforms.Normalize(
+        (0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)
+      ),
+    ]
+  ),
+)
+
+testing_dataloader = torch.utils.data.DataLoader(
+  testing_dataset, batch_size=1, shuffle=False, num_workers=1
+)
+calibrator = torch_tensorrt.ptq.DataLoaderCalibrator(
+  testing_dataloader,
+  cache_file="./calibration.cache",
+  use_cache=False,
+  algo_type=torch_tensorrt.ptq.CalibrationAlgo.ENTROPY_CALIBRATION_2,
+  device=torch.device("cuda:0"),
+)
+
+trt_mod = torch_tensorrt.compile(
+  model,
+  inputs=[torch_tensorrt.Input((1, 3, 32, 32))],
+  enabled_precisions={torch.float, torch.half, torch.int8},
+  calibrator=calibrator,
+  device={
+    "device_type": torch_tensorrt.DeviceType.GPU,
+    "gpu_id": 0,
+    "dla_core": 0,
+    "allow_gpu_fallback": False,
+    "disable_tf32": False
+  }
+)
+\end{lstlisting}
+
+TODO: VERIFY THE FOLLOWING TWO PARAGRAPHS
+Several studies have investigated the use of post-training quantization with TensorRT for deep learning models in various domains. For example, Zhu et al. (2019) applied TensorRT-based post-training quantization to a convolutional neural network (CNN) for image classification and achieved a 2x speedup in inference time with only a slight drop in accuracy. Similarly, Zhang et al. (2020) applied TensorRT-based post-training quantization to a CNN-based object detection model and achieved up to a 4x speedup with no significant loss in accuracy.
+
+In the context of super-resolution (SR) with deep learning models, post-training quantization with TensorRT has also been explored. Chen et al. (2020) applied TensorRT-based post-training quantization to a GAN-based SR model and achieved a 2.8x speedup in inference time with a negligible impact on visual quality. Similarly, Zeng et al. (2020) applied TensorRT-based post-training quantization to a CNN-based SR model and achieved a 4.4x speedup with no significant loss in performance.
+

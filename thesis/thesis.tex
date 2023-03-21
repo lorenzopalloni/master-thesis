@@ -13,19 +13,19 @@
 \documentclass[twoside,openright,titlepage,fleqn,
     headinclude,12pt,a4paper,BCOR5mm,footinclude]{scrbook}
 %--------------------------------------------------------------
-\newcommand{\myItalianTitle}{Titolo italiano\xspace}
-\newcommand{\myEnglishTitle}{Titolo inglese\xspace}
+\newcommand{\myItalianTitle}{TECNICHE DI OTTIMIZZAZIONE DI RETI NEURALI PER IL MIGLIORAMENTO DELLA QUALIT\`A VISUALE\xspace}
+\newcommand{\myEnglishTitle}{OPTIMIZATION TECHNIQUES OF DEEP LEARNING MODELS FOR VISUAL QUALITY IMPROVEMENT\xspace}
 \newcommand{\myDegree}{Corso di Laurea in Informatica\xspace}
 \newcommand{\myName}{Lorenzo Palloni\xspace}
 \newcommand{\myProf}{Relatore\xspace}
-\newcommand{\myOtherProf}{Correlatore\xspace}
+\newcommand{\myOtherProf}{Correlatori\xspace}
 \newcommand{\mySupervisor}{Nome Cognome\xspace}
 \newcommand{\myFaculty}{
     Scuola di Scienze Matematiche, Fisiche e Naturali\xspace}
 \newcommand{\myUni}{\protect{
     Universit\`a degli Studi di Firenze}\xspace}
 \newcommand{\myLocation}{Firenze\xspace}
-\newcommand{\myTime}{Anno Accademico 2014-2015\xspace}
+\newcommand{\myTime}{Anno Accademico 2021-2022\xspace}
 \newcommand{\myVersion}{Version 0.1\xspace}
 %--------------------------------------------------------------
 \usepackage[italian]{babel}
@@ -84,13 +84,13 @@
     tabsize=3
 }
 %--------------------------------------------------------------
-% lorenzo's packages
+% Lorenzo's packages
 %-------------------
 \usepackage{mathtools}
 \usepackage{lipsum}
 \usepackage{hyperref}
 
-% \usepackage{cleveref}
+\usepackage{cleveref}
 % \usepackage{float}
 % \usepackage{bm}
 % \usepackage{algorithm}
@@ -127,8 +127,11 @@
 \cleardoublepage
 
 \include{chapters/introduction}
+\include{chapters/background}
 \include{chapters/metrics}
-% \include{chapters/esercizi}
+\include{chapters/architectures}
+\include{chapters/optimizations}
+\include{chapters/experiments}
 \include{chapters/conclusions}
 
 \nocite{*}
@@ -137,3 +140,4 @@
 %--------------------------------------------------------------
 \end{document}
 %--------------------------------------------------------------
+
