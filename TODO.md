@@ -1,10 +1,9 @@
 # TODO List
-
+> resume from solaris, there are trainings on png's that are running
 > resume from code
 > resume from [architectures], continue explaining custom dataloder implemented
 
 ## Structure
-
 1. Introduction
  - [drafted] - possible outline:
     - Motivation
@@ -40,21 +39,19 @@
     - Conclusion
 
 ## high priority
-
-- [bureaucracy] ask administration about taxes
-- [code] add VMAF as quality metric for video
-- [code] train with PNG for ground-truth images
-- [code] train again replacing LPIPS with another perceptual loss
 - [optimizations] draft custom dataloader section
+- [metrics] add VMAF description, once you have used it
+- [metrics] put some details on some metrics, especially where you have already written something
 
 ## medium priority
-- [metrics] put some details on some metrics, especially where you have already written something
-- [metrics] add VMAF description, once you have used it
+- [code] rename the codebase (suggestions: quant)
+- [code] handle the gifnoc package (rename, refactor, then publish on PyPI)
 
 ## low priority
 - [background] add citations
 - [background] update content with a recent survey on video reconstruction
 - find a quote
+- [code] train again replacing LPIPS with another perceptual loss
 
 ### Comments
 
@@ -92,4 +89,7 @@ Thesis title:
 - DONE - [bureaucracy] ask mighelett'
 - DONE - [bureaucracy] ask emilio
 - DONE - [bureaucracy] ask about supervisors
+- DONE - [code] add VMAF as quality metric for video
+- DONE - [code] train with PNG for ground-truth images
+- DONE - [bureaucracy] ask administration about taxes
 
