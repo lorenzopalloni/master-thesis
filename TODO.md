@@ -39,9 +39,18 @@
     - Conclusion
 
 ## high priority
-- [optimizations] draft custom dataloader section
-- [metrics] add VMAF description, once you have used it
+- [background] polish
+- [metrics] polish, especially VMAF
 - [metrics] put some details on some metrics, especially where you have already written something
+- [architectures] polish
+- [optimizations] polish
+- [code] run quantitative evaluations
+- [code] run quantitative evaluations
+- [experiments] include new quantitative evaluations
+- [experiments] include new qualitative evaluations
+- [experiments] draft qualitative results section
+- [conclusions] draft it
+- [optimizations] draft custom dataloader section
 
 ## medium priority
 - [code] rename the codebase (suggestions: quant)
