@@ -23,19 +23,39 @@ FID (Fréchet Inception Distance) is a perceptual metric used to evaluate the si
 
 LPIPS (Learned Perceptual Image Patch Similarity) computes the similarity between two images based on their perceptual similarity at the patch level, using a deep neural network trained on human perceptual judgments.
 
-LPIPS-Comp (LPIPS with Saliency Map Comparison) is an extension of LPIPS that incorporates saliency maps to enhance the metric's sensitivity to the most salient regions in the image.
+LPIPS-Comp (LPIPS with Saliency Map Comparison) is an extension of LPIPS that incorporates saliency maps to enhance the metric sensitivity to the most salient regions in the image.
 
 E-LPIPS (Ensembled LPIPS) is an improved version of the LPIPS metric that employs an ensemble of neural networks trained on different subsets of images to improve the stability and robustness of the metric.
 
-DISTS (Deep Image Structure and Texture Similarity) is based on a Siamese neural network, which takes two input images, and extracts features from them. These features are then compared at multiple levels to compute a final similarity score between the the two images.
+DISTS (Deep Image Structure and Texture Similarity) is based on a Siamese neural network, which takes two input images, and extracts features from them. These features are then compared at multiple levels to compute a final similarity score between the two images.
 
 Other perceptual metrics such as MOS (Mean Opinion Score), 2AFC (Two Alternative Forced Choice), and JND (Just Noticeable Difference) are all examples of perceptual metrics that are based on subjective human evaluations of image quality.
 
 MOS involves asking human subjects to rate the quality of the predicted images on a scale from 1 to 5, with the MOS score calculated as the average of these ratings. 2AFC involves presenting two images to human subjects and asking them to choose the one that appears to be of higher quality, while JND involves asking subjects to identify the minimum perceptible difference between two images.
 
-Overall, the choice of metric for evaluating super-resolution models depends on the specific application and the goals of the study. Traditional metrics such as PSNR, MSE, and SSIM are simple to compute and provide a good baseline for comparison. Perceptual metrics such as LPIPS and MOS provide a more accurate measure of human perception, but are more complex to compute and require additional resources. A combination of both traditional and perceptual metrics can provide a comprehensive evaluation of the performance of super-resolution models.
+Overall, the choice of metric for evaluating super-resolution models depends on the specific application and the goals of the study. Traditional metrics such as PSNR, MSE, and SSIM are simple to compute and provide a good baseline for comparison. Perceptual metrics such as LPIPS and MOS provide a more accurate measure of human perception but are more complex to compute and require additional resources. A combination of both traditional and perceptual metrics can provide a comprehensive evaluation of the performance of super-resolution models.
 
-While Full-Reference IQA (FR-IQA) measures have been discussed thus far, it is worth noting that No-Reference IQA (NR-IQA) metrics are also commonly employed to assess processed images without their original counterparts. Examples of such NR-IQA metrics include BRISQUE, NIQE, PIQE, and CONTRIQUE. Datasets like LIVE, TID2008, CSIQ, and TID2013 are considered Full-Reference IQA (FR-IQA) datasets, since they need a reference image to assess the image quality. In contrast, AVA and LIVE In the Wild are No-Reference IQA (NR-IQA) datasets, where image quality is evaluated independently without the necessity of a reference image.
+While Full-Reference IQA (FR-IQA) measures have been discussed thus far, it is worth noting that No-Reference IQA (NR-IQA) metrics are also commonly employed to assess processed images without their original counterparts. Examples of such NR-IQA metrics include BRISQUE, NIQE, PIQE, and CONTRIQUE. Datasets like LIVE, TID2008, CSIQ, and TID2013 are considered Full-Reference IQA (FR-IQA) datasets since they need a reference image to assess the image quality. In contrast, AVA and LIVE In the Wild are No-Reference IQA (NR-IQA) datasets, where image quality is evaluated independently without the necessity of a reference image.
+
+\section{VMAF}
+
+Video Multimethod Assessment Fusion (VMAF) is a perceptual video quality metric developed by Netflix to evaluate the visual quality of compressed videos. VMAF combines multiple elementary quality metrics to provide a single score that reflects human perception of video quality. It is trained using machine learning techniques to model the behavior of the human visual system (HVS).
+
+Here's an outline of the math and concepts behind VMAF:
+
+    Feature extraction: VMAF extracts several low-level features from both the original (reference) video and the compressed (distorted) video. These features are designed to capture different aspects of video quality as perceived by the human visual system. The primary features include:
+        VIF (Visual Information Fidelity): Measures the amount of shared visual information between the reference and distorted videos.
+        SSIM (Structural Similarity Index): Evaluates the structural distortions in the distorted video compared to the reference video.
+        ADM (Adaptive Deviation Metric): Measures the deviation in local luminance and contrast statistics.
+        Motion: Estimates the amount of motion in the video, as motion impacts the visibility of compression artifacts.
+
+    Feature pooling: VMAF divides the video frames into non-overlapping blocks and computes the elementary metrics (e.g., VIF, SSIM, ADM) for each block. Then, it applies a pooling strategy (e.g., mean or harmonic mean) to aggregate the scores across all blocks in a frame. This results in a per-frame score for each elementary metric.
+
+    Support Vector Regression (SVR) model: VMAF uses a support vector regression model to combine the per-frame elementary metrics into a single quality score. The model is trained on a dataset of videos annotated with subjective quality scores, which represent the opinions of human observers. The SVR model learns to predict these subjective scores based on the elementary metrics.
+
+    Final VMAF score: The output of the SVR model is a per-frame VMAF score that reflects the perceived video quality. These per-frame scores are usually pooled (e.g., using the mean) to compute a single VMAF score for the entire video.
+
+In summary, VMAF combines multiple elementary quality metrics, aggregates the results using pooling strategies, and employs a machine learning model to predict human perception of video quality. The math behind VMAF involves feature extraction, pooling, and support vector regression modeling to provide a single, meaningful quality score.
 
 % These perceptual metrics are commonly used in the evaluation of super-resolution models, in addition to deep learning-based perceptual metrics. MOS is often used as a benchmark for evaluating the visual quality of predicted images, while 2AFC and JND are used to measure the difference in visual quality between predicted and ground-truth images. Together, these metrics provide a comprehensive evaluation of the visual quality of predicted images from different perspectives.
 

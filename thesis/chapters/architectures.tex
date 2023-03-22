@@ -24,9 +24,9 @@ $$ z = x + W_2\sigma(W_1 x + b_1) + b_2 $$
 
 where $W_1$ and $W_2$ are weight matrices, $b_1$ and $b_2$ are bias vectors, and $\sigma$ is the activation function.
 
-\Cref{fig:unet} shows an high-level representation of the UNet architecture.
+\Cref{fig:unet} shows a high-level representation of the UNet architecture.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth]{static/unet_architecture.png}
 \caption{UNet architecture.}
@@ -36,12 +36,12 @@ where $W_1$ and $W_2$ are weight matrices, $b_1$ and $b_2$ are bias vectors, and
 \section{SRUNet Architecture}
 \label{sec:srunet}
 
-SRUNet is an adaptation of the UNet architecture for super-resolution and compression artifact removal. The main two modifications are the decrease in the number of filters in each convolutional layer, and the use of a residual layer as the final layer.
-The final residual layer computes the difference between the input image $x$ upscaled with a linear interpolation function, and the output of the second to the last layer upscaled with the pixel shuffle function. In this way, the model is set to learn the difference between a low-resolution image and its high-resolution version.
+SRUNet is an adaptation of the UNet architecture for super-resolution and compression artefact removal. The main two modifications are the decrease in the number of filters in each convolutional layer, and the use of a residual layer as the final layer.
+The final residual layer computes the difference between the input image $x$ scaled up with a linear interpolation function and the output of the second to the last layer scaled up with the pixel shuffle function. In this way, the model is set to learn the difference between a low-resolution image and its high-resolution version.
 
-Pixel-shuffle (also known as sub-pixel convolutional layer), is the fastest up-sample layer available: it comprises a depth-compression of the output tensor into 12-channels via-convolution operation, and then these features are reshuffled into an RGB image but at double resolution. Alternatives, such as bilinear upsample with convolution, the transposed convolution, or even the reshuffling to an higher dimension with same depth, would add an exaggerated overhead, since they would work in the high-resolution space.
+Pixel-shuffle (also known as sub-pixel convolutional layer), is the fastest up-sample layer available: it comprises a depth-compression of the output tensor into 12-channels via-convolution operation, and then these features are reshuffled into an RGB image but at double resolution. Alternatives, such as bilinear upsample with convolution, the transposed convolution, or even the reshuffling to a higher dimension with the same depth, would add an exaggerated overhead since they would work in the high-resolution space.
 
-Modelling the problem as producing a residual on the top of the upsampled image is particularly convenient. This forces the model to focus on the high frequency patterns sharpening edges or increasing texture details, since the low frequency patterns are still from the upsampled image. Furthermore, a faster convergence of the training process is ensured.
+Modelling the problem as producing a residual on the top of the up-sampled image is particularly convenient. This forces the model to focus on the high-frequency patterns sharpening edges or increasing texture details since the low-frequency patterns are still from the up-sampled image. Furthermore, faster convergence of the training process is ensured.
  
 % In addition, the SR-UNet model uses residual blocks to help the model learn the difference between the low-resolution input image $x$ and the high-resolution output image $y$. Each residual block consists of two convolutional layers and a shortcut connection that bypasses the convolutional layers. The output of the residual block can be expressed as:
 
@@ -58,9 +58,9 @@ Modelling the problem as producing a residual on the top of the upsampled image 
 
 % The values of $\alpha$ and $\beta$ can be adjusted to prioritize one loss over the other, depending on the specific requirements of the task. For example, if the goal is to prioritize perceptual quality, a higher value of $\alpha$ may be used to emphasize the LPIPS loss. Conversely, if the goal is to prioritize structural similarity, a higher value of $\beta$ may be used to emphasize the SSIM loss.
 
-\Cref{fig:srunet} shows an high-level representation of the SRUNet architecture.
+\Cref{fig:srunet} shows a high-level representation of the SRUNet architecture.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth]{static/srunet_architecture.png}
 \caption{SRUNet architecture.}
@@ -70,9 +70,9 @@ Modelling the problem as producing a residual on the top of the upsampled image 
 \section{Training Setup}
 \label{sec:training-setup}
 
-To train both the UNet and SRUNet models, we used a Generative Adversarial Network (GAN) framework introduced in \cite{goodfellow2020generative}. The GAN framework constists of two models, a generator and a discriminator.
+To train both the UNet and SRUNet models, we used a Generative Adversarial Network (GAN) framework introduced in \cite{goodfellow2020generative}. The GAN framework consists of two models, a generator and a discriminator.
 
-In the context of super-resolution, the generator network takes a low-resolution image as input and generates an high-resolution image, while the discriminator tries to distinguish between the generated high-resolution image and the true high-resolution image.
+In the context of super-resolution, the generator network takes a low-resolution image as input and generates a high-resolution image, while the discriminator tries to distinguish between the generated high-resolution image and the true high-resolution image.
 
 The two networks are trained in an adversarial manner: the generator tries to fool the discriminator by generating high-resolution images as similar as possible to the ground-truth images, while the discriminator tries to correctly classify the generated images as true or generated. This competition between the two networks leads to the generator improving over time and producing images with more quality.
 
@@ -90,7 +90,7 @@ We utilized the same design for the discriminator network as the one used in \ci
 
 The network's structure is illustrated in \cref{fig:discriminator}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth]{static/discriminator_architecture.png}
 \caption{Architecture of the discriminator network with corresponding kernel size (k), number of feature maps (n) and stride (s) indicated for each convolutional layer.}
@@ -104,29 +104,29 @@ It includes eight convolutional layers, with a 3$\times$3 filter kernel size tha
 THE FOLLOWING IS A COPY-PASTE FROM VACCARO'S PAPER
 IT NEEDS COMPLETE ADAPTATION FOR OUR CASE
 
-For training our models, we employed the Adam optimizer with learning rate $1\times10^{-4}$, and trained the model for 80 epochs with the batch composed of 32 image patches (randomly sampled from the train set), which was large enough for stabilizing the entire training; each epoch consists of 1280 iterations, thus the model weights received slightly more than $100K$ updates.
+For training our models, we employed the Adam optimizer setting the learning rate to $1\times10^{-4}$, and training the model for 80 epochs with the batch composed of 32 image patches (randomly sampled from the train set), which was large enough for stabilizing the entire training; each epoch consists of 1280 iterations, thus the model weights received slightly more than $100K$ updates.
 
 The train patch size was 96 × 96, and each patch was obtained from one random-crop per image.
 The only data-augmentation strategy we applied was horizontal reflection.
 
-We avoided any warping or rotation transform for maintaining the consistency with the real frames encoded in H.265 that do not suffer from such distortions.
+We avoided any warping or rotation transform for maintaining consistency with the real frames encoded in H.265 that do not suffer from such distortions.
 
 Training a model took about 24 hours on a single NVIDIA Titan Xp.
 
-We trained the proposed model using the BVI-DVC dataset (INSERT CITATION), a dataset designed for deep video compression tasks. The dataset is made of 200 frame sequences, truncated at the 64\textsuperscript{th} frame regardless of the frame-rate, that ranges from 25 to 120.
+We trained the proposed model using the BVI-DVC dataset (INSERT CITATION), a dataset designed for deep video compression tasks. The dataset is made of 200 frame sequences, truncated at the 64\textsuperscript{th} frame regardless of the frame rate, which ranges from 25 to 120.
 
 The sequences include a variety of content, from natural scenes to man-made objects and
 city scenes, as shown in (INSERT FIGURE).
 
-The sequence resolution is 2160p, but downscaled versions have been created by the authors of the dataset, with resolutions of 1080p, 540p and 270p, leading to a total of 800 sequences and a total of 51200 frames.
+The sequence resolution is 2160p, but down-scaled versions have been created by the authors of the dataset, with resolutions of 1080p, 540p and 270p, leading to a total of 800 sequences and a total of 51200 frames.
 
-The original BVI-DVC dataset constitutes the ground-truth for our training dataset.
+The original BVI-DVC dataset constitutes the ground truth for our training dataset.
 
 The train set is randomly split for the 80\% for training and 20\% for validating the models.
 To generate our input data, we compressed each sequence with the H.265 codec with Constant Rate Factor (CRF) 23 at half of the resolution.
 
-We fixed the CRF in the attempt to avoid the mode-collapse issue described in \cite{galteri2019deep}. However, it should be kept in mind that even a fixed CRF does not imply that all the frames have the same quality: e.g. frames presenting motion will present lower quality than steady ones.
-Since we want to apply super-resolution on compressed videos (thus perform both Artifact Reduction and Super Resolution), it is fundamental to train the models on the compressed videos rather than just on the downscaled version of the HQ videos. Training the model only for SR would cause the model to fail to detect the features to super-resolve, or to even enlarge the compression artifacts and reducing the overall quality.
+We fixed the CRF in an attempt to avoid the mode-collapse issue described in \cite{galteri2019deep}. However, it should be kept in mind that even a fixed CRF does not imply that all the frames have the same quality: e.g. frames presenting motion will present lower quality than steady ones.
+Since we want to apply super-resolution on compressed videos (thus performing both Artifact Reduction and Super Resolution), it is fundamental to train the models on the compressed videos rather than just on the down-scaled version of the HQ videos. Training the model only for SR would cause the model to fail to detect the features to super-resolve, or to even enlarge the compression artefacts and reduce the overall quality.
 
 % BVI-DVC dataset is a training database for deep video compression algorithms. It was introduced in a paper titled "BVI-DVC: A Training Database for Deep Video Compression" by Xiang Li, Yaowei Wang, Wenhan Yang, Zhenyu Guan, and Wei Li.
 % 
@@ -140,19 +140,18 @@ Since we want to apply super-resolution on compressed videos (thus perform both 
 
 -----------------------------------------------------------------------------
 
-\section{Custom dataloader to speed up training}
+\section{Custom data-loader to speed up training}
 \label{sec:custom-dataloader}
 
-A custom data-ingestion pipeline were implemented to optimize model training.
-Its first purpose is to minimize computational bottleneck due to the combination of four interconnected factors:
+A custom data-ingestion pipeline was implemented to optimize model training.
+Its first purpose is to minimize computational bottlenecks due to the combination of four interconnected factors:
 - GPU RAM capacity
 - time required by the GPU to process a batch
 - time required by the CPU to fetch an image
 - image size
 
-The models used in this research were trained on an UBUNTU 20.04 server, using a single GPU Titan Xp, with 12GB of RAM. The BVI-DVC dataset is stored in an external HDD, and for its size it cannot be moved to SSD, that are closer to the server CPUs, but with less capacity. Another constraint was that only one thread was allowed to access data in the HDD a time.
+The models used in this research were trained on an UBUNTU 20.04 server, using a single GPU Titan Xp, with 12GB of RAM. The BVI-DVC dataset is stored in an external HDD, and for its size, it cannot be moved to SSD, which are closer to the server CPUs, but with less capacity. Another constraint was that only one thread was allowed to access data in the HDD at a time.
 
-At the beginning, the naive PyTorch dataloader was implemented to load in this settings only one image a time, extracting only one patch for each loaded image, and considering a mini-batch size of 32, for every forward/backward pass a thread from the CPU would have to load and to process 32 images of 2K resolution each into 32 patches of 98x98 pixels, then to move the data in the GPU RAM. Of course, forward/backward pass in GPU was really much faster than the CPU's job, so the bottleneck for the GPU was too much for train a model in this settings.
+In the beginning, the naive PyTorch data-loader was implemented to load in these settings only one image at a time, extracting only one patch for each loaded image, and considering a mini-batch size of 32, for every forward/backward pass a thread from the CPU would have to load and to process 32 images of 2K resolution each into 32 patches of 98x98 pixels, then to move the data in the GPU RAM. Of course, the forward/backward pass in GPU was really much faster than the CPU's job, so the bottleneck for the GPU was too much to train a model in this setting.
 
-If memory consumption is not a problem, a naive solution could be to store in the SSDs close to the CPUs some patches from each (or only a sample) of the frames from all the available videos. In this way the CPUs can work in parallel ensuring no bottleneck for the GPU workload.
-
+If memory consumption is not a problem, a naive solution could be to store in the SSDs close to the CPUs some patches from each (or only a sample) of the frames from all the available videos. In this way, the CPUs can work in parallel ensuring no bottleneck for the GPU workload.
