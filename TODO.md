@@ -1,18 +1,13 @@
 # TODO List
 > resume from solaris, there are trainings on png's that are running
 > resume from code
-> resume from [architectures], continue explaining custom dataloder implemented
 
 ## Structure
 1. Introduction
- - [drafted] - possible outline:
-    - Motivation
-    - Problem Statement
-    - Objectives and Contributions
-    - Thesis Outline
+ - [editable] - introduction
 
 2. Background
- - [drafted] - literature review in video restoration
+ - [to be drafted] - literature review in video restoration
 
 3. Metrics
  - [drafted] - 3.1 Traditional Metrics
@@ -30,26 +25,28 @@
 
 6. Experiments
  - [drafted] - 6.1 Quantitative Results
- - 6.2 Qualitative Results
+ - [to be drafted] - 6.2 Qualitative Results
 
 7. Conclusions
- - [drafted] - possible outline:
-    - Summary of Contributions
-    - Limitations and Future Work
-    - Conclusion
+ - [editable] - conclusions
 
 ## high priority
-- [background] polish
-- [metrics] polish, especially VMAF
-- [metrics] put some details on some metrics, especially where you have already written something
-- [architectures] polish
-- [optimizations] polish
+- [background] make it editable by the prof
+
+- [metrics] explain VMAF
+- [metrics] explain IQA vs VQA
+- [metrics] make it editable by the prof
+- [metrics] put some technical details on some metrics
+
+- [architectures] make it editable
+- [optimizations] make it editable
+
 - [code] run quantitative evaluations
 - [code] run quantitative evaluations
 - [experiments] include new quantitative evaluations
 - [experiments] include new qualitative evaluations
 - [experiments] draft qualitative results section
-- [conclusions] draft it
+
 - [optimizations] draft custom dataloader section
 
 ## medium priority
@@ -63,7 +60,6 @@
 - [code] train again replacing LPIPS with another perceptual loss
 
 ### Comments
-
 Thesis title:
 - Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
 - Optimization techniques of deep learning models for visual quality improvement
@@ -101,4 +97,6 @@ Thesis title:
 - DONE - [code] add VMAF as quality metric for video
 - DONE - [code] train with PNG for ground-truth images
 - DONE - [bureaucracy] ask administration about taxes
+- DONE - [introduction] make it editable by the prof
+- DONE - [conclusions] make it editable by the prof
 

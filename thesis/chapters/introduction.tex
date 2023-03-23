@@ -1,11 +1,25 @@
 \myChapter{Introduction}
 \label{chap:Introduction}
 
-Super-resolution (SR) with deep learning models has achieved remarkable success in recent years, but the computational complexity of these models is a significant bottleneck for real-world applications. One promising approach to reducing the computational cost of deep learning models is through quantization techniques, which aim to represent the weights and activations of the model with fewer bits without significant loss of accuracy. Quantization can lead to significant improvements in model inference speed and memory usage, making it a highly attractive approach for deploying SR models on resource-constrained devices.
+% Concept structure:
+% - Motivation
+% - Problem Statement
+% - Objectives and Contributions
+% - Thesis Outline
 
-This Master's thesis focuses on investigating the effectiveness of quantization techniques for improving the speed and efficiency of deep learning models for SR. The research will involve an in-depth review of the literature on quantization techniques for deep learning models and their application in the field of SR. The thesis will also explore the implementation and evaluation of post-training quantization using TensorRT, an NVIDIA SDK for high-performance deep learning inference. 
+Video restoration is a widely studied task in the field of computer vision and image processing. The primary objective of video restoration is to improve the visual quality of degraded videos caused by various factors such as noise, blur, compression artefacts, and other distortions. In recent years, deep learning techniques have gained significant attention in the field of video restoration due to their superior performance compared to traditional methods.
 
-The ultimate goal of this research is to maintain the quality of full-precision SR models while improving inference speed with state-of-the-art quantization techniques.
+Traditional video restoration techniques involve the use of mathematical algorithms to reduce the effects of noise, blur, and other distortions. Some of the commonly used techniques include median filtering, bilateral filtering, and wavelet-based denoising. While these methods are effective in restoring some aspects of the video quality, they have limited performance in handling complex distortions and restoring high-frequency details.
 
-The results of this thesis are expected to contribute to the knowledge and the capability on developing more practical and efficient SR models, which can potentially be deployed in various real-world applications, such as mobile devices, embedded systems, and IoT devices.
+Deep learning-based video restoration methods have been shown to achieve state-of-the-art performance in restoring degraded videos. By leveraging deep neural networks to learn the underlying mapping between the degraded and the ground truch images, these methods allow for the restoration of high-frequency details and complex distortions in videos.
+
+Super-resolution (SR) is the process of increasing the spatial resolution of an image or video. It is a critical task in video restoration as it helps to improve the visual quality of videos. Deep learning-based super-resolution techniques typically use convolutional neural networks (CNNs) to learn the underlying mapping between low-resolution and high-resolution images.
+
+The most commonly used approaches are single-image super-resolution (SISR) and multiple-image super-resolution (MISR). In SISR, a CNN is trained to generate a high-resolution image from a single low-resolution image. The CNN learns the underlying mapping between low-resolution and high-resolution images by minimizing a loss function that measures the difference between the generated high-resolution image and the ground-truth high-resolution image. In MISR, a CNN is trained to genereate a high-resolution image from multiple low-resolution images. The CNN learns by using multiple input images to improve its accuracy in generating the high-resolution image. All experiments conducted in this research use models trained with the SISR approach.
+
+Deep learning models for video restoration, including super-resolution (SR) and artifact removal, have made significant progress in recent years. However, the computational complexity of these models remains a major hurdle for their deployment in real-world applications. One promising strategy for reducing the computational demands of deep learning models is the use of quantization techniques. Quantization involves representing the weights and activations of a model with fewer bits, aiming to minimize the loss of accuracy. This approach can lead to substantial improvements in inference speed and memory usage, making it especially attractive for implementing video restoration models on resource-constrained devices.
+
+This thesis focuses on examining the efficacy of quantization techniques for enhancing the inference speed and reducing the memory usage of deep learning models applied to video restoration tasks, including artifact removal and SR. The research encompasses an extensive review of the literature on quantization techniques for deep learning models and their application in the field of video restoration. In particular, the thesis investigates the implementation and evaluation of post-training quantization using TensorRT, an NVIDIA SDK designed for high-performance deep learning inference.
+
+The findings of this thesis are expected to contribute to the knowledge and development of more practical and efficient video restoration models. These models could potentially be deployed in a variety of real-world applications, such as mobile devices, embedded systems, and IoT devices.
 
