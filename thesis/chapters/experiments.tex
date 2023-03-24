@@ -75,39 +75,87 @@ SRUNet\_INT8 &    0.006 ± 0.0 \\
 \label{tab:timings}
 \end{table*}
 
-\begin{figure*}[ht]
-\includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_timings_all.png}
-\caption{Average times elapsed in seconds for generating one image using different versions of UNet and SRUNet implementations. The top graph shows all the versions, and the middle one zooms in comparing only the 
-TensorRT versions of UNet, as well as the bottom graph for SRUNet.}
-\label{fig:timings-all}
-\end{figure*}
-
-\begin{figure*}[ht]
-\includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_quant_UNet.png}
-\caption{Box-plots for several metrics on validation images using UNet compiled in TensorRT (FP32/FP16/INT8).}
-\label{fig:timings-unet}
-\end{figure*}
-
-\begin{figure*}[ht]
-\includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_quant_SRUNet.png}
-\caption{Box-plots for several metrics on validation images using SRUNet compiled in TensorRT (FP32/FP16/INT8).}
-\label{fig:timings-srunet}
-\end{figure*}
-
-\begin{figure*}[ht]
-\includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_mean.png}
-\caption{Mean VMAF score on a test video using different versions of UNet and SRUNet implementations.}
-\label{fig:vmaf-mean}
-\end{figure*}
-
-\begin{figure*}[ht]
-\includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_harmonic_mean.png}
-\caption{Harmonic mean VMAF score on a test video using different versions of UNet and SRUNet implementations.}
-\label{fig:vmaf-harmonic-mean}
-\end{figure*}
-
-\clearpage
-
-\section{Qualitative Results}
-\label{sec:qualitative-results}
-
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_timings_all.png}
+% \caption{Average times elapsed in seconds for generating one image using different versions of UNet and SRUNet implementations. The top graph shows all the versions, and the middle one zooms in comparing only the 
+% TensorRT versions of UNet, as well as the bottom graph for SRUNet.}
+% \label{fig:timings-all}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_quant_UNet.png}
+% \caption{Box-plots for several metrics on validation images using UNet compiled in TensorRT (FP32/FP16/INT8).}
+% \label{fig:timings-unet}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_quant_SRUNet.png}
+% \caption{Box-plots for several metrics on validation images using SRUNet compiled in TensorRT (FP32/FP16/INT8).}
+% \label{fig:timings-srunet}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_mean.png}
+% \caption{Mean VMAF score on a test video using different versions of UNet and SRUNet implementations.}
+% \label{fig:vmaf-mean}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_harmonic_mean.png}
+% \caption{Harmonic mean VMAF score on a test video using different versions of UNet and SRUNet implementations.}
+% \label{fig:vmaf-harmonic-mean}
+% \end{figure*}
+% 
+% \clearpage
+% 
+% \section{Qualitative Results}
+% \label{sec:qualitative-results}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_unet.jpg}
+% \caption{UNet qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-unet}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_unet_fp32.jpg}
+% \caption{UNet FP32 qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-unet-fp32}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_unet_fp16.jpg}
+% \caption{UNet FP16 qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-unet-fp16}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_unet_int8.jpg}
+% \caption{UNet INT8 qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-unet-int8}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_srunet.jpg}
+% \caption{SRUNet qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-srunet}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_srunet_fp32.jpg}
+% \caption{SRUNet FP32 qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-srunet-fp32}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_srunet_fp16.jpg}
+% \caption{SRUNet FP16 qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-srunet-fp16}
+% \end{figure*}
+% 
+% \begin{figure*}[ht]
+% \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_srunet_int8.jpg}
+% \caption{SRUNet INT8 qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
+% \label{fig:qualitative-srunet-int8}
+% \end{figure*}
+% 
