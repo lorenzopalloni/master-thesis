@@ -28,72 +28,82 @@ In this chapter, we will showcase various experiments and their corresponding re
 For each model variation, \cref{tab:metrics} reports the average value of each metric, along with its standard deviation. Higher values of these metrics indicate better image quality. The table shows that the UNet models have higher values for LPIPS and BRISQUE, but lower values for PSNR compared to the SRUNet models. However, the SSIM and MS-SSIM metrics are similar for both models. Additionally, there is a notable difference between the performance of the plain PyTorch implementations and their TensorRT counterparts for both UNet and SRUNet models, especially for LPIPS, BRISQUE, and PSNR metrics.
 
 \begin{table*}[t]
-\begin{tabular}{llllll}
+\begin{tabular}{llll}
 \toprule
-{} &          LPIPS &           SSIM &            PSNR &        MS-SSIM &         BRISQUE \\
+{} &              LPIPS &              DISTS &             BRISQUE \\
 \midrule
-UNet        &  0.559 ± 0.007 &  0.879 ± 0.004 &  21.939 ± 0.027 &  0.735 ± 0.002 &   153.591 ± 0.0 \\
-UNet\_FP32   &  0.354 ± 0.011 &  0.897 ± 0.003 &   28.64 ± 0.108 &  0.871 ± 0.003 &   26.783 ± 1.83 \\
-UNet\_FP16   &  0.354 ± 0.011 &  0.897 ± 0.003 &   28.64 ± 0.108 &  0.871 ± 0.003 &   26.788 ± 1.84 \\
-UNet\_INT8   &  0.343 ± 0.011 &  0.895 ± 0.003 &  28.613 ± 0.108 &   0.87 ± 0.003 &  26.448 ± 1.694 \\
-SRUNet      &  0.551 ± 0.008 &  0.869 ± 0.004 &  19.303 ± 0.014 &  0.669 ± 0.002 &   153.591 ± 0.0 \\
-SRUNet\_FP32 &  0.396 ± 0.012 &  0.896 ± 0.003 &  28.837 ± 0.126 &  0.871 ± 0.003 &  34.647 ± 2.336 \\
-SRUNet\_FP16 &  0.396 ± 0.012 &  0.896 ± 0.003 &  28.837 ± 0.126 &  0.871 ± 0.003 &  34.642 ± 2.334 \\
-SRUNet\_INT8 &  0.373 ± 0.012 &  0.895 ± 0.003 &  28.806 ± 0.124 &  0.869 ± 0.003 &  34.868 ± 1.989 \\
+UNet        &  0.28975 ± 0.01377 &  0.12225 ± 0.00671 &  31.13719 ± 1.16896 \\
+UNet-FP32   &  0.28975 ± 0.01377 &  0.12225 ± 0.00671 &  31.13733 ± 1.16844 \\
+UNet-FP16   &  0.28976 ± 0.01377 &  0.12226 ± 0.00671 &  31.13834 ± 1.16908 \\
+UNet-INT8   &  0.30414 ± 0.01371 &  0.12829 ± 0.00662 &  29.68486 ± 1.01377 \\
+SRUNet      &  0.31106 ± 0.01505 &  0.17172 ± 0.00472 &  27.37380 ± 3.57055 \\
+SRUNet-FP32 &  0.31106 ± 0.01505 &  0.17172 ± 0.00472 &  27.37365 ± 3.56975 \\
+SRUNet-FP16 &  0.31108 ± 0.01505 &  0.17172 ± 0.00472 &  27.37904 ± 3.57393 \\
+SRUNet-INT8 &  0.30677 ± 0.01366 &  0.17217 ± 0.00442 &  26.15459 ± 3.22726 \\
 \bottomrule
 \end{tabular}
-\caption{Evaluation metrics over 50 frames (mean $\pm$ standard deviation).}
+\caption{Perceptual metrics evaluations over 60 frames (mean $\pm$ standard deviation).}
+\label{tab:metrics}
+\end{table*}
+
+\begin{table*}[t]
+\begin{tabular}{llll}
+\toprule
+{} &               SSIM &            MS-SSIM &                PSNR \\
+\midrule
+UNet        &  0.89522 ± 0.00842 &  0.85169 ± 0.00673 &  21.65057 ± 0.12692 \\
+UNet-FP32   &  0.89522 ± 0.00842 &  0.85169 ± 0.00673 &  21.65057 ± 0.12692 \\
+UNet-FP16   &  0.89522 ± 0.00842 &  0.85168 ± 0.00673 &  21.65064 ± 0.12693 \\
+UNet-INT8   &  0.89412 ± 0.00840 &  0.85082 ± 0.00672 &  21.63878 ± 0.12864 \\
+SRUNet      &  0.88938 ± 0.00840 &  0.84569 ± 0.00616 &  21.36702 ± 0.12477 \\
+SRUNet-FP32 &  0.88938 ± 0.00840 &  0.84569 ± 0.00616 &  21.36702 ± 0.12477 \\
+SRUNet-FP16 &  0.88937 ± 0.00840 &  0.84568 ± 0.00616 &  21.36712 ± 0.12479 \\
+SRUNet-INT8 &  0.88820 ± 0.00840 &  0.84421 ± 0.00616 &  21.33201 ± 0.12242 \\
+\bottomrule
+\end{tabular}
+\caption{Traditional metrics evaluations over 60 frames (mean $\pm$ standard deviation).}
 \label{tab:metrics}
 \end{table*}
 
 \begin{figure*}[ht]
-\includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_all.png}
-\caption{Box-plots for several metrics on validation images using different versions of UNet and SRUNet implementations.}
+\includegraphics[width=1.0\textwidth]{static/boxplots_perceptual_metrics.jpg}
+\caption{Box-plots of perceptual metrics on 60 test frames. The lower, the better.}
+\label{fig:metrics}
+\end{figure*}
+
+\begin{figure*}[ht]
+\includegraphics[width=1.0\textwidth]{static/boxplots_traditional_metrics.jpg}
+\caption{Box-plots of traditional metrics on 60 test frames. The higher, the better.}
 \label{fig:metrics}
 \end{figure*}
 
 \Cref{tab:timings} shows the execution times (in seconds) of different variations of UNet and SRUNet implementations. Each table entry represents the average execution time over more than 300 executions "$\pm$" its standard deviation. SRUNet generally has faster execution times than UNet across all versions. Among the different numerical precisions, the fastest execution times are generally achieved, as expected by using INT8, followed by FP16 and FP32.
-
-The distributions of the execution times are shown in \cref{fig:timings-all}, zooming in for the compiled versions of the plain UNet (FP32/FP16/INT8) in \cref{fig:timings-unet}, as well as in \cref{fig:timings-srunet} for SRUNet.
 
 \begin{table*}[t]
 \begin{tabular}{ll}
 \toprule
 {} &      times [s] \\
 \midrule
-UNet        &    0.035 ± 0.0 \\
-UNet\_FP32   &  0.028 ± 0.001 \\
-UNet\_FP16   &  0.028 ± 0.001 \\
-UNet\_INT8   &    0.015 ± 0.0 \\
-SRUNet      &    0.012 ± 0.0 \\
-SRUNet\_FP32 &  0.009 ± 0.001 \\
-SRUNet\_FP16 &    0.009 ± 0.0 \\
-SRUNet\_INT8 &    0.006 ± 0.0 \\
+UNet        &  0.03480 ± 0.00041 \\
+UNet-FP32   &  0.01436 ± 0.00031 \\
+UNet-FP16   &  0.02793 ± 0.00131 \\
+UNet-INT8   &  0.02817 ± 0.00038 \\
+SRUNet      &  0.01232 ± 0.00008 \\
+SRUNet-FP32 &  0.00548 ± 0.00074 \\
+SRUNet-FP16 &  0.00867 ± 0.00052 \\
+SRUNet-INT8 &  0.00868 ± 0.00050 \\
 \bottomrule
 \end{tabular}
 \caption{Evaluation times over 1000 runs (mean $\pm$ standard deviation).}
 \label{tab:timings}
 \end{table*}
 
-% \begin{figure*}[ht]
-% \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_timings_all.png}
-% \caption{Average times elapsed in seconds for generating one image using different versions of UNet and SRUNet implementations. The top graph shows all the versions, and the middle one zooms in comparing only the 
-% TensorRT versions of UNet, as well as the bottom graph for SRUNet.}
-% \label{fig:timings-all}
-% \end{figure*}
-% 
-% \begin{figure*}[ht]
-% \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_quant_UNet.png}
-% \caption{Box-plots for several metrics on validation images using UNet compiled in TensorRT (FP32/FP16/INT8).}
-% \label{fig:timings-unet}
-% \end{figure*}
-% 
-% \begin{figure*}[ht]
-% \includegraphics[width=1.0\textwidth]{static/2023_03_02_boxplots_metrics_quant_SRUNet.png}
-% \caption{Box-plots for several metrics on validation images using SRUNet compiled in TensorRT (FP32/FP16/INT8).}
-% \label{fig:timings-srunet}
-% \end{figure*}
-% 
+\begin{figure*}[ht]
+\includegraphics[width=1.0\textwidth]{static/boxplots_timings.jpg}
+\caption{Average times elapsed in seconds for generating one image using different versions of UNet and SRUNet implementations.}
+\label{fig:timings}
+\end{figure*}
+
 % \begin{figure*}[ht]
 % \includegraphics[width=1.0\textwidth]{static/2023_03_17_barplot_vmaf_mean.png}
 % \caption{Mean VMAF score on a test video using different versions of UNet and SRUNet implementations.}
@@ -105,12 +115,12 @@ SRUNet\_INT8 &    0.006 ± 0.0 \\
 % \caption{Harmonic mean VMAF score on a test video using different versions of UNet and SRUNet implementations.}
 % \label{fig:vmaf-harmonic-mean}
 % \end{figure*}
-% 
-% \clearpage
-% 
-% \section{Qualitative Results}
-% \label{sec:qualitative-results}
-% 
+
+\clearpage
+
+\section{Qualitative Results}
+\label{sec:qualitative-results}
+
 % \begin{figure*}[ht]
 % \includegraphics[width=1.0\textwidth]{static/2023_03_24_qualitative_unet.jpg}
 % \caption{UNet qualitative results: (left) high-quality image; (center) generated image; (right) low-quality image.}
