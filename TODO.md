@@ -1,5 +1,4 @@
 # TODO List
-> resume from solaris, there are trainings on png's that are running
 > resume from code
 
 ## Structure
@@ -24,18 +23,18 @@
  - [maybe to be moved, but where?] 5.3 Custom Dataloader to Speed up Training
 
 6. Experiments
- - [drafted] - 6.1 Quantitative Results
+ - [editable] - 6.1 Quantitative Results
  - [to be drafted] - 6.2 Qualitative Results
 
 7. Conclusions
  - [editable] - conclusions
 
 ## high priority
-- [background] make it editable by the prof
+- [background] make it editable
 
 - [metrics] explain VMAF
 - [metrics] explain IQA vs VQA
-- [metrics] make it editable by the prof
+- [metrics] make it editable
 - [metrics] put some technical details on some metrics
 
 - [architectures] make it editable
@@ -55,14 +54,9 @@
 
 ## low priority
 - [background] add citations
-- [background] update content with a recent survey on video reconstruction
 - find a quote
-- [code] train again replacing LPIPS with another perceptual loss
 
 ### Comments
-Thesis title:
-- Tecniche di ottimizzazione di reti neurali per il miglioramento della qualità visuale
-- Optimization techniques of deep learning models for visual quality improvement
 
 ## DONEs
 - DONE - .gitignore literature/ folder, plus Python and LaTex stuff
@@ -97,6 +91,6 @@ Thesis title:
 - DONE - [code] add VMAF as quality metric for video
 - DONE - [code] train with PNG for ground-truth images
 - DONE - [bureaucracy] ask administration about taxes
-- DONE - [introduction] make it editable by the prof
+- DONE - [introduction] make it editable
 - DONE - [conclusions] make it editable by the prof
 
