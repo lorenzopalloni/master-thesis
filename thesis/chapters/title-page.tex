@@ -1,5 +1,5 @@
 %--------------------------------------------------------------
-% titlepage.tex (use thesis.tex as main file)
+% English version of title-page.tex
 %--------------------------------------------------------------
 \begin{titlepage}
 	\begin{center}
@@ -8,24 +8,24 @@
       \vfill
       \begingroup
       \includegraphics[scale=0.15]{static/logo/LOGO}\\
-%       \spacedallcaps{\myUni} \\ 
+      % \spacedallcaps{\myUni} \\ 
 			\myFaculty \\
 			\myDegree \\ 
 			\vspace{0.5cm}
          \vspace{0.5cm}    
-         Tesi di Laurea    
+         Master of Science Thesis    
       \endgroup 
       \vfill 
       \begingroup
-      	\color{Maroon}\spacedallcaps{\myItalianTitle} \\ $\ $\\
-      	\spacedallcaps{\myEnglishTitle} \\ 	
+      	\color{Maroon}\spacedallcaps{\myEnglishTitle} \\ $\ $\\
+      	\spacedallcaps{\myItalianTitle} \\ 	
 	\bigskip
       \endgroup
       \spacedlowsmallcaps{\myName}
       \vfill 
       \vfill
-      Relatore: \emph{Marco Bertini}\\
-      Correlatori: \emph{Leonardo Galteri, Donatella Merlini}\\
+      Supervisor: \emph{\mySupervisor}\\
+      Co-supervisors: \emph{\myOtherProf}\\
       \vfill
       \vfill
       \myTime
@@ -33,15 +33,55 @@
 	\end{center}        
 \end{titlepage}   
 %--------------------------------------------------------------
-% back titlepage
-%--------------------------------------------------------------
    \newpage
 	\thispagestyle{empty}
 	\hfill
 	\vfill
 	\noindent\myName: 
-	\textit{\myItalianTitle,} 
+	\textit{\myEnglishTitle,} 
 	\myDegree, \textcopyright\ \myTime
 %--------------------------------------------------------------
-% back titlepage end
-%--------------------------------------------------------------
+
+% %--------------------------------------------------------------
+% % Italian version of title-page.tex
+% %--------------------------------------------------------------
+% \begin{titlepage}
+% 	\begin{center}
+%    	\large
+%       \hfill
+%       \vfill
+%       \begingroup
+%       \includegraphics[scale=0.15]{static/logo/LOGO}\\
+% %       \spacedallcaps{\myUni} \\ 
+% 			\myFaculty \\
+% 			\myDegree \\ 
+% 			\vspace{0.5cm}
+%          \vspace{0.5cm}    
+%          Tesi di Laurea    
+%       \endgroup 
+%       \vfill 
+%       \begingroup
+%       	\color{Maroon}\spacedallcaps{\myItalianTitle} \\ $\ $\\
+%       	\spacedallcaps{\myEnglishTitle} \\ 	
+% 	\bigskip
+%       \endgroup
+%       \spacedlowsmallcaps{\myName}
+%       \vfill 
+%       \vfill
+%       Relatore: \emph{Marco Bertini}\\
+%       Correlatori: \emph{Leonardo Galteri, Donatella Merlini}\\
+%       \vfill
+%       \vfill
+%       \myTime
+%       \vfill                      
+% 	\end{center}        
+% \end{titlepage}   
+% %--------------------------------------------------------------
+%    \newpage
+% 	\thispagestyle{empty}
+% 	\hfill
+% 	\vfill
+% 	\noindent\myName: 
+% 	\textit{\myItalianTitle,} 
+% 	\myDegree, \textcopyright\ \myTime
+% %--------------------------------------------------------------

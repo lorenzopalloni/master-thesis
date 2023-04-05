@@ -1,9 +1,9 @@
 \section{LPIPS-Comp}
 \label{sec:lpipscomp}
-The same technique used to train LPIPS has been adopted for LPIPS-Comp. While LPIPS is trained on BAPPS, that contains images with several distortions but accounts only for compression artefacts from JPEG, LPIPS-Comp has seen a compression specific perceptual similarity dataset. In doing so, experiments showed that LPIPS-Comp aligns more to human judgement than the standard LPIPS on general compression tasks.
+The same technique used to train LPIPS has been adopted for LPIPS-Comp. While LPIPS is trained on BAPPS, which contains images with several distortions but accounts only for compression artefacts from JPEG, LPIPS-Comp has seen a compression-specific perceptual similarity dataset. In doing so, experiments showed that LPIPS-Comp aligns more with human judgement than the standard LPIPS on general compression tasks.
 
 LPIPS-Comp \cite{patel2021saliency} is a perceptual similarity metric based on deep neural networks obtained following the same approach as in \cite{zhang2018unreasonable} with LPIPS.
-These methods employ the $ReLU$ activations after each \textit{conv} block in the first five layers of the VGG-16 \cite{simonyan2014very} architecture, with batch-normalization \cite{ioffe2015batch}.
+These methods employ $ReLU$ activations after each \textit{conv} block in the first five layers of the VGG-16 \cite{simonyan2014very} architecture, with batch-normalization \cite{ioffe2015batch}.
 
 Feed-forward is performed on VGG-16 for both the original ($y$) and the reconstructed image ($\hat{y}$).
 Let $L$ be the set of layers used for loss calculation (five for our setup), a function $F(y)$ denoting feed-forward on an input image $y$.
@@ -22,4 +22,4 @@ Equation \ref{eq:lpips-comp} summarizes the LPIPS-Comp computation.
 \text{LPIPS-Comp}(y, \hat{y}) = \sum_{l} \frac{1}{H_l W_l} \sum_{h, w} \left| \left| w_l \odot \left( z^l_{\hat{y}, h, w} - z^l_{y, h, w} \right) \right| \right|^2_2\label{eq:lpips-comp}
 \end{align}
 
-Note that the weights in $F$ are learned for image classification on the ImageNet dataset \cite{russakovsky2015imagenet} and are kept fixed. $w$ are the linear weights learned on top of $F$ on the BAPPS \cite{zhang2018unreasonable} dataset for LPIPS and on a compression specific similarity dataset for LPIPS-Comp. While in the first, compressed images are obtained with JPEG only, the second makes use of several compression methods: Mentzer et al. \cite{mentzer2018conditional}, Patel et al. \cite{patel2019deep}, BPG \cite{bellard2014bpg} and JPEG-2000 \cite{skodras2001jpeg}.
+Note that the weights in $F$ are learned for image classification on the ImageNet dataset \cite{russakovsky2015imagenet} and are kept fixed. $w$ are the linear weights learned on top of $F$ on the BAPPS \cite{zhang2018unreasonable} dataset for LPIPS and on a compression-specific similarity dataset for LPIPS-Comp. While in the first, compressed images are obtained with JPEG only, the second makes use of several compression methods: Mentzer et al. \cite{mentzer2018conditional}, Patel et al. \cite{patel2019deep}, BPG \cite{bellard2014bpg} and JPEG-2000 \cite{skodras2001jpeg}.

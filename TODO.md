@@ -1,60 +1,23 @@
 # TODO List
-> resume from code
-
-## Structure
-1. Introduction
- - [editable] - introduction
-
-2. Background
- - [to be drafted] - literature review in video restoration
-
-3. Metrics
- - [drafted] - 3.1 Traditional Metrics
- - [drafted] - 3.2 Perceptual Metrics
-
-4. Architectures
- - [drafted] - 4.1 UNet Architecture
- - [drafted] - 4.2 SRUNet Architecture
- - [drafted] - 4.3 Training Setup
-
-5. Optimizations
- - [drafted] - 5.1 Quantization
- - [drafted] - 5.2 TensorRT to Speed up Inference
- - [maybe to be moved, but where?] 5.3 Custom Dataloader to Speed up Training
-
-6. Experiments
- - [editable] - 6.1 Quantitative Results
- - [to be drafted] - 6.2 Qualitative Results
-
-7. Conclusions
- - [editable] - conclusions
 
 ## high priority
-- [background] make it editable
+- .4f precicion for speed
+- .2f precision for VMAF
+- .4f precision for metrics
+- arrows to indicate direction of results
+- bold best results per column
+- put memory size table in the text
+- put some other qualitative results about natural scenes and faces
 
-- [metrics] explain VMAF
-- [metrics] explain IQA vs VQA
-- [metrics] make it editable
-- [metrics] put some technical details on some metrics
-
-- [architectures] make it editable
-- [optimizations] make it editable
-
-- [code] run quantitative evaluations
-- [code] run quantitative evaluations
-- [experiments] include new quantitative evaluations
-- [experiments] include new qualitative evaluations
-- [experiments] draft qualitative results section
-
-- [optimizations] draft custom dataloader section
+- [experiments] - enhance comments on qualitative results
+- [acknowledgement] draft acknowledgement
+- [experiments] explain why FP32 and FP16 versions occupy more memory than other versions.
 
 ## medium priority
 - [code] rename the codebase (suggestions: quant)
 - [code] handle the gifnoc package (rename, refactor, then publish on PyPI)
 
 ## low priority
-- [background] add citations
-- find a quote
 
 ### Comments
 
@@ -75,7 +38,7 @@
 - DONE - explain MS-SSIM
 - DONE - explain LPIPS-Comp / LPIPS
 - DONE - add in README.md how to compile and run latex sources to generate a .pdf
-- DONE - study literature in quantization theory
+- DONE - study literature on quantization theory
 - DONE - give more structure to the thesis
 - DONE - [metrics] clean up
 - DONE - [architectures] draft UNet explanation
@@ -86,11 +49,26 @@
 - DONE - [experiments] clean up
 - DONE - [bureaucracy] website
 - DONE - [bureaucracy] ask mighelett'
-- DONE - [bureaucracy] ask emilio
+- DONE - [bureaucracy] ask Emilio
 - DONE - [bureaucracy] ask about supervisors
 - DONE - [code] add VMAF as quality metric for video
 - DONE - [code] train with PNG for ground-truth images
 - DONE - [bureaucracy] ask administration about taxes
 - DONE - [introduction] make it editable
 - DONE - [conclusions] make it editable by the prof
-
+- DONE - [background] make it editable
+- DONE - [metrics] explain VMAF
+- DONE - [code] run quantitative evaluations
+- DONE - [experiments] include new quantitative evaluations
+- DONE - [metrics] make it editable
+- DONE - [code] re-run timing tests
+- DONE - [architectures] make it editable
+- DONE - [optimizations] make it editable
+- DONE - [code] run VMAF tests
+- DONE - [optimizations] draft custom data-loader section
+- DONE - put everything you can into English
+- DONE - find a quote
+- DONE - [abstract] draft an abstract
+- DONE - [code] create an image grid, or think of something smart to show qualitative results
+- DONE - [experiments] include new qualitative evaluations
+- DONE - [experiments] draft qualitative results section

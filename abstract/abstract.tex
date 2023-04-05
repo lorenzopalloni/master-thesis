@@ -1,8 +1,6 @@
 \documentclass{article}
 
-\usepackage{lipsum}
-
-\usepackage[italian]{babel}
+\usepackage[italian,english]{babel}
 \usepackage[utf8x]{inputenc} %eventualmente da cambiare se ci sono problemi con accenti
 \usepackage{hyperref}
 \usepackage[normalem]{ulem}
@@ -15,34 +13,19 @@
 \setlength{\textheight}{30 cm}
 \begin{document}
 
-\begin{table}[]
+\begin{table}
 \centering
-\caption*{\lipsum[1][1]}
-% \caption*{Classificazione di Dataset di TAC Polmonari 3D Utilizzando il Deep Transfer Learning}
+\caption*{Optimization Techniques of Deep Learning Models for Visual Quality Improvement}
 \begin{tabular}{lll}
-\textbf{Candidato:}   & Lorenzo Palloni & \href{mailto:lorenzo.palloni@stud.unifi.it}{\texttt{lorenzo.palloni@stud.unifi.it}} \\
-\textbf{Relatore:}    & Marco Bertini & \href{mailto:marco.bertini@unifi.it}{\texttt{marco.bertini@unifi.it}} \\
-\textbf{Correlatore:}    & Leonardo Galteri & \href{mailto:leonardo.galteri@unifi.it}{\texttt{leonardo.galteri@unifi.it}} \\
+\textbf{Candidate:}   & Lorenzo Palloni & \href{mailto:lorenzo.palloni@stud.unifi.it}{\texttt{lorenzo.palloni@stud.unifi.it}} \\
+\textbf{Supervisor:}    & Marco Bertini & \href{mailto:marco.bertini@unifi.it}{\texttt{marco.bertini@unifi.it}} \\
+\textbf{Co-supervisor:}    & Leonardo Galteri & \href{mailto:leonardo.galteri@unifi.it}{\texttt{leonardo.galteri@unifi.it}} \\
+\textbf{Co-supervisor:}    & Donatella Merlini & \href{mailto:donatella.merlini@unifi.it}{\texttt{donatella.merlini@unifi.it}} \\
 
 \end{tabular}
 \end{table}
 \subsection*{Thesis summary}
 
-\lipsum
-
-% In this work, I present my Master Thesis project carried out at INFN-Florence, in which I studied the application of deep learning to 3D medical images obtained, for examples, through CT scans. Specifically, the attention is focused on the technique of \emph{transfer learning}, which allows to build powerful models even on small datasets. Traditionally, machine learning models employed in the analysis of medical images exploit features manually selected by experts in the field. Transfer learning has the potential to define these features automatically by training a deep learning model on large, possibly unlabeled datasets, to be then applied to classify smaller, different datasets.
-% 
-% The applications presented in this thesis concern 3D CT scans data. Since 3D CT scans are high resolutions images, one of the challenges to perform deep learning on this kind of data is the memory requirements. Thanks to the collaboration with INFN and CINECA, I had the opportunity to develop the experiments discussed in this work with cutting-edge hardware technologies including a computing cluster with several tens of CPU cores and four GPUs, named Marconi100 which is a world's top-20 super-computer operated by CINECA and a dedicated single-GPU infrastructure designed and acquired on purpose for the analysis of CT scans. 
-% 
-% A review of the most relevant aspects of deep learning is presented, including fundamental concepts such as feedforward neural networks, model training and testing, convolutional layers and regularization techniques. Because of the experimental finding that the choice of the activation function is critical to the success of the training of deep learning models on CT scans, a review of the benefits and drawbacks of several possible activation functions commonly used in the literature is also presented. The review is concluded introducing the concept of \emph{transfer learning} which allows to employ large deep neural networks on small datasets and it is therefore of strategical importance to the processing of medical data for which the cost of labeled dataset is orders of magnitude higher than for common computer vision tasks. 
-% 
-% The application of machine learning techniques to the analysis of medical images is discussed, with emphasis on 3D CT scans, whose automated analysis has been a widely explored topic in recent years. Experiments with several hardware and software solutions are presented to identify the optimal setup to develop and train such large and complex models. The first attempt with a CPU-only setup failed and led us towards GPU-equipped platforms. The CINECA's Marconi100 platform proved capable to handle such data, but its complexity of use makes it unsuitable for model design and development. The third platform, which was specifically acquired by INFN-Florence to work with CT scans data, provides both a GPU with high memory availability and an interactive environment suitable for everyday development: this is the platform on which the thesis work was finalized.
-% 
-% The importance of applying 3D convolutional layers to allow the deep neural network model to gain insight on the spatial features of the CT scans is made evident discussing the classification of lung nodules into malignant and benign injuries. The study, based on the LIDC and LUNGx Challenge datasets, also highlights the importance of transfer learning to treat smaller datasets. In particular, it is showed that it is possible to train a deep 3D convolutional neural network on a large
-% dataset, such as the LIDC lung nodule dataset, and to employ the learned features to perform another
-% harder classification task, taking as an example the LUNGx Challenge dataset. In this application, the transfer learning technique increased
-% the AUC score on the LUNGx Challenge dataset from 0.57 to 0.67, which is approximately the highest scored obtained among the participants of the challenge.
-% 
-% This study clearly indicates that, even if computationally intensive, the adoption of 3D convolutional neural networks pre-trained on larger, possibly different datasets makes it possible to employ deep learning techniques for clinical studies with datasets as small as few hundreds of cases, or even less. In the future, the technological advancements in computing will open to the application to the CT scans analysis of pre-trained 3D convolutional networks with hundreds of layers, which is currently possible with 2D images only. 
+This thesis examines the efficacy of quantization techniques for enhancing the inference speed and reducing the memory usage of deep learning models applied to video restoration tasks. The research investigates the implementation and evaluation of post-training quantization using TensorRT. The results indicate that reducing the precision of weights and activations substantially decreases computational complexity and memory requirements without compromising performance. In particular, the INT8-optimized UNet and SRUNet models achieve 2.38X and 2.26X speedup compared to their plain implementations, respectively, while also achieving memory consumption reductions of 63.3\% for UNet and 53.8\% for SRUNet. These findings contribute to the development of more practical and efficient video restoration models for real-world applications.
 
 \end{document}

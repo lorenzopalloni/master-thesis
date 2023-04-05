@@ -13,23 +13,34 @@
 \documentclass[twoside,openright,titlepage,fleqn,
     headinclude,12pt,a4paper,BCOR=5mm,footinclude]{scrbook}
 %--------------------------------------------------------------
+% \newcommand{\myItalianTitle}{TECNICHE DI OTTIMIZZAZIONE DI RETI NEURALI PER IL MIGLIORAMENTO DELLA QUALIT\`A VISUALE\xspace}
+% \newcommand{\myEnglishTitle}{OPTIMIZATION TECHNIQUES OF DEEP LEARNING MODELS FOR VISUAL QUALITY IMPROVEMENT\xspace}
+% \newcommand{\myDegree}{Corso di Laurea in Informatica\xspace}
+% \newcommand{\myName}{Lorenzo Palloni\xspace}
+% \newcommand{\myProf}{Marco Bertini\xspace}
+% \newcommand{\myOtherProf}{Leonardo Galteri, Donatella Merlini\xspace}
+% \newcommand{\mySupervisor}{Marco Bertini\xspace}
+% \newcommand{\myFaculty}{Scuola di Scienze Matematiche, Fisiche e Naturali\xspace}
+% \newcommand{\myUni}{\protect{Universit\`a degli Studi di Firenze}\xspace}
+% \newcommand{\myLocation}{Firenze\xspace}
+% \newcommand{\myTime}{Anno Accademico 2021-2022\xspace}
+% \newcommand{\myVersion}{Version 0.1\xspace}
+%--------------------------------------------------------------
 \newcommand{\myItalianTitle}{TECNICHE DI OTTIMIZZAZIONE DI RETI NEURALI PER IL MIGLIORAMENTO DELLA QUALIT\`A VISUALE\xspace}
 \newcommand{\myEnglishTitle}{OPTIMIZATION TECHNIQUES OF DEEP LEARNING MODELS FOR VISUAL QUALITY IMPROVEMENT\xspace}
-\newcommand{\myDegree}{Corso di Laurea in Informatica\xspace}
+\newcommand{\myDegree}{Master of Science Degree in Computer Science\xspace}
 \newcommand{\myName}{Lorenzo Palloni\xspace}
-\newcommand{\myProf}{Relatore\xspace}
-\newcommand{\myOtherProf}{Correlatori\xspace}
-\newcommand{\mySupervisor}{Nome Cognome\xspace}
-\newcommand{\myFaculty}{
-    Scuola di Scienze Matematiche, Fisiche e Naturali\xspace}
-\newcommand{\myUni}{\protect{
-    Universit\`a degli Studi di Firenze}\xspace}
-\newcommand{\myLocation}{Firenze\xspace}
-\newcommand{\myTime}{Anno Accademico 2021-2022\xspace}
+\newcommand{\myProf}{Marco Bertini\xspace}
+\newcommand{\myOtherProf}{Leonardo Galteri, Donatella Merlini\xspace}
+\newcommand{\mySupervisor}{Marco Bertini\xspace}
+\newcommand{\myFaculty}{\protect{School of Mathematics, Physics and Natural Science}\xspace}
+\newcommand{\myUni}{\protect{University of Florence}\xspace}
+\newcommand{\myLocation}{Florence\xspace}
+\newcommand{\myTime}{Academic Year 2021-2022\xspace}
 \newcommand{\myVersion}{Version 0.1\xspace}
 %--------------------------------------------------------------
-\usepackage[italian]{babel}
-% \usepackage[latin1]{inputenc} 
+\usepackage[italian,english]{babel}
+% \usepackage[latin1]{inputenc}
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc} 
 \usepackage[square,numbers]{natbib} 
@@ -91,6 +102,8 @@
 \usepackage{hyperref}
 
 \usepackage{cleveref}
+\usepackage{wrapfig}
+\usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{bm}
 % \usepackage{algorithm}
@@ -117,15 +130,24 @@
 % use \cleardoublepage here to avoid problems with pdfbookmark
 %\include{intro} % use \myChapter command instead of \chapter
 \tableofcontents
-\listoffigures
+% \listoffigures
+%--------------------------------------------------------------
+% Quote
+%--------------------------------------------------------------
 \cleardoublepage
 \thispagestyle{empty}
-\begin{flushright}
+\begin{flushleft}  % \begin{flushright}
 \null\vspace{\stretch {1}}
-\emph{"Inserire citazione" \break --- Inserire autore citazione} \vspace{\stretch{2}}\null
-\end{flushright}
+{
+    Robot: \emph{What is my purpose?} \break
+    Rick: \emph{You pass butter.} \break
+    Robot: \emph{…Oh my God.} \break
+    Rick: \emph{Yeah, welcome to the club, pal.} \break
+    \emph{--- Rick and Morty}
+} \vspace{\stretch{2}}\null
+\end{flushleft}  % \end{flushright}
 \cleardoublepage
-
+%--------------------------------------------------------------
 \include{chapters/introduction}
 \include{chapters/background}
 \include{chapters/metrics}
