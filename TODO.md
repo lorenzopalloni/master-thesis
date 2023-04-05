@@ -71,4 +71,5 @@
 - DONE - [experiments] bold best results per column
 - DONE - [experiments] put memory size table in the text
 - DONE - [abstract] - enhance abstract and translate it in Italian
+- DONE - [references] remove not-used references
 
