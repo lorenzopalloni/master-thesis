@@ -145,16 +145,41 @@ SRUNet-INT8 &  \textbf{0.0054 ± 0.0006} & \textbf{2.27X} \\
 \section{Qualitative Results}
 \label{sec:qualitative-results}
 
-\Cref{fig:qualitative-unet} and \cref{fig:qualitative-srunet} show no decrease in the quality of a generated image among plain and compiled versions of the UNet and SRUNet models. The evaluations were done on a 96$\times$96 patch from a frame of a test video.
+This section aims to showcase no decrease in restoring distorted frames across all the non-optimized and the TensorRT-optimized UNet and SRUNet models. The evaluations in \cref{fig:building-qualitative-unet,fig:building-qualitative-srunet,fig:crowd-qualitative-unet,fig:crowd-qualitative-srunet,fig:trees-qualitative-unet,fig:trees-qualitative-srunet} were done using three 96$\times$96 patches, each taken from the first frame of three different 1920$\times$1080 test videos in different environments. In each of these figures, there are three columns with the ground truth on the left, the restored image in the middle, and the compressed-downscaled image on the right. Each row refers to a different model variation, and only the mid columns change over the different models.
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/unet_qualitative_results.png}
+\includegraphics[width=0.8\textwidth]{static/01_unet_qualitative_results.png}
 \caption{Qualitative results for each variation of the UNet model on a test patch.}
-\label{fig:qualitative-unet}
+\label{fig:building-qualitative-unet}
 \end{figure*}
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/srunet_qualitative_results.png}
+\includegraphics[width=0.8\textwidth]{static/01_srunet_qualitative_results.png}
 \caption{Qualitative results for each variation of the SRUNet model on a test patch.}
-\label{fig:qualitative-srunet}
+\label{fig:building-qualitative-srunet}
 \end{figure*}
+
+\begin{figure*}[ht]
+\includegraphics[width=0.8\textwidth]{static/02_unet_qualitative_results.png}
+\caption{Qualitative results for each variation of the UNet model on a test patch.}
+\label{fig:crowd-qualitative-unet}
+\end{figure*}
+
+\begin{figure*}[ht]
+\includegraphics[width=0.8\textwidth]{static/02_srunet_qualitative_results.png}
+\caption{Qualitative results for each variation of the SRUNet model on a test patch.}
+\label{fig:crowd-qualitative-srunet}
+\end{figure*}
+
+\begin{figure*}[ht]
+\includegraphics[width=0.8\textwidth]{static/03_unet_qualitative_results.png}
+\caption{Qualitative results for each variation of the UNet model on a test patch.}
+\label{fig:trees-qualitative-unet}
+\end{figure*}
+
+\begin{figure*}[ht]
+\includegraphics[width=0.8\textwidth]{static/03_srunet_qualitative_results.png}
+\caption{Qualitative results for each variation of the SRUNet model on a test patch.}
+\label{fig:trees-qualitative-srunet}
+\end{figure*}
+
