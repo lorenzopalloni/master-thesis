@@ -20,22 +20,22 @@ Execution times for both UNet and SRUNet, along with their TensorRT-optimized ve
 Moreover, the SRUNet model consistently outperforms the UNet model for all precisions, and the relatively small standard deviations indicate consistent performance over the 300 runs.
 For a visual representation, see \cref{fig:timings}.
 
-The INT8-optimized UNet and SRUNet models achieve 2.38X and 2.26X speedup compared to their plain implementations, respectively. Furthermore, \cref{tab:memory-consumption} reveals memory consumption reductions of 63.3\% for UNet and 53.8\% for SRUNet with the INT8 optimizations.
+The INT8-optimized UNet and SRUNet models achieve 2.38X and 2.26X speedup compared to their original implementations, respectively. Furthermore, memory consumption was reduced up to 63.3\% for the UNet (from 30MB to 11MB) and up to 53.8\% (from 2.6MB to 1.2MB) for the SRUNet using the INT8 versions.
 
 \begin{table*}[t]
 \begin{tabular}{llll}
 \toprule
-{} &              LPIPS &              DISTS &             BRISQUE \\
+{} & LPIPS $\downarrow$ & DISTS $\downarrow$ & BRISQUE $\downarrow$ \\
 \midrule
-UNet        &  0.28975 ± 0.01377 &  0.12225 ± 0.00671 &  31.13719 ± 1.16896 \\
-UNet-FP32   &  0.28975 ± 0.01377 &  0.12225 ± 0.00671 &  31.13733 ± 1.16844 \\
-UNet-FP16   &  0.28976 ± 0.01377 &  0.12226 ± 0.00671 &  31.13834 ± 1.16908 \\
-UNet-INT8   &  0.30414 ± 0.01371 &  0.12829 ± 0.00662 &  29.68486 ± 1.01377 \\
+UNet        &  \textbf{0.2897 ± 0.0138} &  \textbf{0.1222 ± 0.0067} &  31.1372 ± 1.1690 \\
+UNet-FP32   &  \textbf{0.2897 ± 0.0138} &  \textbf{0.1222 ± 0.0067} &  31.1373 ± 1.1684 \\
+UNet-FP16   &  0.2898 ± 0.0138 &  0.1223 ± 0.0067 &  31.1383 ± 1.1691 \\
+UNet-INT8   &  0.3041 ± 0.0137 &  0.1283 ± 0.0066 &  \textbf{29.6849 ± 1.0138} \\
 \midrule
-SRUNet      &  0.31106 ± 0.01505 &  0.17172 ± 0.00472 &  27.37380 ± 3.57055 \\
-SRUNet-FP32 &  0.31106 ± 0.01505 &  0.17172 ± 0.00472 &  27.37365 ± 3.56975 \\
-SRUNet-FP16 &  0.31108 ± 0.01505 &  0.17172 ± 0.00472 &  27.37904 ± 3.57393 \\
-SRUNet-INT8 &  0.30677 ± 0.01366 &  0.17217 ± 0.00442 &  26.15459 ± 3.22726 \\
+SRUNet      &  0.3111 ± 0.0151 &  \textbf{0.1717 ± 0.0047} &  27.3738 ± 3.5705 \\
+SRUNet-FP32 &  0.3111 ± 0.0151 &  \textbf{0.1717 ± 0.0047} &  27.3736 ± 3.5697 \\
+SRUNet-FP16 &  0.3111 ± 0.0151 &  \textbf{0.1717 ± 0.0047} &  27.3790 ± 3.5739 \\
+SRUNet-INT8 &  \textbf{0.3068 ± 0.0137} &  0.1722 ± 0.0044 &  \textbf{26.1546 ± 3.2273} \\
 \bottomrule
 \end{tabular}
 \caption{Evaluations on perceptual metrics on 60 test frames (mean $\pm$ standard deviation).}
@@ -45,17 +45,17 @@ SRUNet-INT8 &  0.30677 ± 0.01366 &  0.17217 ± 0.00442 &  26.15459 ± 3.22726 \
 \begin{table*}[t]
 \begin{tabular}{llll}
 \toprule
-{} &               SSIM &            MS-SSIM &                PSNR \\
+{} & SSIM $\uparrow$ & MS-SSIM $\uparrow$ & PSNR $\uparrow$ \\
 \midrule
-UNet        &  0.89522 ± 0.00842 &  0.85169 ± 0.00673 &  21.65057 ± 0.12692 \\
-UNet-FP32   &  0.89522 ± 0.00842 &  0.85169 ± 0.00673 &  21.65057 ± 0.12692 \\
-UNet-FP16   &  0.89522 ± 0.00842 &  0.85168 ± 0.00673 &  21.65064 ± 0.12693 \\
-UNet-INT8   &  0.89412 ± 0.00840 &  0.85082 ± 0.00672 &  21.63878 ± 0.12864 \\
+UNet        &  \textbf{0.8952 ± 0.0084} &  \textbf{0.8517 ± 0.0067} &  \textbf{21.6506 ± 0.1269} \\
+UNet-FP32   &  \textbf{0.8952 ± 0.0084} &  \textbf{0.8517 ± 0.0067} &  \textbf{21.6506 ± 0.1269} \\
+UNet-FP16   &  \textbf{0.8952 ± 0.0084} &  \textbf{0.8517 ± 0.0067} &  \textbf{21.6506 ± 0.1269} \\
+UNet-INT8   &  0.8941 ± 0.0084 &  0.8508 ± 0.0067 &  21.6388 ± 0.1286 \\
 \midrule
-SRUNet      &  0.88938 ± 0.00840 &  0.84569 ± 0.00616 &  21.36702 ± 0.12477 \\
-SRUNet-FP32 &  0.88938 ± 0.00840 &  0.84569 ± 0.00616 &  21.36702 ± 0.12477 \\
-SRUNet-FP16 &  0.88937 ± 0.00840 &  0.84568 ± 0.00616 &  21.36712 ± 0.12479 \\
-SRUNet-INT8 &  0.88820 ± 0.00840 &  0.84421 ± 0.00616 &  21.33201 ± 0.12242 \\
+SRUNet      &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  21.3670 ± 0.1248 \\
+SRUNet-FP32 &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  21.3670 ± 0.1248 \\
+SRUNet-FP16 &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  \textbf{21.3671 ± 0.1248} \\
+SRUNet-INT8 &  0.8882 ± 0.0084 &  \textbf{0.8442 ± 0.0062} &  21.3320 ± 0.1224 \\
 \bottomrule
 \end{tabular}
 \caption{Evaluations on traditional metrics on 60 test frames (mean $\pm$ standard deviation).}
@@ -65,17 +65,17 @@ SRUNet-INT8 &  0.88820 ± 0.00840 &  0.84421 ± 0.00616 &  21.33201 ± 0.12242 \
 \begin{table*}[t]
 \begin{tabular}{lrr}
 \toprule
-{} &       VMAF (mean) &  VMAF (harmonic mean) \\
+{} &       VMAF (mean) $\uparrow$ &  VMAF (harmonic mean) $\uparrow$ \\
 \midrule
-UNet        &  47.710728 &      47.199030 \\
-UNet-FP32   &  47.720646 &      47.209081 \\
-UNet-FP16   &  47.710538 &      47.200484 \\
-UNet-INT8   &  47.474005 &      46.965197 \\
+UNet        &  47.71 &      47.20 \\
+UNet-FP32   &  \textbf{47.72} &      \textbf{47.21} \\
+UNet-FP16   &  47.71 &      47.20 \\
+UNet-INT8   &  47.47 &      46.96 \\
 \midrule
-SRUNet      &  47.198209 &      46.655467 \\
-SRUNet-FP32 &  47.187333 &      46.645322 \\
-SRUNet-FP16 &  47.189154 &      46.646938 \\
-SRUNet-INT8 &  47.176275 &      46.638393 \\
+SRUNet      &  \textbf{47.20} &      \textbf{46.65} \\
+SRUNet-FP32 &  47.19 &      46.64 \\
+SRUNet-FP16 &  47.19 &      \textbf{46.65} \\
+SRUNet-INT8 &  47.18 &      46.64 \\
 \bottomrule
 \end{tabular}
 \caption{VMAF scores on a 120-second-test video.}
@@ -95,19 +95,19 @@ SRUNet-INT8 &  47.176275 &      46.638393 \\
 \end{figure*}
 
 \begin{table*}[t]
-\begin{tabular}{ll}
+\begin{tabular}{lll}
 \toprule
-{} &      times [s] \\
+{} &      times [s] $\downarrow$ & speedup $\uparrow$ \\
 \midrule
-UNet        &  0.03482 ± 0.00040 \\
-UNet-FP32   &  0.02794 ± 0.00045 \\
-UNet-FP16   &  0.02789 ± 0.00041 \\
-UNet-INT8   &  0.01460 ± 0.00064 \\
+UNet        &  0.0348 ± 0.0004 & {} \\
+UNet-FP32   &  0.0279 ± 0.0004 & 1.247X \\
+UNet-FP16   &  0.0279 ± 0.0004 & 1.247X \\
+UNet-INT8   &  \textbf{0.0146 ± 0.0006} & \textbf{2.38X} \\
 \midrule
-SRUNet      &  0.01229 ± 0.00011 \\
-SRUNet-FP32 &  0.00870 ± 0.00054 \\
-SRUNet-FP16 &  0.00869 ± 0.00040 \\
-SRUNet-INT8 &  0.00543 ± 0.00059 \\
+SRUNet      &  0.0123 ± 0.0001 & {} \\
+SRUNet-FP32 &  0.0087 ± 0.0005 & 1.41X \\
+SRUNet-FP16 &  0.0087 ± 0.0004 & 1.41X \\
+SRUNet-INT8 &  \textbf{0.0054 ± 0.0006} & \textbf{2.27X} \\
 \bottomrule
 \end{tabular}
 \caption{Evaluation times over 300 runs (mean $\pm$ standard deviation).}
@@ -120,25 +120,25 @@ SRUNet-INT8 &  0.00543 ± 0.00059 \\
 \label{fig:timings}
 \end{figure*}
 
-\begin{table*}[t]
-\begin{tabular}{ll}
-\toprule
-{} &      size \\
-\midrule
-UNet        & 30MB \\
-% UNet-FP32   & 71MB \\
-% UNet-FP16   & 71MB \\
-UNet-INT8   & 11MB \\
-\midrule
-SRUNet      & 2.6MB \\
-% SRUNet-FP32 & 6.3MB \\
-% SRUNet-FP16 & 6.3MB \\
-SRUNet-INT8 & 1.2MB \\
-\bottomrule
-\end{tabular}
-\caption{Memory consumption of UNet and SRUNet model weights, as well as their compiled versions using TensorRT with precisions INT8. It is noteworthy that the compiled INT8 version also stores the full model graph, its weights, and the calibrated quantization maps.}
-\label{tab:memory-consumption}
-\end{table*}
+% \begin{table*}[t]
+% \begin{tabular}{ll}
+% \toprule
+% {} &      size \\
+% \midrule
+% UNet        & 30MB \\
+% % UNet-FP32   & 71MB \\
+% % UNet-FP16   & 71MB \\
+% UNet-INT8   & 11MB \\
+% \midrule
+% SRUNet      & 2.6MB \\
+% % SRUNet-FP32 & 6.3MB \\
+% % SRUNet-FP16 & 6.3MB \\
+% SRUNet-INT8 & 1.2MB \\
+% \bottomrule
+% \end{tabular}
+% \caption{Memory consumption of UNet and SRUNet model weights, as well as their compiled versions using TensorRT with precisions INT8. It is noteworthy that the compiled INT8 version also stores the full model graph, its weights, and the calibrated quantization maps.}
+% \label{tab:memory-consumption}
+% \end{table*}
 
 \clearpage
 

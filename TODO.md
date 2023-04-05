@@ -1,23 +1,15 @@
 # TODO List
 
 ## high priority
-- .4f precicion for speed
-- .2f precision for VMAF
-- .4f precision for metrics
-- arrows to indicate direction of results
-- bold best results per column
-- put memory size table in the text
-- put some other qualitative results about natural scenes and faces
-
+- [experiments] put some qualitative results about natural scenes and faces
 - [experiments] - enhance comments on qualitative results
 - [acknowledgement] draft acknowledgement
-- [experiments] explain why FP32 and FP16 versions occupy more memory than other versions.
 
 ## medium priority
-- [code] rename the codebase (suggestions: quant)
-- [code] handle the gifnoc package (rename, refactor, then publish on PyPI)
 
 ## low priority
+- [code] rename the codebase (suggestions: ??)
+- [code] handle the gifnoc package (rename, refactor, then publish on PyPI)
 
 ### Comments
 
@@ -72,3 +64,11 @@
 - DONE - [code] create an image grid, or think of something smart to show qualitative results
 - DONE - [experiments] include new qualitative evaluations
 - DONE - [experiments] draft qualitative results section
+- DONE - [experiments] .4f precicion for speed
+- DONE - [experiments] .2f precision for VMAF
+- DONE - [experiments] .4f precision for metrics
+- DONE - [experiments] arrows to indicate direction of results
+- DONE - [experiments] bold best results per column
+- DONE - [experiments] put memory size table in the text
+- DONE - [abstract] - enhance abstract and translate it in Italian
+

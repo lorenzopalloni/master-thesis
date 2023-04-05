@@ -56,7 +56,7 @@ Modelling the problem as producing a residual on the top of the up-sampled image
 \section{Training Setup}
 \label{sec:training-setup}
 
-To train both the UNet and SRUNet models, we used a Generative Adversarial Network (GAN) framework introduced in \cite{goodfellow2020generative}. The GAN framework consists of two models, a generator and a discriminator.
+To train both the UNet and SRUNet models, a Generative Adversarial Network (GAN) framework was employed. Introduced in \cite{goodfellow2020generative}, the GAN framework consists of two models, a generator and a discriminator.
 
 In the context of super-resolution, the generator network takes a low-resolution image as input and generates a high-resolution image, while the discriminator tries to distinguish between the generated high-resolution image and the true high-resolution image.
 
@@ -65,7 +65,7 @@ The two networks are trained in an adversarial manner: the generator tries to fo
 The generator loss is composed of two parts: an adversarial loss and a content loss.
 The generator is encouraged to generate high-resolution images that appear as much as possible to come from the distribution of the ground-truth images by the adversarial loss and to generate high-resolution images that are as close as possible to the actual ground-truth images by the content loss.
 
-In this setup, we used LPIPS and SSIM as the content loss. LPIPS is a perceptual similarity metric that measures the distance between two images in terms of their perceptual features. SSIM is a structural similarity metric that measures the similarity between two images in terms of their structure, luminance, and contrast. See \cref{chap:Metrics}, for further details on perceptual and non-perceptual metrics. 
+In this setup, LPIPS and SSIM were used as the content loss. LPIPS is a perceptual similarity metric that measures the distance between two images in terms of their perceptual features. SSIM is a structural similarity metric that measures the similarity between two images in terms of their structure, luminance, and contrast. See \cref{chap:Metrics}, for further details on perceptual and non-perceptual metrics. 
 
 The generator loss can be represented as follows:
 
@@ -83,7 +83,7 @@ $$
 
 where $\hat{y}$ is the generated high-resolution image, $y$ is the ground truth high-resolution image, $D(\hat{y})$ is the probability score outputted by the discriminator for the generated image, $w_{LPIPS}$ and $w_{SSIM}$ are hyperparameters that control the relative importance of the LPIPS and SSIM losses.
 
-We utilized the same design for the discriminator network as the one used in \cite{ledig2017photo}, in which the authors followed the architectural guidelines described in \cite{radford2015unsupervised} and incorporated LeakyReLU \cite{maas2013rectifier} activation with $\alpha$ set to 0.2 (see \cref{fig:leakyrelu}) while avoiding max-pooling in the network.
+The design chosen for the discriminator network is the same as the one used in \cite{ledig2017photo}, where the authors followed the architectural guidelines described in \cite{radford2015unsupervised} and incorporated LeakyReLU \cite{maas2013rectifier} activation with $\alpha$ set to 0.2 (see \cref{fig:leakyrelu}) while avoiding max-pooling in the network.
 
 \begin{wrapfigure}{r}{0.4\textwidth}
 \centering
@@ -101,7 +101,7 @@ The discriminator network structure is illustrated in \cref{fig:discriminator}. 
 \label{fig:discriminator}
 \end{figure}
 
-During the model training process, the Adam optimizer was utilized with a learning rate of $1\times10^{-4}$. The model was trained for 191,268 iterations, with each batch consisting of 14 image patches randomly sampled from the training set. A patch size of 96 × 96 was used, with one random crop per image. The sole data augmentation strategy applied was the horizontal reflection, avoiding warping or rotation transforms to maintain consistency with real H.265-encoded frames.
+During the model training process, the Adam optimizer was utilized with a learning rate of $1\times10^{-4}$. The model was trained for 191,268 iterations, with each batch consisting of 14 image patches randomly sampled from the training set. A patch size of 96$\times$96 was used, with one random crop per image. The sole data augmentation strategy applied was the horizontal reflection, avoiding warping or rotation transforms to maintain consistency with real H.265-encoded frames.
 
 Model training required approximately 72 hours on a single NVIDIA Titan Xp. The proposed model was trained using the BVI-DVC dataset \cite{ma2021bvi}, designed for deep video compression tasks. This dataset includes 200 frame sequences truncated at the 64\textsuperscript{th} frame, with frame rates ranging from 25 to 120. The sequences feature various content types, such as natural scenes, man-made objects, and cityscapes, with some examples shown in \cref{fig:bvi-dvc}.
 
