@@ -1,8 +1,6 @@
 # TODO List
 
 ## high priority
-- [experiments] put some qualitative results about natural scenes and faces
-- [experiments] - enhance comments on qualitative results
 - [acknowledgement] draft acknowledgement
 
 ## medium priority
@@ -72,4 +70,6 @@
 - DONE - [experiments] put memory size table in the text
 - DONE - [abstract] - enhance abstract and translate it in Italian
 - DONE - [references] remove not-used references
+- DONE - [experiments] put some qualitative results about natural scenes and faces
+- DONE - [experiments] - enhance comments on qualitative results
 

@@ -55,7 +55,7 @@ UNet-INT8   &  0.8941 ± 0.0084 &  0.8508 ± 0.0067 &  21.6388 ± 0.1286 \\
 SRUNet      &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  21.3670 ± 0.1248 \\
 SRUNet-FP32 &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  21.3670 ± 0.1248 \\
 SRUNet-FP16 &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  \textbf{21.3671 ± 0.1248} \\
-SRUNet-INT8 &  0.8882 ± 0.0084 &  \textbf{0.8442 ± 0.0062} &  21.3320 ± 0.1224 \\
+SRUNet-INT8 &  0.8882 ± 0.0084 &  0.8442 ± 0.0062 &  21.3320 ± 0.1224 \\
 \bottomrule
 \end{tabular}
 \caption{Evaluations on traditional metrics on 60 test frames (mean $\pm$ standard deviation).}
@@ -145,41 +145,41 @@ SRUNet-INT8 &  \textbf{0.0054 ± 0.0006} & \textbf{2.27X} \\
 \section{Qualitative Results}
 \label{sec:qualitative-results}
 
-This section aims to showcase no decrease in restoring distorted frames across all the non-optimized and the TensorRT-optimized UNet and SRUNet models. The evaluations in \cref{fig:building-qualitative-unet,fig:building-qualitative-srunet,fig:crowd-qualitative-unet,fig:crowd-qualitative-srunet,fig:trees-qualitative-unet,fig:trees-qualitative-srunet} were done using three 96$\times$96 patches, each taken from the first frame of three different 1920$\times$1080 test videos in different environments. In each of these figures, there are three columns with the ground truth on the left, the restored image in the middle, and the compressed-downscaled image on the right. Each row refers to a different model variation, and only the mid columns change over the different models.
+This section aims to showcase the consistent performance of non-optimized and TensorRT-optimized UNet and SRUNet models in restoring distorted frames. Evaluations are displayed in \Cref{fig:building-qualitative-unet,fig:building-qualitative-srunet,fig:crowd-qualitative-unet,fig:crowd-qualitative-srunet,fig:trees-qualitative-unet,fig:trees-qualitative-srunet}, using three 384$\times$384 patches taken from the first frame of three distinct 1920$\times$1080 test videos, each representing a different environment. Each patch is compressed using H.265 and its resolution is reduced by a scaling factor of 4 resulting in a 96$\times$96 patch. Each of the forementioned figures are organized into three columns: ground truth (left), restored image using a super-resolution model (middle), and resized image using bicubic interpolation (right). The rows in these figures represent model variations, with only the middle column varying across different models.
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/01_unet_qualitative_results.png}
-\caption{Qualitative results for each variation of the UNet model on a test patch.}
+\includegraphics[width=1.0\textwidth]{static/01_unet_qualitative_results.png}
+\caption{Qualitative results evaluating UNet, UNet-FP32, UNet-FP16, and UNet-INT8 models on a compressed and down-scaled 96$\times$96 patch of a test video frame producing a 384$\times$384 patch displayed in the middle column, along with the ground truth (left column), and the resized version using bicubic interpolation (right column).}
 \label{fig:building-qualitative-unet}
 \end{figure*}
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/01_srunet_qualitative_results.png}
-\caption{Qualitative results for each variation of the SRUNet model on a test patch.}
+\includegraphics[width=1.0\textwidth]{static/01_srunet_qualitative_results.png}
+\caption{Qualitative results evaluating SRUNet, SRUNet-FP32, SRUNet-FP16, and SRUNet-INT8 models on a compressed and down-scaled 96$\times$96 patch of a test video frame producing a 384$\times$384 patch displayed in the middle column, along with the ground truth (left column), and the resized version using bicubic interpolation (right column).}
 \label{fig:building-qualitative-srunet}
 \end{figure*}
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/02_unet_qualitative_results.png}
-\caption{Qualitative results for each variation of the UNet model on a test patch.}
+\includegraphics[width=1.0\textwidth]{static/02_unet_qualitative_results.png}
+\caption{Qualitative results evaluating UNet, UNet-FP32, UNet-FP16, and UNet-INT8 models on a compressed and down-scaled 96$\times$96 patch of a test video frame producing a 384$\times$384 patch displayed in the middle column, along with the ground truth (left column), and the resized version using bicubic interpolation (right column).}
 \label{fig:crowd-qualitative-unet}
 \end{figure*}
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/02_srunet_qualitative_results.png}
-\caption{Qualitative results for each variation of the SRUNet model on a test patch.}
+\includegraphics[width=1.0\textwidth]{static/02_srunet_qualitative_results.png}
+\caption{Qualitative results evaluating SRUNet, SRUNet-FP32, SRUNet-FP16, and SRUNet-INT8 models on a compressed and down-scaled 96$\times$96 patch of a test video frame producing a 384$\times$384 patch displayed in the middle column, along with the ground truth (left column), and the resized version using bicubic interpolation (right column).}
 \label{fig:crowd-qualitative-srunet}
 \end{figure*}
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/03_unet_qualitative_results.png}
-\caption{Qualitative results for each variation of the UNet model on a test patch.}
+\includegraphics[width=1.0\textwidth]{static/03_unet_qualitative_results.png}
+\caption{Qualitative results evaluating UNet, UNet-FP32, UNet-FP16, and UNet-INT8 models on a compressed and down-scaled 96$\times$96 patch of a test video frame producing a 384$\times$384 patch displayed in the middle column, along with the ground truth (left column), and the resized version using bicubic interpolation (right column).}
 \label{fig:trees-qualitative-unet}
 \end{figure*}
 
 \begin{figure*}[ht]
-\includegraphics[width=0.8\textwidth]{static/03_srunet_qualitative_results.png}
-\caption{Qualitative results for each variation of the SRUNet model on a test patch.}
+\includegraphics[width=1.0\textwidth]{static/03_srunet_qualitative_results.png}
+\caption{Qualitative results evaluating SRUNet, SRUNet-FP32, SRUNet-FP16, and SRUNet-INT8 models on a compressed and down-scaled 96$\times$96 patch of a test video frame producing a 384$\times$384 patch displayed in the middle column, along with the ground truth (left column), and the resized version using bicubic interpolation (right column).}
 \label{fig:trees-qualitative-srunet}
 \end{figure*}
 
