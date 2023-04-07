@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\usepackage[italian,english]{babel}
+\usepackage[utf8x]{inputenc} %eventualmente da cambiare se ci sono problemi con accenti
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+\setlength{\textwidth}{16 cm}
+\setlength{\oddsidemargin}{0 cm}
+\setlength{\topmargin}{-1.5 cm}
+\setlength{\textheight}{30 cm}
+
+\title{Optimization Techniques of Deep Learning Models for Visual Quality Improvement}
+
+\begin{document}
+
+\section*{CONTENTS}
+
+\begin{description}
+    \item[1] Introduction \hfill 5
+    \item[2] Background \hfill 7
+    \item[3] Metrics \hfill 9
+    \begin{description}
+        \item[3.1] Traditional Metrics \hfill 9
+        \item[3.2] Perceptual Metrics \hfill 10
+        \item[3.3] No-Reference Metrics \hfill 11
+        \item[3.4] Video Quality Metrics \hfill 12
+    \end{description}
+    \item[4] Architectures \hfill 15
+    \begin{description}
+        \item[4.1] UNet Architecture \hfill 15
+        \item[4.2] SRUNet Architecture \hfill 17
+        \item[4.3] Training Setup \hfill 17
+    \end{description}
+    \item[5] Optimizations \hfill 23
+    \begin{description}
+        \item[5.1] Quantization \hfill 24
+        \item[5.2] TensorRT to speed up inference \hfill 25
+        \item[5.3] Data-loader to speed up training \hfill 27
+    \end{description}
+    \item[6] Experiments \hfill 29
+    \begin{description}
+        \item[6.1] Quantitative Results \hfill 29
+        \item[6.2] Qualitative Results \hfill 33
+    \end{description}
+    \item[7] Conclusions \hfill 41
+    \item[8] Acknowledgements \hfill 43
+\end{description}
+
+\end{document}
