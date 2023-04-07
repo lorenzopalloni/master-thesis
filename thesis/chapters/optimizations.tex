@@ -29,11 +29,11 @@ During PTQ, the quantization parameters for both weights and activations are est
 \section{TensorRT to speed up inference}
 \label{sec:tensorrt}
 
-TensorRT is an inference optimization tool developed by NVIDIA that can accelerate deep learning models on NVIDIA GPUs. In recent years, there has been increasing interest in integrating TensorRT with PyTorch, one of the most popular deep learning frameworks that allows users to easily develop and train deep learning models, to take advantage of the performance benefits of TensorRT during inference.
+TensorRT is an inference optimization tool developed by NVIDIA that can accelerate deep learning models on NVIDIA GPUs. In recent years, there has been increasing interest in integrating TensorRT with PyTorch \cite{NEURIPS2019_9015}, one of the most popular deep learning frameworks that allows users to easily develop and train deep learning models, to take advantage of the performance benefits of TensorRT during inference.
  
-There are several ways to integrate TensorRT with PyTorch. One approach is to use the ONNX format, which is an open standard for representing deep learning models. PyTorch models can be converted to the ONNX format using the \texttt{torch.onnx.export} function and the resulting ONNX file can then be optimized for inference using TensorRT. The optimized model can be loaded back into PyTorch using the \texttt{torch.onnx.import} function, allowing users to continue working with the model in PyTorch.
+There are several ways to integrate TensorRT with PyTorch. One approach is to use the ONNX \cite{bai2019} format, which is an open standard for representing deep learning models. PyTorch models can be converted to the ONNX format using the \texttt{torch.onnx.export} function and the resulting ONNX file can then be optimized for inference using TensorRT. The optimized model can be loaded back into PyTorch using the \texttt{torch.onnx.import} function, allowing users to continue working with the model in PyTorch.
 
-Another approach is to use Torch-TensorRT. Torch-TensorRT is a compiler that is designed for PyTorch, TorchScript, and FX, with the aim of optimizing them for NVIDIA GPUs through the use of NVIDIA's TensorRT.
+In this thesis, another approach is employed, which involves using Torch-TensorRT \cite{torchtensorrt}. Torch-TensorRT is a compiler that is designed for PyTorch, TorchScript, and FX, with the aim of optimizing them for NVIDIA GPUs through the use of NVIDIA's TensorRT.
 
 TorchScript is a scripting language and runtime environment for PyTorch that allows you to serialize and save PyTorch models and run them in production without needing the full PyTorch framework. It enables the execution of PyTorch models efficiently on a wide range of devices.
 

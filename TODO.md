@@ -1,13 +1,10 @@
 # TODO List
 
 ## high priority
-- [acknowledgement] draft acknowledgement
 
 ## medium priority
 
 ## low priority
-- [code] rename the codebase (suggestions: ??)
-- [code] handle the gifnoc package (rename, refactor, then publish on PyPI)
 
 ### Comments
 
@@ -72,4 +69,5 @@
 - DONE - [references] remove not-used references
 - DONE - [experiments] put some qualitative results about natural scenes and faces
 - DONE - [experiments] - enhance comments on qualitative results
+- DONE - [acknowledgement] write acknowledgement
 
