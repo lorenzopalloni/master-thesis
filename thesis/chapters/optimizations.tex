@@ -33,7 +33,7 @@ TensorRT is an inference optimization tool developed by NVIDIA that can accelera
  
 There are several ways to integrate TensorRT with PyTorch. One approach is to use the ONNX \cite{bai2019} format, which is an open standard for representing deep learning models. PyTorch models can be converted to the ONNX format using the \texttt{torch.onnx.export} function and the resulting ONNX file can then be optimized for inference using TensorRT. The optimized model can be loaded back into PyTorch using the \texttt{torch.onnx.import} function, allowing users to continue working with the model in PyTorch.
 
-In this thesis, another approach is employed, which involves using Torch-TensorRT \cite{torchtensorrt}. Torch-TensorRT is a compiler that is designed for PyTorch, TorchScript, and FX, with the aim of optimizing them for NVIDIA GPUs through the use of NVIDIA's TensorRT.
+Another approach is to use Torch-TensorRT \cite{torchtensorrt}. Torch-TensorRT is a compiler that is designed for PyTorch, TorchScript, and FX, with the aim of optimizing them for NVIDIA GPUs through the use of NVIDIA's TensorRT.
 
 TorchScript is a scripting language and runtime environment for PyTorch that allows you to serialize and save PyTorch models and run them in production without needing the full PyTorch framework. It enables the execution of PyTorch models efficiently on a wide range of devices.
 
@@ -43,65 +43,18 @@ Unlike PyTorch's Just-In-Time (JIT) compiler, Torch-TensorRT is an Ahead-of-Time
 
 The Torch-TensorRT Python API offers a simple and user-friendly approach to utilizing PyTorch data-loaders in conjunction with TensorRT calibrators. By specifying the desired configuration, the DataLoaderCalibrator class can be employed to establish a TensorRT calibrator.
 
-% The provided code exemplifies how to make use of this functionality.
-
-% TODO: NOT SURE ABOUT INCLUDING THIS CODE SNIPPET
-% \begin{lstlisting}[language=Python]
-% import torch
-% import torchvision
-% import torchvision.transforms as transforms
-% import torch_tensorrt
-
-% testing_dataset = torchvision.datasets.CIFAR10(
-%   root="./data",
-%   train=False,
-%   download=True,
-%   transform=transforms.Compose(
-%     [
-%       transforms.ToTensor(),
-%       transforms.Normalize(
-%         (0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)
-%       ),
-%     ]
-%   ),
-% )
-
-% testing_dataloader = torch.utils.data.DataLoader(
-%   testing_dataset, batch_size=1, shuffle=False, num_workers=1
-% )
-% calibrator = torch_tensorrt.ptq.DataLoaderCalibrator(
-%   testing_dataloader,
-%   cache_file="./calibration.cache",
-%   use_cache=False,
-%   algo_type=torch_tensorrt.ptq.CalibrationAlgo.ENTROPY_CALIBRATION_2,
-%   device=torch.device("cuda:0"),
-% )
-
-% trt_mod = torch_tensorrt.compile(
-%   model,
-%   inputs=[torch_tensorrt.Input((1, 3, 32, 32))],
-%   enabled_precisions={torch.float, torch.half, torch.int8},
-%   calibrator=calibrator,
-%   device={
-%     "device_type": torch_tensorrt.DeviceType.GPU,
-%     "gpu_id": 0,
-%     "dla_core": 0,
-%     "allow_gpu_fallback": False,
-%     "disable_tf32": False
-%   }
-% )
-% \end{lstlisting}
-
 Several studies have investigated the use of TensorRT to improve the inference performance of deep learning models in various domains. For example, St\"acker et al. \cite{stacker2021deployment} applied TensorRT-based post-training quantization to representative object detection networks, such as RetinaNet for image-based 2D object detection and PointPillars for LiDAR-based 3D object detection. The authors focused on deploying these networks on an edge AI platform, examining the conversion process from the PyTorch training environment to the deployment environment, and comparing the performance of TensorRT and TorchScript. Their experiments demonstrated slight advantages of TensorRT for convolutional layers and TorchScript for fully connected layers. Furthermore, they analyzed the trade-off between runtime and performance when optimizing the deployment setup, finding that quantization significantly reduced runtime while having a minimal impact on detection performance.
+
+In the experiments conducted throughout this thesis, Post-Training Quantization was utilized as the chosen quantization method, employing the Torch-TensorRT framework. This approach allowed for the quantization of the UNet and SRUNet without re-training, resulting in a more efficient and expedient process.
 
 \section{Data-loader to speed up training}
 \label{sec:dataloader}
 
 In this section is presented a novel and custom data-loading pipeline implemented for training super-resolution models. Its primary goal is to reduce computational bottlenecks arising from four interrelated factors: GPU RAM capacity, GPU batch processing time, CPU image fetching time, and image size. The models were trained on an Ubuntu 20.04 server using a single GPU Titan Xp with 12GB RAM. The BVI-DVC dataset is stored on an external HDD, which cannot be transferred to an SSD due to its size.
-% Additionally, only one thread can access the HDD data at a time.
 
 Initially, a naive PyTorch data loader was implemented to load one image at a time, extracting only one patch from each loaded image. However, this approach led to a significant bottleneck for the GPU as the CPU's processing time exceeded that of the GPU's forward/backward pass. A more efficient solution would be to store patches from each frame (or a subset of frames) in SSDs near the CPU, allowing parallel processing to prevent GPU bottlenecks.
 
 To overcome these challenges, the custom data-loading pipeline comprises two main components: the BufferGenerator and the BatchGenerator. The BufferGenerator serves buffered chunks of items from a list and applies a function to each item before it enters the buffer. The BatchGenerator generates batches of patches taken from prefetched frames, with both image selection and cropping taking place randomly.
 
 The pipeline also provides different behaviours for the training, validation, and testing stages. In the training stage, the data is shuffled, while in the validation and testing stages, it remains in its original order. The custom data-loading pipeline ensures efficient training of super-resolution models without causing GPU bottlenecks or excessive memory consumption.
+
