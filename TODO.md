@@ -1,6 +1,37 @@
 # TODO List
 
+
 ## high priority
+- write presentation slides
+- write presentation script
+- define presentation structure
+
+- intro
+- context / background
+- metrics
+- architectures
+- optimizations
+- experiments
+- conclusions
+
+20 mins (15 mins + 5 mins of Q&As) -> 6 slides
+
+1. intro
+    - context
+    - goals
+2. metrics
+    - non-perceptual vs perceptual metrics
+3. architectures
+    - UNet
+    - SRUNet
+4. optimizations
+    - training
+    - inference
+5. experiments
+6. conclusions
+
+- bibliography
+- appendix
 
 ## medium priority
 
@@ -70,4 +101,5 @@
 - DONE - [experiments] put some qualitative results about natural scenes and faces
 - DONE - [experiments] - enhance comments on qualitative results
 - DONE - [acknowledgement] write acknowledgement
+- DONE - ask how long will you have for your thesis dissertation (20 mins including any questions)
 
