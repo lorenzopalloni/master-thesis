@@ -2,17 +2,14 @@
 
 
 ## high priority
+
+- explain better metrics
+- put VMAF results
+- generate qualitative results showing only plain implementation vs INT8 of SRUNet on trees
+
 - write presentation slides
 - write presentation script
 - define presentation structure
-
-- intro
-- context / background
-- metrics
-- architectures
-- optimizations
-- experiments
-- conclusions
 
 20 mins (15 mins + 5 mins of Q&As) -> 6 slides
 

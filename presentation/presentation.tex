@@ -13,7 +13,7 @@
 % \usepackage{pacman}
 
 \usepackage{graphicx} % Allows to include figures
-% \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 % \usepackage[utf8]{inputenc}
 % \usepackage{float}
 % \usepackage{mathtools}
@@ -21,6 +21,7 @@
 % \usepackage{bm}
 % \usepackage{scalerel}
 % \usepackage{setspace}
+\usepackage{tabularx}
 \usepackage{appendixnumberbeamer} % add \appendix
 
 % \usepackage{amsmath}
@@ -89,6 +90,9 @@
   \item \textbf{Goal:} Improve video restoration with deep learning models
   \item \textbf{Challenge:} Computational complexity of deep learning models
   \item \textbf{Solution:} Apply quantization techniques for faster inference and reduced memory usage
+\end{itemize}
+\medskip
+\begin{itemize}
   \item \textbf{Focus:} Artefact removal and super-resolution tasks
   \item \textbf{Method:} Post-training quantization using TensorRT
   \item \textbf{Impact:} Enable practical deployment on resource-constrained devices
@@ -124,9 +128,8 @@
 \end{frame}
 %---------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------
-\begin{frame}{Architectures}
+\begin{frame}{Model Architectures}
 \begin{itemize}
-  \item Overview of UNet and SRUNet model architectures
   \item UNet: encoder-decoder structure with skip connections
   \item SRUNet: modified UNet for super-resolution and artefact removal
   \item Training setup: Generative Adversarial Network (GAN) framework
@@ -176,27 +179,111 @@
 % %---------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------
-\begin{frame}{Quantitative Results: Boxplots of Metrics}
-\begin{columns}
-\column{0.5\textwidth}
-\includegraphics[width=\textwidth]{../thesis/static/boxplots_perceptual_metrics.jpg}
-\includegraphics[width=\textwidth]{../thesis/static/boxplots_traditional_metrics.jpg}
-% \caption{Perceptual Metrics}
-\column{0.5\textwidth}
-\includegraphics[width=\textwidth]{../thesis/static/boxplots_timings.jpg}
-% \caption{Traditional Metrics}
-\end{columns}
+\begin{frame}{Quantitative Results: Perceptual Metrics}
+\begin{table}[htb]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{llll}
+    \toprule
+    {} & LPIPS $\downarrow$ & DISTS $\downarrow$ & BRISQUE $\downarrow$ \\
+    \midrule
+    UNet        &  \textbf{0.2897 ± 0.0138} &  \textbf{0.1222 ± 0.0067} &  31.1372 ± 1.1690 \\
+    UNet-FP32   &  \textbf{0.2897 ± 0.0138} &  \textbf{0.1222 ± 0.0067} &  31.1373 ± 1.1684 \\
+    UNet-FP16   &  0.2898 ± 0.0138 &  0.1223 ± 0.0067 &  31.1383 ± 1.1691 \\
+    UNet-INT8   &  0.3041 ± 0.0137 &  0.1283 ± 0.0066 &  \textbf{29.6849 ± 1.0138} \\
+    \midrule
+    SRUNet      &  0.3111 ± 0.0151 &  \textbf{0.1717 ± 0.0047} &  27.3738 ± 3.5705 \\
+    SRUNet-FP32 &  0.3111 ± 0.0151 &  \textbf{0.1717 ± 0.0047} &  27.3736 ± 3.5697 \\
+    SRUNet-FP16 &  0.3111 ± 0.0151 &  \textbf{0.1717 ± 0.0047} &  27.3790 ± 3.5739 \\
+    SRUNet-INT8 &  \textbf{0.3068 ± 0.0137} &  0.1722 ± 0.0044 &  \textbf{26.1546 ± 3.2273} \\
+    \bottomrule
+    \end{tabular}
+  }
+  \caption{Evaluations on perceptual metrics on 60 test frames (mean $\pm$ standard deviation).}
+  \label{tab:perceptual-metrics}
+\end{table}
+\end{frame}
+%---------------------------------------------------------------------------------------
+\begin{frame}{Quantitative Results: Traditional Metrics}
+\begin{table}[htb]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{llll}
+    \toprule
+    {} & SSIM $\uparrow$ & MS-SSIM $\uparrow$ & PSNR $\uparrow$ \\
+    \midrule
+    UNet        &  \textbf{0.8952 ± 0.0084} &  \textbf{0.8517 ± 0.0067} &  \textbf{21.6506 ± 0.1269} \\
+    UNet-FP32   &  \textbf{0.8952 ± 0.0084} &  \textbf{0.8517 ± 0.0067} &  \textbf{21.6506 ± 0.1269} \\
+    UNet-FP16   &  \textbf{0.8952 ± 0.0084} &  \textbf{0.8517 ± 0.0067} &  \textbf{21.6506 ± 0.1269} \\
+    UNet-INT8   &  0.8941 ± 0.0084 &  0.8508 ± 0.0067 &  21.6388 ± 0.1286 \\
+    \midrule
+    SRUNet      &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  21.3670 ± 0.1248 \\
+    SRUNet-FP32 &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  21.3670 ± 0.1248 \\
+    SRUNet-FP16 &  \textbf{0.8894 ± 0.0084} &  \textbf{0.8457 ± 0.0062} &  \textbf{21.3671 ± 0.1248} \\
+    SRUNet-INT8 &  0.8882 ± 0.0084 &  0.8442 ± 0.0062 &  21.3320 ± 0.1224 \\
+    \bottomrule
+    \end{tabular}
+  }
+  \caption{Evaluations on traditional metrics on 60 test frames (mean $\pm$ standard deviation).}
+  \label{tab:traditional-metrics}
+\end{table}
+\end{frame}
+%---------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------
+
+\begin{frame}{Quantitative Results: Evaluation Times}
+\begin{table}[htb]
+  \resizebox{0.75\linewidth}{!}{
+    \begin{tabular}{llr}
+    \toprule
+    {}          & times [s] $\downarrow$ & speedup $\uparrow$ \\
+    \midrule                                                  
+    UNet        &  0.0348 ± 0.0004          &  {} \\
+    UNet-FP32   &  0.0279 ± 0.0004          &  1.247X \\
+    UNet-FP16   &  0.0279 ± 0.0004          &  1.247X \\
+    UNet-INT8   &  \textbf{0.0146 ± 0.0006} &  \textbf{2.38X} \\
+    \midrule                                                   
+    SRUNet      &  0.0123 ± 0.0001          &  {} \\
+    SRUNet-FP32 &  0.0087 ± 0.0005          &  1.41X \\
+    SRUNet-FP16 &  0.0087 ± 0.0004          &  1.41X \\
+    SRUNet-INT8 &  \textbf{0.0054 ± 0.0006} &  \textbf{2.27X} \\
+    \bottomrule
+    \end{tabular}
+  }
+  \caption{Evaluation times over 300 runs (mean $\pm$ standard deviation).}
+  \label{tab:timings}
+\end{table}
+\end{frame}
+%---------------------------------------------------------------------------------------
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{Quantitative Results: Boxplots of Metrics}
+% \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_perceptual_metrics.jpg}
+% \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_traditional_metrics.jpg}
+% % \includegraphics[width=\textwidth]{../thesis/static/boxplots_timings.jpg}
+% % \begin{columns}
+% % \column{0.5\textwidth}
+% % \column{0.5\textwidth}
+% % \end{columns}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------
+% \begin{frame}{Quantitative Results: Boxplots of Timings}
+%   \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_timings.jpg}
+% \end{frame}
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{Inference Speed and Qualitative Results}
+\includegraphics[width=\textwidth]{../thesis/static/03_srunet_qualitative_results.png}
 \end{frame}
 %---------------------------------------------------------------------------------------
 
-% %---------------------------------------------------------------------------------------
 % \begin{frame}{Inference Speed and Qualitative Results}
 % \begin{columns}
 % \column{0.5\textwidth}
 % % \caption{Inference Speed}
 % % \column{0.5\textwidth}
-% \includegraphics[width=\textwidth]{../thesis/static/trees-qualitative-unet.jpg}
 % % \caption{Qualitative Results: Trees (UNet)}
+% \includegraphics[width=\textwidth]{../thesis/static/03_srunet_qualitative_results.png}
 % \end{columns}
 % \end{frame}
 % %---------------------------------------------------------------------------------------
@@ -207,7 +294,7 @@
   \item Investigated post-training quantization techniques for optimizing deep learning models in super-resolution
   \item Achieved up to 2.38X speedup and 63.3\% size reduction without compromising performance
   \item Utilized TensorRT for further efficiency improvement and GPU compatibility
-  \item Future research: pruning, weight sharing, model distillation, and exploring different quantization parameters
+  \item Future research: pruning, weight sharing, model distillation, and exploring different quantization techniques
   \item Aim to stimulate advancements in optimizing deep learning models for video quality improvement
 \end{itemize}
 \end{frame}
