@@ -87,39 +87,39 @@
 %---------------------------------------------------------------------------------------
 \begin{frame}{Introduction}
 \begin{itemize}
-  \item \textbf{Goal:} Improve video restoration with deep learning models
-  \item \textbf{Challenge:} Computational complexity of deep learning models
-  \item \textbf{Solution:} Apply quantization techniques for faster inference and reduced memory usage
+  \item Goal: Improve video restoration with deep learning models
+  \item Challenge: Computational complexity of deep learning models
+  \item Solution: Apply quantization techniques for faster inference and reduced memory usage
 \end{itemize}
 \medskip
 \begin{itemize}
-  \item \textbf{Focus:} Artefact removal and super-resolution tasks
-  \item \textbf{Method:} Post-training quantization using TensorRT
-  \item \textbf{Impact:} Enable practical deployment on resource-constrained devices
+  \item Focus: Artefact removal and super-resolution tasks
+  \item Method: Post-training quantization using TensorRT
+  \item Impact: Enable practical deployment on resource-constrained devices
 \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------
 \begin{frame}{Quality Metrics for Video Restoration}
 \begin{itemize}
-  \item \textbf{Traditional Metrics:}
+  \item Traditional Metrics:
   \begin{itemize}
     \item PSNR, MSE, SSIM, MS-SSIM
     \item Simple numerical comparisons
     \item May not correlate well with human perception
   \end{itemize}
-  \item \textbf{Perceptual Metrics:}
+  \item Perceptual Metrics:
   \begin{itemize}
     \item FID, LPIPS, LPIPS-Comp, E-LPIPS, DISTS, MOS, 2AFC, JND
     \item Evaluate image quality based on human perception
     \item More complex to compute, but better correlation with perception
   \end{itemize}
-  \item \textbf{No-Reference Metrics:}
+  \item No-Reference Metrics:
   \begin{itemize}
     \item BRISQUE, NIQE, PIQUE, CONTRIQUE
     \item Assess image quality without reference images
   \end{itemize}
-  \item \textbf{Video Quality Metrics:}
+  \item Video Quality Metrics:
   \begin{itemize}
     \item VMAF
     \item Takes into account temporal aspects of quality degradation
@@ -231,7 +231,7 @@
 %---------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------
 
-\begin{frame}{Quantitative Results: Evaluation Times}
+\begin{frame}{Quantitative Results: Inference Speed}
 \begin{table}[htb]
   \resizebox{0.75\linewidth}{!}{
     \begin{tabular}{llr}
@@ -271,10 +271,40 @@
 %   \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_timings.jpg}
 % \end{frame}
 
-%---------------------------------------------------------------------------------------
-\begin{frame}{Inference Speed and Qualitative Results}
-\includegraphics[width=\textwidth]{../thesis/static/03_srunet_qualitative_results.png}
+
+\begin{frame}{Qualitative Results}
+  \begin{figure}
+    \centering
+    \begin{subfigure}{0.18\textwidth}
+      \includegraphics[width=\linewidth]{static/trees_srunet.png}
+      \caption{Original Image (384x384)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.18\textwidth}
+      \includegraphics[width=\linewidth]{static/tress_bilinear_interpolation.png}
+      \caption{Compressed and Down-scaled (96x96)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.18\textwidth}
+      \includegraphics[width=\linewidth]{static/tress_bilinear_interpolation.png}
+      \caption{Up-scaled using Bilinear Interpolation (384x384)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.18\textwidth}
+      \includegraphics[width=\linewidth]{static/trees_srunet.png}
+      \caption{Up-scaled using SRUNet Model}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.18\textwidth}
+      \includegraphics[width=\linewidth]{static/trees_srunet_int8.png}
+      \caption{Up-scaled using SRUNet-INT8 Model}
+    \end{subfigure}
+  \end{figure}
 \end{frame}
+%---------------------------------------------------------------------------------------
+% \begin{frame}{Qualitative Results}
+% \includegraphics[width=\textwidth]{../thesis/static/03_srunet_qualitative_results.png}
+% \end{frame}
 %---------------------------------------------------------------------------------------
 
 % \begin{frame}{Inference Speed and Qualitative Results}
@@ -317,26 +347,26 @@
 \end{frame}
 %---------------------------------------------------------------------------------------
 
-%---------------------------------------------------------------------------------------
-% BIBLIOGRAPHY
-%---------------------------------------------------------------------------------------
-\begingroup
-\footnotesize
-\begin{frame}[noframenumbering]{References}
-\begin{thebibliography}{99}
-
-% \bibitem{bib:kocher}{Kocher, P.C., 1996, August. Timing attacks on implementations of Diffie-Hellman, RSA, DSS, and other systems. In Annual International Cryptology Conference (pp. 104-113). Springer, Berlin, Heidelberg.}
-% \bibitem{bib:openssl}{Brumley, D. and Boneh, D., 2005. Remote timing attacks are practical. Computer Networks, 48(5), pp.701-716.}
-% \bibitem{bib:boreale}{Boreale, M., 2003. Note per il corso di Sicurezza delle Reti.}
-% \bibitem{bib:montgomery}{Montgomery, P.L., 1985. Modular multiplication without trial division. Mathematics of computation, 44(170), pp.519-521.}
-% \bibitem{bib:sliding}{Menezes, A.J., Van Oorschot, P.C. and Vanstone, S.A., 2018. Handbook of applied cryptography. CRC press.}
-% \bibitem{bib:schindler}{Schindler, W., 2000, August. A timing attack against RSA with the chinese remainder theorem. In International Workshop on Cryptographic Hardware and Embedded Systems (pp. 109-124). Springer, Berlin, Heidelberg.}
-% \bibitem{bib:coppersmith}{Coppersmith, D., 1997. Small solutions to polynomial equations, and low exponent RSA vulnerabilities. Journal of cryptology, 10(4), pp.233-260.}
-
-\end{thebibliography}
-\end{frame}
-\endgroup
-%---------------------------------------------------------------------------------------
+% %---------------------------------------------------------------------------------------
+% % BIBLIOGRAPHY
+% %---------------------------------------------------------------------------------------
+% \begingroup
+% \footnotesize
+% \begin{frame}[noframenumbering]{References}
+% \begin{thebibliography}{99}
+% 
+% % \bibitem{bib:kocher}{Kocher, P.C., 1996, August. Timing attacks on implementations of Diffie-Hellman, RSA, DSS, and other systems. In Annual International Cryptology Conference (pp. 104-113). Springer, Berlin, Heidelberg.}
+% % \bibitem{bib:openssl}{Brumley, D. and Boneh, D., 2005. Remote timing attacks are practical. Computer Networks, 48(5), pp.701-716.}
+% % \bibitem{bib:boreale}{Boreale, M., 2003. Note per il corso di Sicurezza delle Reti.}
+% % \bibitem{bib:montgomery}{Montgomery, P.L., 1985. Modular multiplication without trial division. Mathematics of computation, 44(170), pp.519-521.}
+% % \bibitem{bib:sliding}{Menezes, A.J., Van Oorschot, P.C. and Vanstone, S.A., 2018. Handbook of applied cryptography. CRC press.}
+% % \bibitem{bib:schindler}{Schindler, W., 2000, August. A timing attack against RSA with the chinese remainder theorem. In International Workshop on Cryptographic Hardware and Embedded Systems (pp. 109-124). Springer, Berlin, Heidelberg.}
+% % \bibitem{bib:coppersmith}{Coppersmith, D., 1997. Small solutions to polynomial equations, and low exponent RSA vulnerabilities. Journal of cryptology, 10(4), pp.233-260.}
+% 
+% \end{thebibliography}
+% \end{frame}
+% \endgroup
+% %---------------------------------------------------------------------------------------
 
 \end{document}
 
