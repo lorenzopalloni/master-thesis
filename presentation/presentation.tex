@@ -23,8 +23,7 @@
 % \usepackage{setspace}
 \usepackage{tabularx}
 \usepackage{appendixnumberbeamer} % add \appendix
-\usepackage{caption}
-\usepackage{subcaption}
+\usepackage{tikz} % For arrow drawing
 
 % \usepackage{amsmath}
 % \usepackage{amssymb}
@@ -35,6 +34,17 @@
 
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Custom caption style
+\captionsetup{
+  font=small, % Small font size for captions
+  labelfont=bf, % Bold font for label (e.g., Figure 1:)
+  justification=centering, % Centered caption
+  singlelinecheck=false % Force centering, even for single-line captions
+}
 
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\modexp}{mod\_exp}
@@ -101,34 +111,40 @@
 \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
+
 %---------------------------------------------------------------------------------------
 \begin{frame}{Quality Metrics for Video Restoration}
 \begin{itemize}
   \item Traditional Metrics:
   \begin{itemize}
-    \item PSNR, MSE, SSIM, MS-SSIM
+%     \item PSNR, MSE, SSIM, MS-SSIM
     \item Simple numerical comparisons
     \item May not correlate well with human perception
+    {\scriptsize \item An example: PSNR (Peak-Signal-to-Noise-Ratio)}
   \end{itemize}
   \item Perceptual Metrics:
   \begin{itemize}
-    \item FID, LPIPS, LPIPS-Comp, E-LPIPS, DISTS, MOS, 2AFC, JND
+%     \item FID, LPIPS, LPIPS-Comp, E-LPIPS, DISTS, MOS, 2AFC, JND
     \item Evaluate image quality based on human perception
     \item More complex to compute, but better correlation with perception
+    {\scriptsize \item An example: LPIPS (Learned Perceptual Image Patch Similarity)}
   \end{itemize}
   \item No-Reference Metrics:
   \begin{itemize}
-    \item BRISQUE, NIQE, PIQUE, CONTRIQUE
+%     \item BRISQUE, NIQE, PIQUE, CONTRIQUE
     \item Assess image quality without reference images
+    {\scriptsize \item An example: BRISQUE (Blind/Referenceless Image Spatial Quality Evaluator)}
   \end{itemize}
   \item Video Quality Metrics:
   \begin{itemize}
-    \item VMAF
+%     \item VMAF
     \item Takes into account temporal aspects of quality degradation
+    {\scriptsize \item An example: VMAF (Video Multi-Method Assessment Fusion)}
   \end{itemize}
   \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
+
 %---------------------------------------------------------------------------------------
 \begin{frame}{Model Architectures}
 \begin{itemize}
@@ -137,10 +153,19 @@
   \item Training setup: Generative Adversarial Network (GAN) framework
   \item Generator loss: combination of LPIPS and SSIM metrics
 \end{itemize}
-\includegraphics[width=0.45\textwidth]{../thesis/static/unet_architecture.png}
-\includegraphics[width=0.45\textwidth]{../thesis/static/srunet_architecture.png}
+\begin{figure}
+\begin{columns}
+\column{0.5\linewidth}
+\includegraphics[width=0.9\textwidth]{../thesis/static/unet_architecture.png}
+\subcaption{UNet architecture}
+\column{0.5\linewidth}
+\includegraphics[width=0.9\textwidth]{../thesis/static/srunet_architecture.png}
+\subcaption{SRUNet architecture}
+\end{columns}
+\end{figure}
 \end{frame}
 %---------------------------------------------------------------------------------------
+
 %---------------------------------------------------------------------------------------
 \begin{frame}{Optimizations}
 \begin{itemize}
@@ -148,37 +173,65 @@
   \item Factors: architecture, loss functions, evaluation metrics, model weights, hyperparameters
   \item Regularization techniques: dropout and data augmentation
   \item Quantization: reduces memory footprint and computation requirements
-  \begin{itemize}
-    \item Uniform and non-uniform quantization
-    \item Fixed-point, integer, and hybrid quantization
-    \item Quantization-Aware Training (QAT) vs Post-Training Quantization (PTQ)
-  \end{itemize}
-  \item TensorRT: NVIDIA tool to speed up inference
-  \item Custom data-loading pipeline: efficient training without GPU bottlenecks
-\end{itemize}
-\end{frame}
-%---------------------------------------------------------------------------------------
-%---------------------------------------------------------------------------------------
-\begin{frame}{Experiments}
-\begin{itemize}
-  \item Performance comparison of UNet and SRUNet models.
-  \item TensorRT optimization with different precisions: FP32, FP16, and INT8.
-  \item Quantitative results: Perceptual and traditional metrics show minor differences between optimized and non-optimized models.
-  \item Speedup: Up to 2.38X for UNet and 2.27X for SRUNet using INT8 optimization.
-  \item Memory consumption reduced up to 63.3\% for UNet and 53.8\% for SRUNet.
+%   \begin{itemize}
+%     \item Uniform and non-uniform quantization
+%     \item Fixed-point, integer, and hybrid quantization
+%     \item Quantization-Aware Training (QAT) vs Post-Training Quantization (PTQ)
+%   \end{itemize}
 \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
 
+%---------------------------------------------------------------------------------------
+\begin{frame}{Generator Loss and Training Setup}
+\begin{itemize}
+  \item BVI-DVC Dataset:
+  \begin{itemize}
+    \item Designed for deep video compression tasks
+    \item Includes 200 frame sequences truncated at the 64\textsuperscript{th} frame
+%     \item Frame rates range from 25 to 120
+    \item Features various content types: natural scenes, man-made objects, cityscapes
+%     \item Down-scaled versions available: 1080p, 540p, and 270p
+%     \item Compressed with H.265 codec, Constant Rate Factor (CRF) of 23
+  \end{itemize}
+  \item Training setup:
+  \begin{itemize}
+    \item Models trained on frame patches of 96$\times$96 pixels randomly cropped
+    \item Model training required $\sim$72 hours on a single GPU NVIDIA Titan Xp
+    \item Custom data-loader: to speed up training reducing GPU bottlenecks
+  \end{itemize}
+\end{itemize}
+
+\centering
+\includegraphics[width=0.5\textwidth]{../thesis/static/BVI-DVC.jpg}
+\captionof{figure}{Some frame examples from the BVI-DVC dataset.}
+
+\end{frame}
+%---------------------------------------------------------------------------------------
+
 % %---------------------------------------------------------------------------------------
-% \begin{frame}{Experiments Overview}
+% \begin{frame}{Experiments}
 % \begin{itemize}
-% \item Comparison of UNet and SRUNet models with TensorRT-optimized versions (FP32, FP16, INT8)
-% \item Evaluation on 60 test frames using perceptual and traditional metrics
-% \item Analysis of inference speed and memory consumption
+%   \item Performance comparison of UNet and SRUNet models.
+%   \item TensorRT optimization with different precisions: FP32, FP16, and INT8.
+%   \item Quantitative results: Perceptual and traditional metrics show minor differences between optimized and non-optimized models.
+%   \item Speedup: Up to 2.38X for UNet and 2.27X for SRUNet using INT8 optimization.
+%   \item Memory consumption reduced up to 63.3\% for UNet and 53.8\% for SRUNet.
 % \end{itemize}
 % \end{frame}
 % %---------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{Experiments}
+\begin{itemize}
+  \item Post-Training Quantization (PTQ) implemented using TensorRT
+  \item Comparison of UNet and SRUNet models with TensorRT-optimized versions (FP32, FP16, INT8)
+  \item Evaluation on 60 test frames using perceptual and traditional metrics
+  \item Quantitative results: Perceptual and traditional metrics show minor differences between optimized and non-optimized models.
+  \item Analysis of inference speed and memory consumption
+\end{itemize}
+\end{frame}
+%---------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------
 \begin{frame}{Quantitative Results: Perceptual Metrics}
@@ -241,8 +294,8 @@
     {}          & times [s] $\downarrow$ & speedup $\uparrow$ \\
     \midrule                                                  
     UNet        &  0.0348 ± 0.0004          &  {} \\
-    UNet-FP32   &  0.0279 ± 0.0004          &  1.247X \\
-    UNet-FP16   &  0.0279 ± 0.0004          &  1.247X \\
+    UNet-FP32   &  0.0279 ± 0.0004          &  1.25X \\
+    UNet-FP16   &  0.0279 ± 0.0004          &  1.25X \\
     UNet-INT8   &  \textbf{0.0146 ± 0.0006} &  \textbf{2.38X} \\
     \midrule                                                   
     SRUNet      &  0.0123 ± 0.0001          &  {} \\
@@ -257,6 +310,7 @@
 \end{table}
 \end{frame}
 %---------------------------------------------------------------------------------------
+
 % %---------------------------------------------------------------------------------------
 % \begin{frame}{Quantitative Results: Boxplots of Metrics}
 % \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_perceptual_metrics.jpg}
@@ -268,41 +322,120 @@
 % % \end{columns}
 % \end{frame}
 % %---------------------------------------------------------------------------------------
+
 %---------------------------------------------------------------------------------------
 % \begin{frame}{Quantitative Results: Boxplots of Timings}
 %   \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_timings.jpg}
 % \end{frame}
 
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{Qualitative Results: Trees}
+%   % Top area
+% \begin{figure}
+%   \begin{columns}
+%     \column{0.33\textwidth}
+%       \includegraphics[width=0.6\linewidth]{static/trees_srunet.png}
+%       \subcaption{Original Image (384$\times$384)}
+%     \column{0.33\textwidth}
+%       \begin{tikzpicture}
+%         \draw[->, line width=2.0pt] (0,0) -- (3,0);
+%       \end{tikzpicture}
+%     \column{0.33\textwidth}
+%       \includegraphics[width=0.15\linewidth]{static/trees_compressed.png}
+%       \subcaption{Compressed and Down-scaled (96$\times$96)}
+%   \end{columns}
+% 
+%   \vspace{0.5cm} % Vertical space between top and bottom area
+% 
+%   % Bottom area
+%   \begin{columns}
+%     \column{0.33\textwidth}
+%       \includegraphics[width=0.6\linewidth]{static/trees_bilinear_interpolation.png}
+%       \subcaption{Up-scaled using Bilinear Interpolation (384$\times$384)}
+%     \column{0.33\textwidth}
+%       \includegraphics[width=0.6\linewidth]{static/trees_srunet.png}
+%       \subcaption{Up-scaled using SRUNet (384$\times$384)}
+%     \column{0.33\textwidth}
+%       \includegraphics[width=0.6\linewidth]{static/trees_srunet_int8.png}
+%       \subcaption{Up-scaled using SRUNet-INT8 (384$\times$384)}
+%   \end{columns}
+% 
+% \end{figure}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
 
-\begin{frame}{Qualitative Results}
-  \begin{figure}
-    \centering
-    \begin{subfigure}{0.18\textwidth}
-      \includegraphics[width=\linewidth]{static/trees_srunet.png}
-      \caption{Original Image (384x384)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.18\textwidth}
-      \includegraphics[width=\linewidth]{static/trees_bilinear_interpolation.png}
-      \caption{Compressed and Down-scaled (96x96)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.18\textwidth}
-      \includegraphics[width=\linewidth]{static/trees_bilinear_interpolation.png}
-      \caption{Up-scaled using Bilinear Interpolation (384x384)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.18\textwidth}
-      \includegraphics[width=\linewidth]{static/trees_srunet.png}
-      \caption{Up-scaled using SRUNet Model}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.18\textwidth}
-      \includegraphics[width=\linewidth]{static/trees_srunet_int8.png}
-      \caption{Up-scaled using SRUNet-INT8 Model}
-    \end{subfigure}
-  \end{figure}
+%---------------------------------------------------------------------------------------
+\begin{frame}{Qualitative Results: Buildings}
+  % Top area
+\begin{figure}
+  \begin{columns}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/buildings_srunet.png}
+      \subcaption{Original Image (384$\times$384)}
+    \column{0.33\textwidth}
+      \begin{tikzpicture}
+        \draw[->, line width=2.0pt] (0,0) -- (3,0);
+      \end{tikzpicture}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.15\linewidth]{static/buildings_compressed.png}
+      \subcaption{Compressed and Down-scaled (96$\times$96)}
+  \end{columns}
+
+  \vspace{0.5cm} % Vertical space between top and bottom area
+
+  % Bottom area
+  \begin{columns}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/buildings_bilinear_interpolation.png}
+      \subcaption{Up-scaled using Bilinear Interpolation (384$\times$384)}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/buildings_srunet.png}
+      \subcaption{Up-scaled using SRUNet (384$\times$384)}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/buildings_srunet_int8.png}
+      \subcaption{Up-scaled using SRUNet-INT8 (384$\times$384)}
+  \end{columns}
+
+\end{figure}
 \end{frame}
+%---------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{Qualitative Results: Crowd}
+  % Top area
+\begin{figure}
+  \begin{columns}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_srunet.png}
+      \subcaption{Original Image (384$\times$384)}
+    \column{0.33\textwidth}
+      \begin{tikzpicture}
+        \draw[->, line width=2.0pt] (0,0) -- (3,0);
+      \end{tikzpicture}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.15\linewidth]{static/crowd_compressed.png}
+      \subcaption{Compressed and Down-scaled (96$\times$96)}
+  \end{columns}
+
+  \vspace{0.5cm} % Vertical space between top and bottom area
+
+  % Bottom area
+  \begin{columns}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_bilinear_interpolation.png}
+      \subcaption{Up-scaled using Bilinear Interpolation (384$\times$384)}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_srunet.png}
+      \subcaption{Up-scaled using SRUNet (384$\times$384)}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_srunet_int8.png}
+      \subcaption{Up-scaled using SRUNet-INT8 (384$\times$384)}
+  \end{columns}
+
+\end{figure}
+\end{frame}
+%---------------------------------------------------------------------------------------
+
 %---------------------------------------------------------------------------------------
 % \begin{frame}{Qualitative Results}
 % \includegraphics[width=\textwidth]{../thesis/static/03_srunet_qualitative_results.png}
@@ -323,11 +456,11 @@
 %---------------------------------------------------------------------------------------
 \begin{frame}{Conclusions}
 \begin{itemize}
-  \item Investigated post-training quantization techniques for optimizing deep learning models in super-resolution
-  \item Achieved up to 2.38X speedup and 63.3\% size reduction without compromising performance
-  \item Utilized TensorRT for further efficiency improvement and GPU compatibility
-  \item Future research: pruning, weight sharing, model distillation, and exploring different quantization techniques
   \item Aim to stimulate advancements in optimizing deep learning models for video quality improvement
+  \item Investigated post-training quantization techniques for optimizing deep learning models in super-resolution
+  \item Utilized TensorRT for further efficiency improvement and GPU compatibility
+  \item Achieved up to 2.38X speedup and 63.3\% size reduction without compromising performance
+  \item Future research: pruning, weight sharing, model distillation, and exploring different quantization techniques
 \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
@@ -335,16 +468,26 @@
 %---------------------------------------------------------------------------------------
 % DO-YOU-HAVE-ANY-QUESTIONS
 %---------------------------------------------------------------------------------------
-\begin{frame}[c,noframenumbering]
+\begin{frame}  % [c,noframenumbering]
 
-  {\Huge \emph{Thanks for your attention!}}
+{\Huge \emph{Thank you, for your attention!}}
 
-  \begin{itemize}
-    \item[]
-    \item[]
-  \end{itemize}
+\begin{itemize}
+  \item[]
+  \item[]
+\end{itemize}
 
-  \LARGE Do you have any questions?
+\LARGE Do you have any questions?
+
+\begin{itemize}
+  \item[]
+\end{itemize}
+
+\begin{columns}
+\column{0.5\textwidth}
+\column{0.5\textwidth}
+\includegraphics[width=\linewidth]{../thesis/static/logo/LOGO}\\
+\end{columns}
 
 \end{frame}
 %---------------------------------------------------------------------------------------
@@ -369,6 +512,50 @@
 % \end{frame}
 % \endgroup
 % %---------------------------------------------------------------------------------------
+
+% %---------------------------------------------------------------------------------------
+% % APPENDIX
+% %---------------------------------------------------------------------------------------
+% \appendix
+% \begin{frame}[c,noframenumbering]
+% 
+%   \Huge Appendix
+% 
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{UNet vs SRUNet}
+% \begin{itemize}
+%   \item UNet: Encoder-decoder architecture with skip connections for biomedical image segmentation
+%   \item SRUNet: Adaptation of UNet for super-resolution and compression artefact removal
+%   \item Main differences:
+%   \begin{itemize}
+%     \item Decrease in number of filters in each convolutional layer
+%     \item Use of residual layer as the final layer
+%   \end{itemize}
+% \end{itemize}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{LPIPS: Learned Perceptual Image Patch Similarity}
+% \begin{itemize}
+%   \item Perceptual similarity metric
+% %   \item Developed by Zhang et al. \cite{zhang2018unreasonable}
+%   \item Measures distance between two images in terms of their perceptual features
+%   \item Utilizes deep neural networks to extract features
+%   \item Highly correlated with human judgments of image similarity
+%   \item Used as a part of the content loss in the GAN training setup
+% \end{itemize}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{BRISQUE: Blind/Referenceless Image Spatial Quality Evaluator}
+% \begin{itemize}
+%   \item No-reference image quality assessment metric
+%   \item Developed by Mittal et al. \cite{mittal2012no}
+%   \item Evaluates image quality based on natural scene statistics
+%   \item Does not require a reference image for comparison
+%   \item Measures image quality by capturing spatial distortions
+%   \item Useful for evaluating the quality of super-resolved images
+% \end{itemize}
+% \end{frame}
 
 \end{document}
 

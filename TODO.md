@@ -1,6 +1,29 @@
 # TODO List
 
 
+- [intro] visual representation of video restoration task
+- [metrics] only one example for each category
+- [optimizations] highlight PTQ
+- [experiments] using TensorRT that implements PTQ - remove TensorRT from the optimizations slide
+- [experiments] include dataset description and training 
+- [appendix] include VMAF table results
+- [appendix] include descriptions of metrics
+
+slide 3: io mi concentrerei sulle metriche che usi nello specifico, così fa un po' effetto lista della spesa. In generale nella presentazione ha senso concentrarsi sul tuo contributo innovitativo e lasciare perdere le info di background tranne quelle strettamente necessarie.
+
+s4: qui forse ogni modello meriterebbe una slide con figura a parte, in particolare le GAN se uno non le conosce può valere la pena spiegarle meglio.
+
+s5: questa slide contiene tanto cose diverse, non mi è molto chiaro il messaggio che vuoi trasmettere. Forse meglio spezzarla in due slides, una dove descrivi le tecninche di quantization che usi nella tesi e un'altra le ottimizzazioni a livello di computazione (amesso che tu voglia includerle, forse nella presentazione meglio risaltare la parte scientifica e lasciare perdere i dettagli più ingegneristici).
+
+s6: sugli esperimenti, prima ci vorrebbe una slide che illustri le domande sperimentali che ti poni, spiegando perchè ha senso chiedersi quelle domande. Poi fai vedere una risultato per ogni domanda che ti sei posto e poi fai una slide di summary dove riassumi i punti principali. Questa slide richia di mettere un po' tanta carne al fuoco tutta in una volta.
+
+s7-8-9: se possibile io metterei i plot invece che le tabelle, sono più intuitivi da comprendere per un commissione che in 10 minuti deve capire quello che hai fatto. E' normale che ci siano tanti risultati uguali sulle righe? E' un po' strano, preparati una spiegazione per questa cosa a voce :)
+
+s10-11-12: personalmente toglierei la slide con gli alberi, le immagini sono scure e non si capisce molto. Forse meglio tenere solo una slide tra gli edifici e le persone, o metterle tutte nella stessa slide, alla fine entrambe le slides dicono la stessa cosa.
+
+s14: Thank you è meglio di thanks, più formale. Metti logo UNIFI alla fine.
+
+
 ## high priority
 
 - explain better metrics
