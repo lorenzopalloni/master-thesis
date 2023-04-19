@@ -118,27 +118,27 @@
   \item Traditional Metrics:
   \begin{itemize}
 %     \item PSNR, MSE, SSIM, MS-SSIM
-    \item Simple numerical comparisons
-    \item May not correlate well with human perception
+    \item Evaluate image quality based on numerical comparisons
+%     \item May not correlate well with human perception
     {\scriptsize \item An example: PSNR (Peak-Signal-to-Noise-Ratio)}
   \end{itemize}
   \item Perceptual Metrics:
   \begin{itemize}
 %     \item FID, LPIPS, LPIPS-Comp, E-LPIPS, DISTS, MOS, 2AFC, JND
     \item Evaluate image quality based on human perception
-    \item More complex to compute, but better correlation with perception
+%     \item More complex to compute, but better correlation with perception
     {\scriptsize \item An example: LPIPS (Learned Perceptual Image Patch Similarity)}
   \end{itemize}
   \item No-Reference Metrics:
   \begin{itemize}
 %     \item BRISQUE, NIQE, PIQUE, CONTRIQUE
-    \item Assess image quality without reference images
+    \item Evaluate image quality without reference images
     {\scriptsize \item An example: BRISQUE (Blind/Referenceless Image Spatial Quality Evaluator)}
   \end{itemize}
   \item Video Quality Metrics:
   \begin{itemize}
 %     \item VMAF
-    \item Takes into account temporal aspects of quality degradation
+    \item Take into account temporal aspects of quality degradation
     {\scriptsize \item An example: VMAF (Video Multi-Method Assessment Fusion)}
   \end{itemize}
   \end{itemize}
@@ -167,30 +167,57 @@
 %---------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------
-\begin{frame}{Optimizations}
-\begin{itemize}
-  \item Enhancing deep learning models for super-resolution and visual artefact removal
-  \item Factors: architecture, loss functions, evaluation metrics, model weights, hyperparameters
-  \item Regularization techniques: dropout and data augmentation
-  \item Quantization: reduces memory footprint and computation requirements
-%   \begin{itemize}
-%     \item Uniform and non-uniform quantization
-%     \item Fixed-point, integer, and hybrid quantization
-%     \item Quantization-Aware Training (QAT) vs Post-Training Quantization (PTQ)
-%   \end{itemize}
-\end{itemize}
+\begin{frame}{Quantization}
+  \begin{itemize}
+    \item Quantization in deep learning: process of reducing the precision of weights and activations of a neural network
+%     \item Goal: reduce memory footprint, computational requirements, and energy consumption
+%     \item A popular choice for a quantization function is as follows:
+%     \begin{itemize}
+%       \item Quantized value: $Q(x) = \lfloor \frac{x - x_\mathrm{min}}{S} \rfloor$
+%       \item Dequantized value: $x_{dequantized} = Q(x) \cdot S + x_\mathrm{min}$
+%       \item $S$: scale factor, $x_\mathrm{min}$: minimum value
+%     \end{itemize}
+    \item Two main approaches to quantize a deep learning model:
+    \begin{itemize}
+      \item Quantization-Aware Training (QAT)
+      \begin{itemize}
+        \item Quantization incorporated during training
+        \item Model learns to be more robust to quantization effects
+      \end{itemize}
+      \item Post-Training Quantization (PTQ)
+      \begin{itemize}
+        \item Quantization applied after training the model
+        \item Model accuracy may be affected
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
 
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{Optimizations}
+% \begin{itemize}
+%   \item Enhancing deep learning models for super-resolution and visual artefact removal
+%   \item Factors: architecture, loss functions, evaluation metrics, regularization techniques
+%   \item Quantization: reduces memory footprint and computation requirements
+% %   \begin{itemize}
+% %     \item Uniform and non-uniform quantization
+% %     \item Fixed-point, integer, and hybrid quantization
+% %     \item Quantization-Aware Training (QAT) vs Post-Training Quantization (PTQ)
+% %   \end{itemize}
+% \end{itemize}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+
 %---------------------------------------------------------------------------------------
-\begin{frame}{Generator Loss and Training Setup}
+\begin{frame}{Dataset and Training Setup}
 \begin{itemize}
-  \item BVI-DVC Dataset:
+  \item BVI-DVC dataset:
   \begin{itemize}
     \item Designed for deep video compression tasks
     \item Includes 200 frame sequences truncated at the 64\textsuperscript{th} frame
 %     \item Frame rates range from 25 to 120
-    \item Features various content types: natural scenes, man-made objects, cityscapes
+    \item Various content types: natural scenes, man-made objects, cityscapes
 %     \item Down-scaled versions available: 1080p, 540p, and 270p
 %     \item Compressed with H.265 codec, Constant Rate Factor (CRF) of 23
   \end{itemize}

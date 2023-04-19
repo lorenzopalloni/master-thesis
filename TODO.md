@@ -2,10 +2,6 @@
 
 
 - [intro] visual representation of video restoration task
-- [metrics] only one example for each category
-- [optimizations] highlight PTQ
-- [experiments] using TensorRT that implements PTQ - remove TensorRT from the optimizations slide
-- [experiments] include dataset description and training 
 - [appendix] include VMAF table results
 - [appendix] include descriptions of metrics
 
@@ -122,4 +118,8 @@ s14: Thank you è meglio di thanks, più formale. Metti logo UNIFI alla fine.
 - DONE - [experiments] - enhance comments on qualitative results
 - DONE - [acknowledgement] write acknowledgement
 - DONE - ask how long will you have for your thesis dissertation (20 mins including any questions)
+- DONE - [metrics] only one example for each category
+- DONE - [optimizations] highlight PTQ
+- DONE - [experiments] using TensorRT that implements PTQ - remove TensorRT from the optimizations slide
+- DONE - [experiments] include dataset description and training 
 
