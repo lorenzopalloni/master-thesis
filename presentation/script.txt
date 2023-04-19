@@ -1,0 +1,25 @@
+Buon pomeriggio, mi chiamo Lorenzo Palloni e oggi presenterò la mia tesi
+magistrale dal titolo "Tecniche di ottimizzazione per modelli di reti
+neurali per il miglioramento della qualità visuale".
+
+# Introduction
+Questa tesi ruota attorno al problema del restauro di video
+
+# Quality Metrics for Video Restoration
+Esiste una letteratura molto vasta per quanto riguarda la valutazione della qualità del restauro di un video.
+La maggior parte degli approcci si basano sul confrontare un'immagine detta di referenza o di alta qualità, con la sua versione deteriorata.
+Valutare oggettivamente la qualità di un'immagine è in generale un problema difficile
+
+# Model Architectures
+M
+
+# Quantization
+# Dataset and Training Setup
+# Experiments
+# Quantitative Results: Perceptual Metrics
+# Quantitative Results: Traditional Metrics
+# Quantitative Results: Inference Speed
+# Qualitative Results: Buildings
+# Qualitative Results: Crowd
+# Conclusions
+

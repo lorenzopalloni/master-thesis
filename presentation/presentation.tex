@@ -120,7 +120,7 @@
 %     \item PSNR, MSE, SSIM, MS-SSIM
     \item Evaluate image quality based on numerical comparisons
 %     \item May not correlate well with human perception
-    {\scriptsize \item An example: PSNR (Peak-Signal-to-Noise-Ratio)}
+    {\scriptsize \item An example: SSIM (Structural Similarity)}
   \end{itemize}
   \item Perceptual Metrics:
   \begin{itemize}
@@ -540,49 +540,81 @@
 % \endgroup
 % %---------------------------------------------------------------------------------------
 
-% %---------------------------------------------------------------------------------------
-% % APPENDIX
-% %---------------------------------------------------------------------------------------
-% \appendix
-% \begin{frame}[c,noframenumbering]
-% 
-%   \Huge Appendix
-% 
-% \end{frame}
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{UNet vs SRUNet}
-% \begin{itemize}
-%   \item UNet: Encoder-decoder architecture with skip connections for biomedical image segmentation
-%   \item SRUNet: Adaptation of UNet for super-resolution and compression artefact removal
-%   \item Main differences:
-%   \begin{itemize}
-%     \item Decrease in number of filters in each convolutional layer
-%     \item Use of residual layer as the final layer
-%   \end{itemize}
-% \end{itemize}
-% \end{frame}
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{LPIPS: Learned Perceptual Image Patch Similarity}
-% \begin{itemize}
-%   \item Perceptual similarity metric
-% %   \item Developed by Zhang et al. \cite{zhang2018unreasonable}
-%   \item Measures distance between two images in terms of their perceptual features
-%   \item Utilizes deep neural networks to extract features
-%   \item Highly correlated with human judgments of image similarity
-%   \item Used as a part of the content loss in the GAN training setup
-% \end{itemize}
-% \end{frame}
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{BRISQUE: Blind/Referenceless Image Spatial Quality Evaluator}
-% \begin{itemize}
-%   \item No-reference image quality assessment metric
+%---------------------------------------------------------------------------------------
+% APPENDIX
+%---------------------------------------------------------------------------------------
+\appendix
+\begin{frame}[c,noframenumbering]
+
+  \Huge Appendix
+
+\end{frame}
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{Quantitative Results: VMAF}
+\begin{table}[htb]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{llll}
+    \toprule
+    {} &       VMAF (mean) $\uparrow$ &  VMAF (harmonic mean) $\uparrow$ \\
+    \midrule
+    UNet        &  47.71 &      47.20 \\
+    UNet-FP32   &  \textbf{47.72} &      \textbf{47.21} \\
+    UNet-FP16   &  47.71 &      47.20 \\
+    UNet-INT8   &  47.47 &      46.96 \\
+    \midrule
+    SRUNet      &  \textbf{47.20} &      \textbf{46.65} \\
+    SRUNet-FP32 &  47.19 &      46.64 \\
+    SRUNet-FP16 &  47.19 &      \textbf{46.65} \\
+    SRUNet-INT8 &  47.18 &      46.64 \\
+    \bottomrule
+    \end{tabular}
+  }
+  \caption{VMAF scores on a 120-second-test video.}
+  \label{tab:vmaf}
+\end{table}
+\end{frame}
+%---------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{UNet vs SRUNet}
+\begin{itemize}
+  \item UNet: Encoder-decoder architecture with skip connections for biomedical image segmentation
+  \item SRUNet: Adaptation of UNet for super-resolution and compression artefact removal
+  \item Main differences:
+  \begin{itemize}
+    \item Decrease in number of filters in each convolutional layer
+    \item Use of residual layer as the final layer
+  \end{itemize}
+\end{itemize}
+\end{frame}
+%---------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{LPIPS: Learned Perceptual Image Patch Similarity}
+\begin{itemize}
+  \item Perceptual similarity metric
+  \item Measures distance between two images in terms of their perceptual features
+  \item Utilizes deep neural networks to extract features
+  \item Highly correlated with human judgments of image similarity
+  \item Used as a part of the content loss in the GAN training setup
+\end{itemize}
+\end{frame}
+%---------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------
+\begin{frame}{BRISQUE: Blind/Referenceless Image Spatial Quality Evaluator}
+\begin{itemize}
+  \item No-reference image quality assessment metric
 %   \item Developed by Mittal et al. \cite{mittal2012no}
-%   \item Evaluates image quality based on natural scene statistics
-%   \item Does not require a reference image for comparison
-%   \item Measures image quality by capturing spatial distortions
-%   \item Useful for evaluating the quality of super-resolved images
-% \end{itemize}
-% \end{frame}
+  \item Evaluates image quality based on natural scene statistics
+  \item Does not require a reference image for comparison
+  \item Measures image quality by capturing spatial distortions
+  \item Useful for evaluating the quality of super-resolved images
+\end{itemize}
+\end{frame}
+%---------------------------------------------------------------------------------------
 
 \end{document}
 
