@@ -1,8 +1,20 @@
 Buon pomeriggio, mi chiamo Lorenzo Palloni e oggi presenterò la mia tesi
-magistrale dal titolo "Tecniche di ottimizzazione per modelli di reti
-neurali per il miglioramento della qualità visuale".
+magistrale dal titolo "Tecniche di ottimizzazione di reti neurali per il
+miglioramento della qualità visuale".
 
 # Introduction
+Questa tesi ruota attorno al problema del restauro video.
+Cosa si intende per restauro video? Intanto, possiamo suddividere il problema
+video concentrandosi sul problema più semplice di restauro immagini.
+
+Compressione e riduzione della risoluzione sono due approcci per rendere più
+efficiente la trasmissione di immagini e quindi di video, in servizi come
+ad esempio lo streaming di Netflix.
+Una volta compresse, le immagini devono essere decompresse e questo porta
+alla creazione di artefatti, mentre l'aumento della risoluzione, porta con se
+
+
+
 Questa tesi ruota attorno al problema del restauro di video
 
 # Quality Metrics for Video Restoration
