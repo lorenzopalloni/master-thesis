@@ -1,37 +1,107 @@
-Buon pomeriggio, mi chiamo Lorenzo Palloni e oggi presenterò la mia tesi
-magistrale dal titolo "Tecniche di ottimizzazione di reti neurali per il
-miglioramento della qualità visuale".
+Buon pomeriggio a tutti, mi chiamo Lorenzo Palloni e oggi presenterò la mia
+tesi magistrale dal titolo Tecniche di Ottimizzazione di reti neurali per il
+miglioramento della qualità visuale.
 
-# Introduction
-Questa tesi ruota attorno al problema del restauro video.
-Cosa si intende per restauro video? Intanto, possiamo suddividere il problema
-video concentrandosi sul problema più semplice di restauro immagini.
+L'obiettivo principale di questa tesi è rispondere alla seguente domanda:
+è possibile mantenere le prestazioni di modelli allo stato dell'arte per
+rimuovere artefatti da compressione e difetti dovuti alla riduzione della
+dimensione di un immagine e allo stesso tempo velocizzarne i processi e
+magari ridurne la capacità in termini di memoria?
 
-Compressione e riduzione della risoluzione sono due approcci per rendere più
-efficiente la trasmissione di immagini e quindi di video, in servizi come
-ad esempio lo streaming di Netflix.
-Una volta compresse, le immagini devono essere decompresse e questo porta
-alla creazione di artefatti, mentre l'aumento della risoluzione, porta con se
+Video restoration è un problema che si occupa di restaurare video e quindi
+immagini deteriorate. Come possiamo vedere nella slide, immagine a,
+rappresenta un'immagine ad alta risoluzione, l'immagine b risulta
+deteriorata magari perchè per trasmetterla per esempio su whatsapp è stata
+compressa e dopo essere stata decompressa si può perdere qualità
+nell'immagine ricostruita. Con la super-risoluzione si cerca di ottenere
+l'immagine sulla destra, immagine c, ovvero una ricostruzione che sia
+la più accurata possibile a quella originale.
 
+Modelli allo stato dell'arte che approcciano questo tipo di problema hanno
+un'elevata richiesta di computazione e spazio di memoria. In questa tesi
+cerchiamo di migliorare questi aspetti con l'uso di TensorRT, un tool
+sviluppato da NVIDIA che compila il nostro modello e permette anche di
+diminuire i bit per rappresentare i pesi e le attivazioni della rete.
 
+Per misurare la qualità di un immagine esiste una vasta letteratura che
+cerca di costruire metriche che valutino il più vicino possible al giudizio
+umano la qualità di un immagine. Uno degli obiettivi nel costruire queste
+metriche è di trovare metodi matematici adeguati all'addestramento di
+modelli machine learning in grado di penalizzare una cattiva ricostruzione
+in modo adeguato al problema.
 
-Questa tesi ruota attorno al problema del restauro di video
+Si parla di metriche tradizionali, nelle quali vengono messe a confronto
+statistiche e semplici operazioni applicate all'immagine originale e a quella
+rigenerata, percettive che sono più complesse da calcolare e negli ultimi
+anni utilizzano reti neurali pretrainate e fine-tunate per aderire al meglio
+al giudizio umano. Poi abbiamo le metriche che non utilizzano un'immagine
+di referenza, e le metriche come per esempio la VMAF che tiene conto anche
+dell'aspetto temporale.
 
-# Quality Metrics for Video Restoration
-Esiste una letteratura molto vasta per quanto riguarda la valutazione della qualità del restauro di un video.
-La maggior parte degli approcci si basano sul confrontare un'immagine detta di referenza o di alta qualità, con la sua versione deteriorata.
-Valutare oggettivamente la qualità di un'immagine è in generale un problema difficile
+I modelli per la super-risoluzione utilizzati sono stati addestrati in un
+framework GAN, usando come generatore una UNet oppure una SRUNet e come
+discriminatore un CNN. La loss del generatore è una combinazione di LPIPS,
+una metrica percettiva e SSIM, una metrica tradizionale.
 
-# Model Architectures
-M
+La quantizzazione consiste nella riduzione in precisione dei pesi e delle
+attivazioni di una rete neurale cercando di mantenerne l'efficienza
 
-# Quantization
-# Dataset and Training Setup
-# Experiments
-# Quantitative Results: Perceptual Metrics
-# Quantitative Results: Traditional Metrics
-# Quantitative Results: Inference Speed
-# Qualitative Results: Buildings
-# Qualitative Results: Crowd
-# Conclusions
+Esistono tantissimi approcci alla quantizzazione, due fra questi sono
+la post-training quantization, e la training-aware quantization. Nella prima
+non c'è bisogno di retrainare il modello, al più viene effettuata una
+calibrazione con qualche iterazione utilizzando qualche batch di train,
+mentre la seconda fa un train from scratch della rete.
+In questa tesi utilizziamo post-training quantization implementata con
+il tool NVIDIA TensorRT.
+
+Il dataset utilizzato è un dataset pensato per il mondo della compressione
+video, con centinaia di video in vari contesti.
+
+Qua ci sono dei dettagli sul training, come per esempio che ognuno dei due
+modelli è stato addestrato per circa 3 giorni su una GPU NVIDIA Titan Xp
+e che per evitare colli di bottiglia nel servire patch di immagini alla
+scheda grafica ho implementato un data-loader custom
+
+Gli esperimenti sono stati effettuati compilando i due modelli UNet e SRUNet
+con TensorRT in FP32, FP16 e INT8, testandoli in termini di metriche
+percettive e tradizionali, su 60 frame di video test che le due reti non
+hanno mai incontrato durante il training.
+
+I risultati in tabella mostrano che le variazioni fra le varie versioni
+compilate e non dei modelli variano appena l'una dall'altra in maniera
+statisticamente robusta.
+Lo stesso vale per le metriche tradizionali.
+
+Qua invece abbiamo forse il risultato più interessante: il modello compilato
+INT8 mostra una velocità quasi 2 volte e mezzo superiore al modello originale
+
+Per quanto riguarda i risultati qualitativi dalle slide si vede probabilmente
+poco, però rispetto a metodi standard come l'interpolazione bilineare
+le reti migliorano non poco la risoluzione delle immagini rigenerate in
+concordanza con i numeri visti nelle tabelle precedent
+I risultati in tabella mostrano che le variazioni fra le varie versioni
+compilate e non dei modelli variano appena l'una dall'altra in maniera
+statisticamente robusta.
+Lo stesso vale per le metriche tradizionali.
+
+Qua invece abbiamo forse il risultato più interessante: il modello compilato
+INT8 mostra una velocità quasi 2 volte e mezzo superiore al modello originale
+
+Per quanto riguarda i risultati qualitativi dalle slide si vede probabilmente
+poco, però rispetto a metodi standard come l'interpolazione bilineare
+le reti migliorano non poco la risoluzione delle immagini rigenerate in
+concordanza con i numeri visti nelle tabelle precedenti.
+
+In conclusione, siamo riusciti a dimostrate, almeno in questo caso, che è
+possibile velocizzare modelli allo stato dell'arte per la super-risoluzione
+mantenendo la qualità delle immagini rigenerate, raggiungendo uno speedup
+di quasi 2 volte e mezzo e una riduzione della memoria occupata fino al 63%.
+
+La ricerca in questo ambito sta spaziando enormemente ed ovviamente c'è
+spazio per esplorare altri metodi come il pruning, weight sharing, 
+teacher-student, model distillation, e altre tecniche di quantizzazione
+oltre a quella implementata in questa ricerca.
+
+Vi ringrazio per la vostra attenzione. Se ci sono domande, sarò felice di
+rispondere!
 
