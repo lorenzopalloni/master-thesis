@@ -98,6 +98,29 @@
 
 %---------------------------------------------------------------------------------------
 \begin{frame}{Introduction}
+
+\begin{figure}
+  \begin{columns}
+    \column{0.20\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_original.png}
+      \subcaption{Original Image}
+    \column{0.15\textwidth}
+      \begin{tikzpicture}
+        \draw[->, line width=2.0pt] (0,0) -- (1,0);
+      \end{tikzpicture}
+    \column{0.20\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_compressed_blurred.png}
+      \subcaption{Low-resolution Image}
+    \column{0.15\textwidth}
+      \begin{tikzpicture}
+        \draw[->, line width=2.0pt] (0,0) -- (1,0);
+      \end{tikzpicture}
+    \column{0.20\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/crowd_srunet_int8.png}
+      \subcaption{Super-resoluted Image}
+  \end{columns}
+\end{figure}
+
 \begin{itemize}
   \item Goal: Improve video restoration with deep learning models
   \item Challenge: Computational complexity of deep learning models
@@ -355,42 +378,6 @@
 %   \includegraphics[width=1.0\textwidth]{../thesis/static/boxplots_timings.jpg}
 % \end{frame}
 
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{Qualitative Results: Trees}
-%   % Top area
-% \begin{figure}
-%   \begin{columns}
-%     \column{0.33\textwidth}
-%       \includegraphics[width=0.6\linewidth]{static/trees_srunet.png}
-%       \subcaption{Original Image (384$\times$384)}
-%     \column{0.33\textwidth}
-%       \begin{tikzpicture}
-%         \draw[->, line width=2.0pt] (0,0) -- (3,0);
-%       \end{tikzpicture}
-%     \column{0.33\textwidth}
-%       \includegraphics[width=0.15\linewidth]{static/trees_compressed.png}
-%       \subcaption{Compressed and Down-scaled (96$\times$96)}
-%   \end{columns}
-% 
-%   \vspace{0.5cm} % Vertical space between top and bottom area
-% 
-%   % Bottom area
-%   \begin{columns}
-%     \column{0.33\textwidth}
-%       \includegraphics[width=0.6\linewidth]{static/trees_bilinear_interpolation.png}
-%       \subcaption{Up-scaled using Bilinear Interpolation (384$\times$384)}
-%     \column{0.33\textwidth}
-%       \includegraphics[width=0.6\linewidth]{static/trees_srunet.png}
-%       \subcaption{Up-scaled using SRUNet (384$\times$384)}
-%     \column{0.33\textwidth}
-%       \includegraphics[width=0.6\linewidth]{static/trees_srunet_int8.png}
-%       \subcaption{Up-scaled using SRUNet-INT8 (384$\times$384)}
-%   \end{columns}
-% 
-% \end{figure}
-% \end{frame}
-% %---------------------------------------------------------------------------------------
-
 %---------------------------------------------------------------------------------------
 \begin{frame}{Qualitative Results: Buildings}
   % Top area
@@ -578,43 +565,79 @@
 %---------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------
-\begin{frame}{UNet vs SRUNet}
-\begin{itemize}
-  \item UNet: Encoder-decoder architecture with skip connections for biomedical image segmentation
-  \item SRUNet: Adaptation of UNet for super-resolution and compression artefact removal
-  \item Main differences:
-  \begin{itemize}
-    \item Decrease in number of filters in each convolutional layer
-    \item Use of residual layer as the final layer
-  \end{itemize}
-\end{itemize}
+\begin{frame}{Qualitative Results: Trees}
+  % Top area
+\begin{figure}
+  \begin{columns}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/trees_srunet.png}
+      \subcaption{Original Image (384$\times$384)}
+    \column{0.33\textwidth}
+      \begin{tikzpicture}
+        \draw[->, line width=2.0pt] (0,0) -- (3,0);
+      \end{tikzpicture}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.15\linewidth]{static/trees_compressed.png}
+      \subcaption{Compressed and Down-scaled (96$\times$96)}
+  \end{columns}
+
+  \vspace{0.5cm} % Vertical space between top and bottom area
+
+  % Bottom area
+  \begin{columns}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/trees_bilinear_interpolation.png}
+      \subcaption{Up-scaled using Bilinear Interpolation (384$\times$384)}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/trees_srunet.png}
+      \subcaption{Up-scaled using SRUNet (384$\times$384)}
+    \column{0.33\textwidth}
+      \includegraphics[width=0.6\linewidth]{static/trees_srunet_int8.png}
+      \subcaption{Up-scaled using SRUNet-INT8 (384$\times$384)}
+  \end{columns}
+
+\end{figure}
 \end{frame}
 %---------------------------------------------------------------------------------------
 
-%---------------------------------------------------------------------------------------
-\begin{frame}{LPIPS: Learned Perceptual Image Patch Similarity}
-\begin{itemize}
-  \item Perceptual similarity metric
-  \item Measures distance between two images in terms of their perceptual features
-  \item Utilizes deep neural networks to extract features
-  \item Highly correlated with human judgments of image similarity
-  \item Used as a part of the content loss in the GAN training setup
-\end{itemize}
-\end{frame}
-%---------------------------------------------------------------------------------------
-
-%---------------------------------------------------------------------------------------
-\begin{frame}{BRISQUE: Blind/Referenceless Image Spatial Quality Evaluator}
-\begin{itemize}
-  \item No-reference image quality assessment metric
-%   \item Developed by Mittal et al. \cite{mittal2012no}
-  \item Evaluates image quality based on natural scene statistics
-  \item Does not require a reference image for comparison
-  \item Measures image quality by capturing spatial distortions
-  \item Useful for evaluating the quality of super-resolved images
-\end{itemize}
-\end{frame}
-%---------------------------------------------------------------------------------------
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{UNet vs SRUNet}
+% \begin{itemize}
+%   \item UNet: Encoder-decoder architecture with skip connections for biomedical image segmentation
+%   \item SRUNet: Adaptation of UNet for super-resolution and compression artefact removal
+%   \item Main differences:
+%   \begin{itemize}
+%     \item Decrease in number of filters in each convolutional layer
+%     \item Use of residual layer as the final layer
+%   \end{itemize}
+% \end{itemize}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+% 
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{LPIPS: Learned Perceptual Image Patch Similarity}
+% \begin{itemize}
+%   \item Perceptual similarity metric
+%   \item Measures distance between two images in terms of their perceptual features
+%   \item Utilizes deep neural networks to extract features
+%   \item Highly correlated with human judgments of image similarity
+%   \item Used as a part of the content loss in the GAN training setup
+% \end{itemize}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
+% 
+% %---------------------------------------------------------------------------------------
+% \begin{frame}{BRISQUE: Blind/Referenceless Image Spatial Quality Evaluator}
+% \begin{itemize}
+%   \item No-reference image quality assessment metric
+% %   \item Developed by Mittal et al. \cite{mittal2012no}
+%   \item Evaluates image quality based on natural scene statistics
+%   \item Does not require a reference image for comparison
+%   \item Measures image quality by capturing spatial distortions
+%   \item Useful for evaluating the quality of super-resolved images
+% \end{itemize}
+% \end{frame}
+% %---------------------------------------------------------------------------------------
 
 \end{document}
 
