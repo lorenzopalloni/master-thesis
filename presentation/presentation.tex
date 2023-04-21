@@ -88,13 +88,13 @@
 \end{frame}
 %---------------------------------------------------------------------------------------
 
-%---------------------------------------------------------------------------------------
-% TABLE OF CONTENTS
-%---------------------------------------------------------------------------------------
-%\begin{frame}
-%\tableofcontents
-%\end{frame}
-%---------------------------------------------------------------------------------------
+% %---------------------------------------------------------------------------------------
+% % TABLE OF CONTENTS
+% %---------------------------------------------------------------------------------------
+% \begin{frame}
+% \tableofcontents
+% \end{frame}
+% %---------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------
 \begin{frame}{Introduction}
@@ -180,10 +180,10 @@
 \begin{columns}
 \column{0.5\linewidth}
 \includegraphics[width=0.9\textwidth]{../thesis/static/unet_architecture.png}
-\subcaption{UNet architecture}
+\subcaption{{\scriptsize UNet architecture }}
 \column{0.5\linewidth}
 \includegraphics[width=0.9\textwidth]{../thesis/static/srunet_architecture.png}
-\subcaption{SRUNet architecture}
+\subcaption{{\scriptsize SRUNet architecture }}
 \end{columns}
 \end{figure}
 \end{frame}
@@ -254,7 +254,7 @@
 
 \centering
 \includegraphics[width=0.5\textwidth]{../thesis/static/BVI-DVC.jpg}
-\captionof{figure}{Some frame examples from the BVI-DVC dataset.}
+\captionof{figure}{{\scriptsize Some frame examples from the BVI-DVC dataset. }}
 
 \end{frame}
 %---------------------------------------------------------------------------------------
@@ -470,11 +470,19 @@
 %---------------------------------------------------------------------------------------
 \begin{frame}{Conclusions}
 \begin{itemize}
-  \item Aim to stimulate advancements in optimizing deep learning models for video quality improvement
-  \item Investigated post-training quantization techniques for optimizing deep learning models in super-resolution
-  \item Utilized TensorRT for further efficiency improvement and GPU compatibility
-  \item Achieved up to 2.38X speedup and 63.3\% size reduction without compromising performance
-  \item Future research: pruning, weight sharing, model distillation, and exploring different quantization techniques
+  \item Aim to optimize deep learning models for video quality improvement
+  \item Investigated post-training quantization techniques using TensorRT
+  \medskip
+  \item Achieved up to 2.38X speedup and 64.3\% size reduction without compromising performance
+  \medskip
+  \item Future research:
+    \begin{itemize}
+      \item designing efficient NN model architectures
+      \item co-designing NN architecture and hardware together
+      \item pruning
+      \item knowledge distillation
+      \item exploring different quantization techniques
+    \end{itemize}
 \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------
@@ -600,44 +608,48 @@
 \end{frame}
 %---------------------------------------------------------------------------------------
 
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{UNet vs SRUNet}
-% \begin{itemize}
-%   \item UNet: Encoder-decoder architecture with skip connections for biomedical image segmentation
-%   \item SRUNet: Adaptation of UNet for super-resolution and compression artefact removal
-%   \item Main differences:
-%   \begin{itemize}
-%     \item Decrease in number of filters in each convolutional layer
-%     \item Use of residual layer as the final layer
-%   \end{itemize}
-% \end{itemize}
-% \end{frame}
-% %---------------------------------------------------------------------------------------
-% 
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{LPIPS: Learned Perceptual Image Patch Similarity}
-% \begin{itemize}
-%   \item Perceptual similarity metric
-%   \item Measures distance between two images in terms of their perceptual features
-%   \item Utilizes deep neural networks to extract features
-%   \item Highly correlated with human judgments of image similarity
-%   \item Used as a part of the content loss in the GAN training setup
-% \end{itemize}
-% \end{frame}
-% %---------------------------------------------------------------------------------------
-% 
-% %---------------------------------------------------------------------------------------
-% \begin{frame}{BRISQUE: Blind/Referenceless Image Spatial Quality Evaluator}
-% \begin{itemize}
-%   \item No-reference image quality assessment metric
-% %   \item Developed by Mittal et al. \cite{mittal2012no}
-%   \item Evaluates image quality based on natural scene statistics
-%   \item Does not require a reference image for comparison
-%   \item Measures image quality by capturing spatial distortions
-%   \item Useful for evaluating the quality of super-resolved images
-% \end{itemize}
-% \end{frame}
-% %---------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------
+\begin{frame}{LPIPS-Comp: Introduction (1/5)}
+  \begin{itemize}
+    \item LPIPS-Comp: perceptual similarity metric based on deep neural networks
+    \item Trained on a compression-specific perceptual similarity dataset
+    \item Better alignment with human judgement on general compression tasks
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{VGG-16 and Feed-Forward Process (2/5)}
+  \begin{itemize}
+    \item LPIPS-Comp uses VGG-16 architecture
+    \item ReLU activations after each conv block in the first five layers
+    \item Batch-normalization applied
+    \item Feed-forward performed on VGG-16 for both original ($y$) and reconstructed image ($\hat{y}$)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Feature Activations and Normalization (3/5)}
+  \begin{itemize}
+    \item $F(y)$ and $F(\hat{y})$ return stacks of feature activations for all layers $L$
+    \item Unit-normalized in the channel dimension: $z^l_y, z^l_{\hat{y}} \in R^{H_l \times W_l \times C_l}$ where $l \in L$
+    \item $H_l, W_l$ are the spatial dimensions; $C_l$ is the number of channels
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Scaling and L2 Distance (4/5)}
+  \begin{itemize}
+    \item $z^l_y , z^l_{\hat{y}}$ are scaled channel-wise with the vector $w_l \in R^{C_l}$
+    \item L2 distance computed and averaged over spatial dimensions
+    \item Channel-wise sum performed
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{LPIPS-Comp Equation (5/5)}
+  $$ \text{LPIPS-Comp}(y, \hat{y}) = \sum_{l} \frac{1}{H_l W_l} \sum_{h, w} \left| \left| w_l \odot \left( z^l_{\hat{y}, h, w} - z^l_{y, h, w} \right) \right| \right|^2_2 $$
+  \begin{itemize}
+    \item Weights in $F$ learned for image classification and kept fixed
+    \item $w$ are linear weights learned on a compression-specific similarity dataset
+  \end{itemize}
+\end{frame}
+%---------------------------------------------------------------------------------------
 
 \end{document}
 
